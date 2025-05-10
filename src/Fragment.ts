@@ -3,7 +3,7 @@ import { ComponentFactory, FragmentComponent } from "@vanilla-ts/core";
 
 /**
  * Fragment component.
- * @see FragmentComponent
+ * @see {@link FragmentComponent}
  */
 export class Fragment extends FragmentComponent { }
 
