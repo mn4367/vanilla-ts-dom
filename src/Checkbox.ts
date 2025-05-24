@@ -2,9 +2,7 @@ import { CheckedAttr, CheckedEvent, ComponentFactory, mixinDOMAttributes } from 
 import { Input } from "./Input.js";
 
 
-/**
- * Additional event(s) for `Checkbox`.
- */
+/** Additional event(s) for `Checkbox`. */
 export interface CheckboxEventMap extends HTMLElementEventMap {
     /** A checkbox is checked/unchecked. */
     "checked": CheckedEvent<Checkbox>; // eslint-disable-line jsdoc/require-jsdoc

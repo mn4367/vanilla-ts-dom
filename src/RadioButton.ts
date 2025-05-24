@@ -2,9 +2,7 @@ import { CheckedAttr, CheckedEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, m
 import { Input } from "./Input.js";
 
 
-/**
- * Additional event(s) for `RadioButton`.
- */
+/** Additional event(s) for `RadioButton`. */
 export interface RadioButtonEventMap extends HTMLElementEventMap {
     /** A radio button is checked/unchecked. */
     "checked": CheckedEvent<RadioButton>; // eslint-disable-line jsdoc/require-jsdoc
