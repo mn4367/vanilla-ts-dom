@@ -44,8 +44,8 @@ export interface TextInput<EventMap extends HTMLElementEventMap = HTMLElementEve
     DataListAttr<HTMLInputElement, EventMap>,
     MinMaxLengthAttr<HTMLInputElement, EventMap>,
     PatternAttr<HTMLInputElement, EventMap>,
-    SizeAttr<HTMLInputElement, EventMap>,
-    PlaceholderAttr<HTMLInputElement, EventMap> { }
+    PlaceholderAttr<HTMLInputElement, EventMap>,
+    SizeAttr<HTMLInputElement, EventMap> { }
 
 /**
  * Factory for TextInput components.

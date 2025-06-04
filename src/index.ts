@@ -23,6 +23,7 @@ export * from "./Main.js";
 export * from "./Menu.js";
 export * from "./Ol.js";
 export * from "./P.js";
+export * from "./PasswordInput.js";
 export * from "./Progress.js";
 export * from "./RadioButton.js";
 export * from "./RangeInput.js";
