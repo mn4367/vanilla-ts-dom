@@ -8,7 +8,8 @@ export class A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exten
     /**
      * Create A component.
      * @param href The `href` attribute for the `<a>` element.
-     * @param phrase The phrasing content for the `<a>` element.
+     * @param phrase The phrasing content for the `<a>` element. If the length of `phrase` is `0`,
+     * the phrasing content of the `<a>` element will be set to the value of `href`.
      */
     constructor(href: string, ...phrase: Phrase[]) {
         super("a");
