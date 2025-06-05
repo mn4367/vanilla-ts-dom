@@ -139,8 +139,8 @@ export class RadioButton<EventMap extends RadioButtonEventMap = RadioButtonEvent
     }
 }
 
-/** Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above. */
-export interface RadioButton<EventMap extends RadioButtonEventMap = RadioButtonEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+export interface RadioButton<EventMap extends RadioButtonEventMap = RadioButtonEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     CheckedAttr<HTMLInputElement, EventMap> { }
 
 /**

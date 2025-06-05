@@ -54,7 +54,7 @@ export class A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exten
     }
 }
 
-/** Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above. */
+// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
 export interface A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging,jsdoc/require-jsdoc
     DownloadAttr<HTMLAnchorElement, EventMap>,
     HrefAttr<HTMLAnchorElement, EventMap>,

@@ -27,8 +27,8 @@ export class LiOl<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
     }
 }
 
-/** Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above. */
-export interface LiOl<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+export interface LiOl<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     ValueAttr<HTMLLIElement, EventMap> { }
 
 /**

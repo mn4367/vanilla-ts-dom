@@ -62,8 +62,8 @@ export class PasswordInput<EventMap extends HTMLElementEventMap = HTMLElementEve
     }
 }
 
-/** Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above. */
-export interface PasswordInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+export interface PasswordInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     DataListAttr<HTMLInputElement, EventMap>,
     MinMaxLengthAttr<HTMLInputElement, EventMap>,
     PatternAttr<HTMLInputElement, EventMap>,

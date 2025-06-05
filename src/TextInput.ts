@@ -39,8 +39,8 @@ export class TextInput<EventMap extends HTMLElementEventMap = HTMLElementEventMa
     }
 }
 
-/** Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above. */
-export interface TextInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+export interface TextInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     DataListAttr<HTMLInputElement, EventMap>,
     MinMaxLengthAttr<HTMLInputElement, EventMap>,
     PatternAttr<HTMLInputElement, EventMap>,

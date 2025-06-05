@@ -25,7 +25,7 @@ export class Button<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
     }
 }
 
-/** Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above. */
+// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
 export interface Button<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging,jsdoc/require-jsdoc
     NativeDisabledAttr<HTMLButtonElement, EventMap> { }
 

@@ -150,8 +150,8 @@ export class Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ext
     }
 }
 
-/** Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above. */
-export interface Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+export interface Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     CrossOrginAttr<HTMLImageElement, EventMap>,
     SrcAttr<HTMLImageElement, EventMap>,
     AltAttr<HTMLImageElement, EventMap>,
