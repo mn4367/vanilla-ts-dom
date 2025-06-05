@@ -26,6 +26,29 @@ export class PasswordInput<EventMap extends HTMLElementEventMap = HTMLElementEve
         return this;
     }
 
+    /**
+     * Get/set the `Disclosed` state of the component. If 'true', the password is displayed in plain
+     * text instead of in masked form.
+     */
+    public get Disclosed(): boolean {
+        return this._dom.type === "text";
+    }
+    /** @inheritdoc */
+    public set Disclosed(v: boolean) {
+        this._dom.type = v ? "text" : "password";
+    }
+
+    /**
+     * Set the `Disclosed` state of the component.
+     * @param v The value to be set. If 'true', the password is displayed in plain text instead of
+     * in masked form.
+     * @returns This instance.
+     */
+    public disclosed(v: boolean): this {
+        this._dom.type = v ? "text" : "password";
+        return this;
+    }
+
     static {
         /** Mixin additional DOM attributes. */
         mixinDOMAttributes(
