@@ -1,4 +1,4 @@
-import { DirnameAttr, ElementComponentVoid, HTMLInputTypes, MultipleAttr, NameAttr, NativeDisabledAttr, ReadonlyAttr, RequiredAttr, ValueAttr, mixinDOMAttributes } from "@vanilla-ts/core";
+import { AutocompleteAttr, DirnameAttr, ElementComponentVoid, HTMLInputTypes, MultipleAttr, NameAttr, NativeDisabledAttr, ReadonlyAttr, RequiredAttr, ValueAttr, mixinDOMAttributes } from "@vanilla-ts/core";
 
 
 /**
@@ -41,6 +41,7 @@ export abstract class Input<EventMap extends HTMLElementEventMap = HTMLElementEv
         /** Mixin additional DOM attributes. */
         mixinDOMAttributes(
             Input,
+            AutocompleteAttr<HTMLInputElement>,
             DirnameAttr<HTMLInputElement>,
             MultipleAttr<HTMLInputElement>,
             NameAttr<HTMLInputElement>,
@@ -54,6 +55,7 @@ export abstract class Input<EventMap extends HTMLElementEventMap = HTMLElementEv
 
 /** Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above. */
 export interface Input<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    AutocompleteAttr<HTMLInputElement, EventMap>,
     DirnameAttr<HTMLInputElement, EventMap>,
     MultipleAttr<HTMLInputElement, EventMap>,
     NameAttr<HTMLInputElement, EventMap>,
