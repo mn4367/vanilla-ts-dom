@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /**
@@ -9,7 +9,7 @@ export class LiUl<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
      * Create LiUl component.
      * @param phrase The phrasing content for the `<li>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("li");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -25,7 +25,7 @@ export class LiUlFactory<T> extends ComponentFactory<LiUl> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns LiUl component.
      */
-    public liUl(phrase?: Phrase | Phrase[], data?: T): LiUl {
+    public liUl(phrase?: Phrase | Phrases, data?: T): LiUl {
         return this.setupComponent(
             !phrase
                 ? new LiUl()

@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, NameAttr, NativeDisabledAttr, Phrase, ValueAttr, mixinDOMAttributes } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, NameAttr, NativeDisabledAttr, Phrase, Phrases, ValueAttr, mixinDOMAttributes } from "@vanilla-ts/core";
 
 
 /**
@@ -9,7 +9,7 @@ export class Button<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
      * Create Button component.
      * @param phrase The phrasing content for the `<button>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("button");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -39,7 +39,7 @@ export class ButtonFactory<T> extends ComponentFactory<Button> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Button component.
      */
-    public button(phrase?: Phrase | Phrase[], data?: T): Button {
+    public button(phrase?: Phrase | Phrases, data?: T): Button {
         return this.setupComponent(
             !phrase
                 ? new Button()

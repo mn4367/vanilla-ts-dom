@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase, ValueAttr, mixinDOMAttributes } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases, ValueAttr, mixinDOMAttributes } from "@vanilla-ts/core";
 
 
 /**
@@ -10,7 +10,7 @@ export class LiOl<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
      * @param value The numeric value for the `<li>` element.
      * @param phrase The phrasing content for the `<li>` element.
      */
-    constructor(value?: number, ...phrase: Phrase[]) {
+    constructor(value?: number, ...phrase: Phrases) {
         super("li");
         value !== undefined
             ? this.value(value)
@@ -42,7 +42,7 @@ export class LiOlFactory<T> extends ComponentFactory<LiOl> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns LiOl component.
      */
-    public liOl(value?: number, phrase?: Phrase | Phrase[], data?: T): LiOl {
+    public liOl(value?: number, phrase?: Phrase | Phrases, data?: T): LiOl {
         return this.setupComponent(
             !phrase
                 ? new LiOl(value)

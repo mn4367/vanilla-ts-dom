@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /**
@@ -9,7 +9,7 @@ export class Footer<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
      * Create Footer component.
      * @param phrase The phrasing content for the `<footer>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("footer");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -25,7 +25,7 @@ export class FooterFactory<T> extends ComponentFactory<Footer> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Footer component.
      */
-    public footer(phrase?: Phrase | Phrase[], data?: T): Footer {
+    public footer(phrase?: Phrase | Phrases, data?: T): Footer {
         return this.setupComponent(
             !phrase
                 ? new Footer()

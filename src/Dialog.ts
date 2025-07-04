@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, mixinDOMAttributes, OpenAttr, Phrase } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, mixinDOMAttributes, OpenAttr, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /**
@@ -14,7 +14,7 @@ export class Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
      * element in `show()`/`showModal()` and removed again in `close()`.
      * @param phrase The phrasing content for the `<dialog>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("dialog");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -102,7 +102,7 @@ export class DialogFactory<T> extends ComponentFactory<Dialog> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Dialog component.
      */
-    public dialog(phrase?: Phrase | Phrase[], data?: T): Dialog {
+    public dialog(phrase?: Phrase | Phrases, data?: T): Dialog {
         return this.setupComponent(
             !phrase
                 ? new Dialog()

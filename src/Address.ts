@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /**
@@ -9,7 +9,7 @@ export class Address<EventMap extends HTMLElementEventMap = HTMLElementEventMap>
      * Create Address component.
      * @param phrase The phrasing content for the `<address>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("address");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -25,7 +25,7 @@ export class AddressFactory<T> extends ComponentFactory<Address> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Header component.
      */
-    public address(phrase?: Phrase | Phrase[], data?: T): Address {
+    public address(phrase?: Phrase | Phrases, data?: T): Address {
         return this.setupComponent(
             !phrase
                 ? new Address()

@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /**
@@ -9,7 +9,7 @@ export class Strong<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
      * Create Strong component.
      * @param phrase The phrasing content for the `<strong>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("strong");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -25,7 +25,7 @@ export class StrongFactory<T> extends ComponentFactory<Strong> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Strong component.
      */
-    public strong(phrase?: Phrase | Phrase[], data?: T): Strong {
+    public strong(phrase?: Phrase | Phrases, data?: T): Strong {
         return this.setupComponent(
             !phrase
                 ? new Strong()

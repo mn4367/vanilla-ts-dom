@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, NullableString, Phrase } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, NullableString, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /**
@@ -10,7 +10,7 @@ export class Label<EventMap extends HTMLElementEventMap = HTMLElementEventMap> e
      * @param for_ Content of the `for` attribute.
      * @param phrase The phrasing content for the `<label>` element.
      */
-    constructor(for_?: string, ...phrase: Phrase[]) {
+    constructor(for_?: string, ...phrase: Phrases) {
         super("label");
         !for_ || this.for(for_);
         phrase.length === 0 || this.phrase(...phrase);
@@ -49,7 +49,7 @@ export class LabelFactory<T> extends ComponentFactory<Label> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Label component.
      */
-    public label(for_?: string, phrase?: Phrase | Phrase[], data?: T): Label {
+    public label(for_?: string, phrase?: Phrase | Phrases, data?: T): Label {
         return this.setupComponent(
             !phrase
                 ? new Label(for_)

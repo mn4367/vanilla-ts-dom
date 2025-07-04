@@ -1,4 +1,4 @@
-import { ACustomComponentEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, ElementComponentWithChildren, Phrase } from "@vanilla-ts/core";
+import { ACustomComponentEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /** Custom 'progress-value' event for progress components. */
@@ -44,7 +44,7 @@ export class Progress<EventMap extends ProgressEventMap = ProgressEventMap> exte
      * 'indeterminate' state.
      * @param phrase The phrasing content for the `<progress>` element.
      */
-    constructor(max: number = 1, value?: number, ...phrase: Phrase[]) {
+    constructor(max: number = 1, value?: number, ...phrase: Phrases) {
         super("progress");
         this
             .max(max)
@@ -169,7 +169,7 @@ export class ProgressFactory<T> extends ComponentFactory<Progress> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Progress component.
      */
-    public progress(max: number = 1, value?: number, phrase?: Phrase | Phrase[], data?: T): Progress {
+    public progress(max: number = 1, value?: number, phrase?: Phrase | Phrases, data?: T): Progress {
         return this.setupComponent(
             !phrase
                 ? new Progress(max, value)

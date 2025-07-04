@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /**
@@ -9,7 +9,7 @@ export class H1<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
      * Create H1 component.
      * @param phrase The phrasing content for the `<h1>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("h1");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -23,7 +23,7 @@ export class H2<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
      * Create H2 component.
      * @param phrase The phrasing content for the `<h2>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("h2");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -37,7 +37,7 @@ export class H3<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
      * Create H3 component.
      * @param phrase The phrasing content for the `<h3>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("h3");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -51,7 +51,7 @@ export class H4<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
      * Create H4 component.
      * @param phrase The phrasing content for the `<h4>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("h4");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -65,7 +65,7 @@ export class H5<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
      * Create H5 component.
      * @param phrase The phrasing content for the `<h5>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("h5");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -79,7 +79,7 @@ export class H6<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
      * Create H6 component.
      * @param phrase The phrasing content for the `<h6>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("h6");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -95,7 +95,7 @@ export class HxFactory<T> extends ComponentFactory<H1 | H2 | H3 | H4 | H5 | H6> 
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns H1 component.
      */
-    public h1(phrase?: Phrase | Phrase[], data?: T): H1 {
+    public h1(phrase?: Phrase | Phrases, data?: T): H1 {
         return this.setupComponent(
             !phrase
                 ? new H1()
@@ -112,7 +112,7 @@ export class HxFactory<T> extends ComponentFactory<H1 | H2 | H3 | H4 | H5 | H6> 
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns H2 component.
      */
-    public h2(phrase?: Phrase | Phrase[], data?: T): H2 {
+    public h2(phrase?: Phrase | Phrases, data?: T): H2 {
         return this.setupComponent(
             !phrase
                 ? new H2()
@@ -129,7 +129,7 @@ export class HxFactory<T> extends ComponentFactory<H1 | H2 | H3 | H4 | H5 | H6> 
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns H3 component.
      */
-    public h3(phrase?: Phrase | Phrase[], data?: T): H3 {
+    public h3(phrase?: Phrase | Phrases, data?: T): H3 {
         return this.setupComponent(
             !phrase
                 ? new H3()
@@ -146,7 +146,7 @@ export class HxFactory<T> extends ComponentFactory<H1 | H2 | H3 | H4 | H5 | H6> 
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns H4 component.
      */
-    public h4(phrase?: Phrase | Phrase[], data?: T): H4 {
+    public h4(phrase?: Phrase | Phrases, data?: T): H4 {
         return this.setupComponent(
             !phrase
                 ? new H4()
@@ -163,7 +163,7 @@ export class HxFactory<T> extends ComponentFactory<H1 | H2 | H3 | H4 | H5 | H6> 
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns H5 component.
      */
-    public h5(phrase?: Phrase | Phrase[], data?: T): H5 {
+    public h5(phrase?: Phrase | Phrases, data?: T): H5 {
         return this.setupComponent(
             !phrase
                 ? new H5()
@@ -180,7 +180,7 @@ export class HxFactory<T> extends ComponentFactory<H1 | H2 | H3 | H4 | H5 | H6> 
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns H6 component.
      */
-    public h6(phrase?: Phrase | Phrase[], data?: T): H6 {
+    public h6(phrase?: Phrase | Phrases, data?: T): H6 {
         return this.setupComponent(
             !phrase
                 ? new H6()

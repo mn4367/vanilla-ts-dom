@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /**
@@ -9,7 +9,7 @@ export class Span<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
      * Create Span component.
      * @param phrase The phrasing content for the `<span>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("span");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -25,7 +25,7 @@ export class SpanFactory<T> extends ComponentFactory<Span> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Span component.
      */
-    public span(phrase?: Phrase | Phrase[], data?: T): Span {
+    public span(phrase?: Phrase | Phrases, data?: T): Span {
         return this.setupComponent(
             !phrase
                 ? new Span()

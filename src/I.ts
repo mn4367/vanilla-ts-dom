@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /**
@@ -9,7 +9,7 @@ export class I<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exten
      * Create I component.
      * @param phrase The phrasing content for the `<i>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("i");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -25,7 +25,7 @@ export class IFactory<T> extends ComponentFactory<I> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns I component.
      */
-    public i(phrase?: Phrase | Phrase[], data?: T): I {
+    public i(phrase?: Phrase | Phrases, data?: T): I {
         return this.setupComponent(
             !phrase
                 ? new I()

@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /**
@@ -9,7 +9,7 @@ export class Section<EventMap extends HTMLElementEventMap = HTMLElementEventMap>
      * Create Section component.
      * @param phrase The phrasing content for the `<section>` element.
      */
-    constructor(...phrase: Phrase[]) {
+    constructor(...phrase: Phrases) {
         super("section");
         phrase.length === 0 || this.phrase(...phrase);
     }
@@ -25,7 +25,7 @@ export class SectionFactory<T> extends ComponentFactory<Section> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Section component.
      */
-    public section(phrase?: Phrase | Phrase[], data?: T): Section {
+    public section(phrase?: Phrase | Phrases, data?: T): Section {
         return this.setupComponent(
             !phrase
                 ? new Section()

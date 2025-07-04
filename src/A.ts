@@ -1,4 +1,4 @@
-import { ComponentFactory, DownloadAttr, ElementComponentWithChildren, HrefAttr, HreflangAttr, mixinDOMAttributes, NullableString, Phrase, PingAttr, ReferrerPolicyAttr, RelAttr, TargetAttr } from "@vanilla-ts/core";
+import { ComponentFactory, DownloadAttr, ElementComponentWithChildren, HrefAttr, HreflangAttr, mixinDOMAttributes, NullableString, Phrase, Phrases, PingAttr, ReferrerPolicyAttr, RelAttr, TargetAttr } from "@vanilla-ts/core";
 
 
 /**
@@ -11,7 +11,7 @@ export class A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exten
      * @param phrase The phrasing content for the `<a>` element. If the length of `phrase` is `0`,
      * the phrasing content of the `<a>` element will be set to the value of `href`.
      */
-    constructor(href: string, ...phrase: Phrase[]) {
+    constructor(href: string, ...phrase: Phrases) {
         super("a");
         this.href(href);
         phrase.length === 0
@@ -76,7 +76,7 @@ export class AFactory<T> extends ComponentFactory<A> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns B component.
      */
-    public a(href: string, phrase?: Phrase | Phrase[], data?: T): A {
+    public a(href: string, phrase?: Phrase | Phrases, data?: T): A {
         return this.setupComponent(
             !phrase
                 ? new A(href)
