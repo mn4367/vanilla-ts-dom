@@ -27,6 +27,7 @@ export * from "./PasswordInput.js";
 export * from "./Progress.js";
 export * from "./RadioButton.js";
 export * from "./RangeInput.js";
+export * from "./SearchInput.js";
 export * from "./Section.js";
 export * from "./Select.js";
 export * from "./Span.js";
