@@ -86,7 +86,7 @@ export class H6<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
 }
 
 /**
- * Factory for H1 - H6 components.
+ * Factory for `H1` - `H6` components.
  */
 export class HxFactory<T> extends ComponentFactory<H1 | H2 | H3 | H4 | H5 | H6> {
     /**

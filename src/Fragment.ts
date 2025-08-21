@@ -8,7 +8,7 @@ import { ComponentFactory, FragmentComponent } from "@vanilla-ts/core";
 export class Fragment extends FragmentComponent { }
 
 /**
- * Factory for Fragment components.
+ * Factory for `Fragment` components.
  */
 export class FragmentFactory<T> extends ComponentFactory<FragmentComponent> {
     /**

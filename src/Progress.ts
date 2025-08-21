@@ -154,7 +154,7 @@ export class Progress<EventMap extends ProgressEventMap = ProgressEventMap> exte
 }
 
 /**
- * Factory for Progress components.
+ * Factory for `Progress` components.
  */
 export class ProgressFactory<T> extends ComponentFactory<Progress> {
     /**

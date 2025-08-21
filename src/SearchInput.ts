@@ -3,8 +3,7 @@ import { Input } from "./Input.js";
 
 
 /**
- * Search input component (`<input type="search">`) extended with  `MinLength`, `MaxLength` `DataList`
- * and `Placeholder` getters/setters and set methods.
+ * Search input component (`<input type="search">`).
  */
 export class SearchInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     /**
@@ -48,7 +47,7 @@ export interface SearchInput<EventMap extends HTMLElementEventMap = HTMLElementE
     SizeAttr<HTMLInputElement, EventMap> { }
 
 /**
- * Factory for SearchInput components.
+ * Factory for `SearchInput` components.
  */
 export class SearchInputFactory<T> extends ComponentFactory<SearchInput> {
     /**

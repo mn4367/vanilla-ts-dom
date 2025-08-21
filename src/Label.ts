@@ -39,7 +39,7 @@ export class Label<EventMap extends HTMLElementEventMap = HTMLElementEventMap> e
 }
 
 /**
- * Factory for Label components.
+ * Factory for `Label` components.
  */
 export class LabelFactory<T> extends ComponentFactory<Label> {
     /**

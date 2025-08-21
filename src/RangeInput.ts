@@ -74,7 +74,7 @@ export interface RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEv
     StepAttr<HTMLInputElement, EventMap> { }
 
 /**
- * Factory for RangeInput components.
+ * Factory for `RangeInput` components.
  */
 export class RangeInputFactory<T> extends ComponentFactory<RangeInput> {
     /**

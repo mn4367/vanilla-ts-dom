@@ -16,7 +16,7 @@ export class Span<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
 }
 
 /**
- * Factory for Span components.
+ * Factory for `Span` components.
  */
 export class SpanFactory<T> extends ComponentFactory<Span> {
     /**

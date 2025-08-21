@@ -3,8 +3,7 @@ import { Input } from "./Input.js";
 
 
 /**
- * Password input component (`<input type="password">`) extended with  `MinLength`, `MaxLength` `DataList`
- * and `Placeholder` getters/setters and set methods.
+ * Password input component (`<input type="password">`).
  */
 export class PasswordInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     /**
@@ -71,7 +70,7 @@ export interface PasswordInput<EventMap extends HTMLElementEventMap = HTMLElemen
     SizeAttr<HTMLInputElement, EventMap> { }
 
 /**
- * Factory for PasswordInput components.
+ * Factory for `PasswordInput` components.
  */
 export class PasswordInputFactory<T> extends ComponentFactory<PasswordInput> {
     /**

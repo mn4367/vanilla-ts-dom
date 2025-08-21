@@ -3,8 +3,7 @@ import { Input } from "./Input.js";
 
 
 /**
- * Text input component (`<input type="text">`) extended with  `MinLength`, `MaxLength` `DataList`
- * and `Placeholder` getters/setters and set methods.
+ * Text input component (`<input type="text">`).
  */
 export class TextInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     /**
@@ -48,7 +47,7 @@ export interface TextInput<EventMap extends HTMLElementEventMap = HTMLElementEve
     SizeAttr<HTMLInputElement, EventMap> { }
 
 /**
- * Factory for TextInput components.
+ * Factory for `TextInput` components.
  */
 export class TextInputFactory<T> extends ComponentFactory<TextInput> {
     /**

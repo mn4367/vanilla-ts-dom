@@ -16,7 +16,7 @@ export class Header<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
 }
 
 /**
- * Factory for Header components.
+ * Factory for `Header` components.
  */
 export class HeaderFactory<T> extends ComponentFactory<Header> {
     /**

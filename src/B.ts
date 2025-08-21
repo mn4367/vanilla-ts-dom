@@ -16,7 +16,7 @@ export class B<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exten
 }
 
 /**
- * Factory for B components.
+ * Factory for `B` components.
  */
 export class BFactory<T> extends ComponentFactory<B> {
     /**

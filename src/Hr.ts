@@ -14,7 +14,7 @@ export class Hr<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
 }
 
 /**
- * Factory for Hr components.
+ * Factory for `Hr` components.
  */
 export class HrFactory<T> extends ComponentFactory<Hr> {
     /**

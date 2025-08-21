@@ -16,7 +16,7 @@ export class Div<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ext
 }
 
 /**
- * Factory for Div components.
+ * Factory for `Div` components.
  */
 export class DivFactory<T> extends ComponentFactory<Div> {
     /**

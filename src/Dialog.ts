@@ -93,7 +93,7 @@ export interface Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventM
     OpenAttr<HTMLDialogElement, EventMap> { }
 
 /**
- * Factory for Dialog components.
+ * Factory for `Dialog` components.
  */
 export class DialogFactory<T> extends ComponentFactory<Dialog> {
     /**

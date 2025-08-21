@@ -160,7 +160,7 @@ export interface Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap>
     ReferrerPolicyAttr<HTMLImageElement, EventMap> { }
 
 /**
- * Factory for Img components.
+ * Factory for `Img` components.
  */
 export class ImgFactory<T> extends ComponentFactory<Img> {
     /**

@@ -99,7 +99,7 @@ export class Ol<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
 }
 
 /**
- * Factory for Ol components.
+ * Factory for `Ol` components.
  */
 export class OlFactory<T> extends ComponentFactory<Ol> {
     /**

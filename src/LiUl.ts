@@ -16,7 +16,7 @@ export class LiUl<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
 }
 
 /**
- * Factory for LiUl components (for unordered lists (`<ul>`)).
+ * Factory for `LiUl` components (for unordered lists (`<ul>`)).
  */
 export class LiUlFactory<T> extends ComponentFactory<LiUl> {
     /**

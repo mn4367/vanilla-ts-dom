@@ -16,7 +16,7 @@ export class Footer<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
 }
 
 /**
- * Factory for Footer components.
+ * Factory for `Footer` components.
  */
 export class FooterFactory<T> extends ComponentFactory<Footer> {
     /**

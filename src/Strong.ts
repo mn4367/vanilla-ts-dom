@@ -16,7 +16,7 @@ export class Strong<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
 }
 
 /**
- * Factory for Strong components.
+ * Factory for `Strong` components.
  */
 export class StrongFactory<T> extends ComponentFactory<Strong> {
     /**

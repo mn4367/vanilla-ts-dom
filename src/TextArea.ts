@@ -131,7 +131,7 @@ export interface TextArea<EventMap extends HTMLElementEventMap = HTMLElementEven
     ValueAttr<HTMLTextAreaElement, EventMap> { }
 
 /**
- * Factory for TextArea components.
+ * Factory for `TextArea` components.
  */
 export class TextAreaFactory<T> extends ComponentFactory<TextArea> {
     /**

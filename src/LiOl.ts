@@ -32,7 +32,7 @@ export interface LiOl<EventMap extends HTMLElementEventMap = HTMLElementEventMap
     ValueAttr<HTMLLIElement, EventMap> { }
 
 /**
- * Factory for LiOl components (for ordered lists (`<ol>`)).
+ * Factory for `LiOl` components (for ordered lists (`<ol>`)).
  */
 export class LiOlFactory<T> extends ComponentFactory<LiOl> {
     /**

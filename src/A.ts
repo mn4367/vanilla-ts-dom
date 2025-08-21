@@ -66,7 +66,7 @@ export interface A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> e
     TargetAttr<HTMLAnchorElement, EventMap> { }
 
 /**
- * Factory for A components.
+ * Factory for `A` components.
  */
 export class AFactory<T> extends ComponentFactory<A> {
     /**

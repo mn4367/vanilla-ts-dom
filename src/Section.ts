@@ -16,7 +16,7 @@ export class Section<EventMap extends HTMLElementEventMap = HTMLElementEventMap>
 }
 
 /**
- * Factory for Section components.
+ * Factory for `Section` components.
  */
 export class SectionFactory<T> extends ComponentFactory<Section> {
     /**

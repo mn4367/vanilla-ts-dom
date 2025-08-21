@@ -16,7 +16,7 @@ export class Main<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
 }
 
 /**
- * Factory for Main components.
+ * Factory for `Main` components.
  */
 export class MainFactory<T> extends ComponentFactory<Main> {
     /**

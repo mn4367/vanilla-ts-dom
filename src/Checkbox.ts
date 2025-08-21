@@ -80,7 +80,7 @@ export interface Checkbox<EventMap extends CheckboxEventMap = CheckboxEventMap> 
     CheckedAttr<HTMLInputElement, EventMap> { }
 
 /**
- * Factory for Checkbox components (`<input type="checkbox">`).
+ * Factory for `Checkbox` components (`<input type="checkbox">`).
  */
 export class CheckboxFactory<T> extends ComponentFactory<Checkbox> {
     /**

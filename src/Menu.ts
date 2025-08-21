@@ -14,7 +14,7 @@ export class Menu<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
 }
 
 /**
- * Factory for Menu components.
+ * Factory for `Menu` components.
  */
 export class MenuFactory<T> extends ComponentFactory<Menu> {
     /**

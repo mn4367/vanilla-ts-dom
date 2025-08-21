@@ -16,7 +16,7 @@ export class Text<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
 }
 
 /**
- * Factory for Text components.
+ * Factory for `Text` components.
  */
 export class TextFactory<T> extends ComponentFactory<Text> {
     /**

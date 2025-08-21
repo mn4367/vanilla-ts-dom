@@ -144,7 +144,7 @@ export interface RadioButton<EventMap extends RadioButtonEventMap = RadioButtonE
     CheckedAttr<HTMLInputElement, EventMap> { }
 
 /**
- * Factory for RadioButton components.
+ * Factory for `RadioButton` components.
  */
 export class RadioButtonFactory<T> extends ComponentFactory<RadioButton> {
     /**

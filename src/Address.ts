@@ -16,7 +16,7 @@ export class Address<EventMap extends HTMLElementEventMap = HTMLElementEventMap>
 }
 
 /**
- * Factory for Address components.
+ * Factory for `Address` components.
  */
 export class AddressFactory<T> extends ComponentFactory<Address> {
     /**

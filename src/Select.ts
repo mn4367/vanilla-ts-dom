@@ -149,7 +149,7 @@ export interface Select<EventMap extends HTMLElementEventMap = HTMLElementEventM
     ValueAttr<HTMLSelectElement, EventMap> { }
 
 /**
- * Factory for Select components.
+ * Factory for `Select` components.
  */
 export class SelectFactory<T> extends ComponentFactory<Select> {
     /**

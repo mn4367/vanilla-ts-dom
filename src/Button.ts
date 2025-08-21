@@ -30,7 +30,7 @@ export interface Button<EventMap extends HTMLElementEventMap = HTMLElementEventM
     NativeDisabledAttr<HTMLButtonElement, EventMap> { }
 
 /**
- * Factory for Button components.
+ * Factory for `Button` components.
  */
 export class ButtonFactory<T> extends ComponentFactory<Button> {
     /**

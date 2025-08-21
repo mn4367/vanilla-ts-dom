@@ -25,8 +25,7 @@ export enum TemporalType {
 }
 
 /**
- * Input component (`<input>`) for temporal types (`date`, `datetime-local`, `time` etc.), extended
- * with `Min`, `Min`, `Step` and 'DataList' getters/setters and set methods.
+ * Input component (`<input>`) for temporal types (`date`, `datetime-local`, `time` etc.).
  */
 export class TemporalInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     /**
@@ -109,7 +108,7 @@ export interface TemporalInput<EventMap extends HTMLElementEventMap = HTMLElemen
     StepAttr<HTMLInputElement, EventMap> { }
 
 /**
- * Factory for TemporalInput components.
+ * Factory for `TemporalInput` components.
  */
 export class TemporalInputFactory<T> extends ComponentFactory<TemporalInput> {
     /**

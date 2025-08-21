@@ -16,7 +16,7 @@ export class Comment<EventMap extends HTMLElementEventMap = HTMLElementEventMap>
 }
 
 /**
- * Factory for Comment components.
+ * Factory for `Comment` components.
  */
 export class CommentFactory<T> extends ComponentFactory<Comment> {
     /**
