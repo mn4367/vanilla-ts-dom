@@ -21,6 +21,7 @@ export * from "./LiOl.js";
 export * from "./LiUl.js";
 export * from "./Main.js";
 export * from "./Menu.js";
+export * from "./NumberInput.js";
 export * from "./Ol.js";
 export * from "./P.js";
 export * from "./PasswordInput.js";
