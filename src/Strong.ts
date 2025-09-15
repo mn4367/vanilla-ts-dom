@@ -11,7 +11,7 @@ export class Strong<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
      */
     constructor(...phrase: Phrases) {
         super("strong");
-        phrase.length === 0 || this.phrase(...phrase);
+        phrase.length > 0 && this.phrase(...phrase);
     }
 }
 

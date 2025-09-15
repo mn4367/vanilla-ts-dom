@@ -23,11 +23,11 @@ export abstract class Input<EventMap extends HTMLElementEventMap = HTMLElementEv
         super("input");
         this.type = type;
         this._dom.type = this.type;
-        !id || this.id(id);
+        id && this.id(id);
         // Otherwise this will be "on" (for checkboxes, radiobuttons, ...).
         // this.value(value ? value : ""); // eslint-disable-line @typescript-eslint/no-unsafe-call
-        !value || this.value(value);
-        !name || this.name(name);
+        value && this.value(value);
+        name && this.name(name);
     }
 
     /**

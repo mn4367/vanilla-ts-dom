@@ -11,7 +11,7 @@ export class LiUl<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
      */
     constructor(...phrase: Phrases) {
         super("li");
-        phrase.length === 0 || this.phrase(...phrase);
+        phrase.length > 0 && this.phrase(...phrase);
     }
 }
 

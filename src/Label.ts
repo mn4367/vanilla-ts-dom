@@ -12,8 +12,8 @@ export class Label<EventMap extends HTMLElementEventMap = HTMLElementEventMap> e
      */
     constructor(for_?: string, ...phrase: Phrases) {
         super("label");
-        !for_ || this.for(for_);
-        phrase.length === 0 || this.phrase(...phrase);
+        for_ && this.for(for_);
+        phrase.length > 0 && this.phrase(...phrase);
     }
 
     /**

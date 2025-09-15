@@ -11,7 +11,7 @@ export class Button<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
      */
     constructor(...phrase: Phrases) {
         super("button");
-        phrase.length === 0 || this.phrase(...phrase);
+        phrase.length > 0 && this.phrase(...phrase);
     }
 
     static {

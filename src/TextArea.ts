@@ -20,9 +20,9 @@ export class TextArea<EventMap extends HTMLElementEventMap = HTMLElementEventMap
         super("textarea");
         this.rows(rows !== undefined ? Math.max(rows, 1) : 2)
             .cols(cols !== undefined ? Math.max(cols, 1) : 20);
-        !text || this.text(text);
-        !id || this.id(id);
-        !name || this.name(name);
+        text && this.text(text);
+        id && this.id(id);
+        name && this.name(name);
     }
 
     /**

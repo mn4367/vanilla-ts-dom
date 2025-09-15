@@ -17,9 +17,9 @@ export class NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEvent
      */
     constructor(id?: string, value?: string, name?: string, min?: string, max?: string, step?: string) {
         super("number", id, value, name);
-        !min || this.min(min);
-        !max || this.max(max);
-        !step || this.step(step);
+        min && this.min(min);
+        max && this.max(max);
+        step && this.step(step);
     }
 
     /**

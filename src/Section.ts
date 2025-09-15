@@ -11,7 +11,7 @@ export class Section<EventMap extends HTMLElementEventMap = HTMLElementEventMap>
      */
     constructor(...phrase: Phrases) {
         super("section");
-        phrase.length === 0 || this.phrase(...phrase);
+        phrase.length > 0 && this.phrase(...phrase);
     }
 }
 

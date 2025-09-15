@@ -49,7 +49,7 @@ export class Progress<EventMap extends ProgressEventMap = ProgressEventMap> exte
         this
             .max(max)
             .value(value);
-        phrase.length === 0 || this.phrase(...phrase);
+        phrase.length > 0 && this.phrase(...phrase);
         this.valueObserver = new MutationObserver((records: MutationRecord[]) => {
             for (const record of records) {
                 if (record.type === "attributes" && record.attributeName === "value") {
@@ -111,7 +111,7 @@ export class Progress<EventMap extends ProgressEventMap = ProgressEventMap> exte
     public max(v: number) {
         const oldVal = this._dom.value;
         this._dom.max = v <= 0 ? 1 : v;
-        !(oldVal > this._dom.max) || (this._dom.value = this._dom.max);
+        (oldVal > this._dom.max) && (this._dom.value = this._dom.max);
         return this;
     }
 

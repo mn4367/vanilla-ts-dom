@@ -27,9 +27,9 @@ export class Select<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
     constructor(values: ISelectValues[], id?: string, value?: string, name?: string) {
         super("select");
         this.values(values);
-        !id || this.id(id);
-        !value || this.value(value);
-        !name || this.name(name);
+        id && this.id(id);
+        value && this.value(value);
+        name && this.name(name);
     }
 
     /**

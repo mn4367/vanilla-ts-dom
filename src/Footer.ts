@@ -11,7 +11,7 @@ export class Footer<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
      */
     constructor(...phrase: Phrases) {
         super("footer");
-        phrase.length === 0 || this.phrase(...phrase);
+        phrase.length > 0 && this.phrase(...phrase);
     }
 }
 

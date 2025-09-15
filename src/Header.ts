@@ -11,7 +11,7 @@ export class Header<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
      */
     constructor(...phrase: Phrases) {
         super("header");
-        phrase.length === 0 || this.phrase(...phrase);
+        phrase.length > 0 && this.phrase(...phrase);
     }
 }
 

@@ -22,8 +22,8 @@ export class Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ext
         super("img");
         width !== undefined ? this.width(width) : undefined;
         height !== undefined ? this.height(height) : undefined;
-        !alt || this.alt(alt);
-        !lazyLoad || this.loading("lazy");
+        alt && this.alt(alt);
+        lazyLoad && this.loading("lazy");
         this
             .on("load", (_ev) => {
                 if (this._dom.complete && (this._dom.naturalWidth !== 0) && (this._dom.naturalHeight !== 0)) {

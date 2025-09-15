@@ -11,7 +11,7 @@ export class Em<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
      */
     constructor(...phrase: Phrases) {
         super("em");
-        phrase.length === 0 || this.phrase(...phrase);
+        phrase.length > 0 && this.phrase(...phrase);
     }
 }
 

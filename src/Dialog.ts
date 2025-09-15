@@ -16,7 +16,7 @@ export class Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
      */
     constructor(...phrase: Phrases) {
         super("dialog");
-        phrase.length === 0 || this.phrase(...phrase);
+        phrase.length > 0 && this.phrase(...phrase);
     }
 
     /**

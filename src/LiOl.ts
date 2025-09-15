@@ -12,10 +12,8 @@ export class LiOl<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
      */
     constructor(value?: number, ...phrase: Phrases) {
         super("li");
-        value !== undefined
-            ? this.value(value)
-            : undefined;
-        phrase.length === 0 || this.phrase(...phrase);
+        value !== undefined && this.value(value);
+        phrase.length > 0 && this.phrase(...phrase);
     }
 
     static {
