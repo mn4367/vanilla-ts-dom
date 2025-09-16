@@ -1,4 +1,4 @@
-import { ComponentFactory, DataListAttr, MinMaxAttr, StepAttr, mixinDOMAttributes } from "@vanilla-ts/core";
+import { ComponentFactory, MinMaxAttr, mixinDOMProperties, StepAttr } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
@@ -56,20 +56,55 @@ export class RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventM
         return this;
     }
 
+    /**
+     * `Readonly` isn't supported by `RangeInput`, using this (overridden) property has no effect)!
+     */
+    public override get Readonly(): boolean {
+        return false;
+    }
+    /** @inheritdoc */
+    public override set Readonly(_v: boolean) { }
+
+    /**
+     * `Readonly` isn't supported by `RangeInput`, using this (overridden) function has no effect)!
+     * @param _v The readonly attribute value to be set.
+     * @returns This instance.
+     */
+    public override readonly(_v: boolean): this {
+        return this;
+    }
+
+    /**
+     * `Required` isn't supported by `RangeInput`, using this (overridden) property has no effect)!
+     */
+    public override get Required(): boolean {
+        return false;
+    }
+    /** @inheritdoc */
+    public override set Required(_v: boolean) { }
+
+    /**
+     * `Required` isn't supported by `RangeInput`, using this (overridden) function has no effect)!
+     * @param _v The required attribute value to be set.
+     * @returns This instance.
+     */
+    public override required(_v: boolean): this {
+        return this;
+    }
+
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             RangeInput,
-            DataListAttr<HTMLInputElement>,
             MinMaxAttr<HTMLInputElement>,
             StepAttr<HTMLInputElement>
         );
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging,jsdoc/require-jsdoc
-    DataListAttr<HTMLInputElement, EventMap>,
     MinMaxAttr<HTMLInputElement, EventMap>,
     StepAttr<HTMLInputElement, EventMap> { }
 

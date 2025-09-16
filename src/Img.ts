@@ -1,4 +1,4 @@
-import { AltAttr, ComponentFactory, CrossOrginAttr, ElementComponentVoid, LoadingAttr, ReferrerPolicyAttr, SrcAttr, WidthHeightAttr, mixinDOMAttributes } from "@vanilla-ts/core";
+import { AltAttr, ComponentFactory, CrossOrginAttr, ElementComponentVoid, LoadingAttr, mixinDOMProperties, ReferrerPolicyAttr, SrcAttr, WidthHeightAttr } from "@vanilla-ts/core";
 
 
 /**
@@ -137,8 +137,8 @@ export class Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ext
     }
 
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             Img,
             CrossOrginAttr<HTMLImageElement>,
             SrcAttr<HTMLImageElement>,
@@ -150,7 +150,8 @@ export class Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ext
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     CrossOrginAttr<HTMLImageElement, EventMap>,
     SrcAttr<HTMLImageElement, EventMap>,

@@ -1,4 +1,4 @@
-import { ComponentFactory, DownloadAttr, ElementComponentWithChildren, HrefAttr, HreflangAttr, mixinDOMAttributes, NullableString, Phrase, Phrases, PingAttr, ReferrerPolicyAttr, RelAttr, TargetAttr } from "@vanilla-ts/core";
+import { ComponentFactory, DownloadAttr, ElementComponentWithChildren, HrefAttr, HreflangAttr, mixinDOMProperties, NullableString, Phrase, Phrases, PingAttr, ReferrerPolicyAttr, RelAttr, TargetAttr } from "@vanilla-ts/core";
 
 
 /**
@@ -41,8 +41,8 @@ export class A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exten
     }
 
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             A,
             DownloadAttr<HTMLAnchorElement>,
             HrefAttr<HTMLAnchorElement>,
@@ -55,7 +55,8 @@ export class A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exten
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging,jsdoc/require-jsdoc
     DownloadAttr<HTMLAnchorElement, EventMap>,
     HrefAttr<HTMLAnchorElement, EventMap>,

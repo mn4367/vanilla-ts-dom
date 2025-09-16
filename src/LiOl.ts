@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases, ValueAttr, mixinDOMAttributes } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, mixinDOMProperties, Phrase, Phrases, ValueAttr } from "@vanilla-ts/core";
 
 
 /**
@@ -17,15 +17,16 @@ export class LiOl<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
     }
 
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             LiOl,
             ValueAttr<HTMLLIElement>
         );
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface LiOl<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     ValueAttr<HTMLLIElement, EventMap> { }
 

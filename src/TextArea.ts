@@ -1,4 +1,5 @@
-import { AutocompleteAttr, ComponentFactory, DirnameAttr, ElementComponentWithChildren, MinMaxLengthAttr, mixinDOMAttributes, NameAttr, NativeDisabledAttr, PlaceholderAttr, ReadonlyAttr, RequiredAttr, ValueAttr } from "@vanilla-ts/core";
+import { AutocompleteAttr, ComponentFactory, DirnameAttr, ElementComponentWithChildren, MinMaxLengthAttr, mixin, mixinDOMProperties, NameAttr, NativeDisabledAttr, PlaceholderAttr, ReadonlyAttr, RequiredAttr, SelectionEndProp, SelectionStartProp, ValueAttr } from "@vanilla-ts/core";
+import { TextField } from "./TextField.js";
 
 
 /**
@@ -92,18 +93,9 @@ export class TextArea<EventMap extends HTMLElementEventMap = HTMLElementEventMap
         return this;
     }
 
-    /**
-     * Selects all text in the textarea.
-     * @returns This instance.
-     */
-    public select(): this {
-        this._dom.select();
-        return this;
-    }
-
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             TextArea,
             AutocompleteAttr<HTMLTextAreaElement>,
             DirnameAttr<HTMLTextAreaElement>,
@@ -113,12 +105,17 @@ export class TextArea<EventMap extends HTMLElementEventMap = HTMLElementEventMap
             NativeDisabledAttr<HTMLTextAreaElement>,
             ReadonlyAttr<HTMLTextAreaElement>,
             RequiredAttr<HTMLTextAreaElement>,
-            ValueAttr<HTMLTextAreaElement>
+            ValueAttr<HTMLTextAreaElement>,
+            SelectionEndProp<HTMLTextAreaElement>,
+            SelectionStartProp<HTMLTextAreaElement>
         );
+        /** Mixin `TextField` functionality. */
+        mixin(false, TextArea, TextField<HTMLTextAreaElement>);
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface TextArea<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     AutocompleteAttr<HTMLTextAreaElement, EventMap>,
     DirnameAttr<HTMLTextAreaElement, EventMap>,
@@ -128,7 +125,10 @@ export interface TextArea<EventMap extends HTMLElementEventMap = HTMLElementEven
     NativeDisabledAttr<HTMLTextAreaElement, EventMap>,
     ReadonlyAttr<HTMLTextAreaElement, EventMap>,
     RequiredAttr<HTMLTextAreaElement, EventMap>,
-    ValueAttr<HTMLTextAreaElement, EventMap> { }
+    ValueAttr<HTMLTextAreaElement, EventMap>,
+    SelectionEndProp<HTMLTextAreaElement, EventMap>,
+    SelectionStartProp<HTMLTextAreaElement, EventMap>,
+    TextField<HTMLTextAreaElement, EventMap> { }
 
 /**
  * Factory for `TextArea` components.

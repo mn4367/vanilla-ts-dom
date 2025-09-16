@@ -1,4 +1,4 @@
-import { CheckedAttr, CheckedEvent, ComponentFactory, mixinDOMAttributes } from "@vanilla-ts/core";
+import { AutocompleteAttributeValues, CheckedAttr, CheckedEvent, ComponentFactory, mixinDOMProperties } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
@@ -49,6 +49,44 @@ export class Checkbox<EventMap extends CheckboxEventMap = CheckboxEventMap> exte
     }
 
     /**
+     * `DataList` isn't supported by `Checkbox`, using this (overridden) property has no effect)!
+     */
+    public override get DataList(): string[] {
+        return [];
+    }
+    /** @inheritdoc */
+    public override set DataList(_v: string[]) { }
+
+    /**
+     * `DataList` isn't supported by `Checkbox`, using this (overridden) function has no effect)!
+     * @param _v The list attribute value to be set.
+     * @returns This instance.
+     */
+    public override dataList(_v: string[]): this {
+        return this;
+    }
+
+    /**
+     * `Autocomplete` isn't supported by `Checkbox`, using this (overridden) property has no
+     * effect)!
+     */
+    public override get Autocomplete(): AutocompleteAttributeValues {
+        return null;
+    }
+    /** @inheritdoc */
+    public override set Autocomplete(_v: boolean) { }
+
+    /**
+     * `Autocomplete` isn't supported by `Checkbox`, using this (overridden) function has no
+     * effect)!
+     * @param _v The autocomplete attribute value to be set.
+     * @returns This instance.
+     */
+    public override autocomplete(_v: AutocompleteAttributeValues): this {
+        return this;
+    }
+
+    /**
      * `Readonly` isn't supported by `Checkbox`, using this (overridden) property has no effect)!
      */
     public override get Readonly(): boolean {
@@ -67,15 +105,16 @@ export class Checkbox<EventMap extends CheckboxEventMap = CheckboxEventMap> exte
     }
 
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             Checkbox,
             CheckedAttr<HTMLInputElement, CheckboxEventMap>
         );
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface Checkbox<EventMap extends CheckboxEventMap = CheckboxEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     CheckedAttr<HTMLInputElement, EventMap> { }
 

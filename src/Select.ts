@@ -1,4 +1,4 @@
-import { AutocompleteAttr, ComponentFactory, ElementComponentWithChildren, MultipleAttr, NameAttr, NativeDisabledAttr, RequiredAttr, SizeAttr, ValueAttr, mixinDOMAttributes } from "@vanilla-ts/core";
+import { AutocompleteAttr, ComponentFactory, ElementComponentWithChildren, mixinDOMProperties, MultipleAttr, NameAttr, NativeDisabledAttr, RequiredAttr, SizeAttr, ValueAttr } from "@vanilla-ts/core";
 
 
 /**
@@ -124,8 +124,8 @@ export class Select<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
     }
 
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             Select,
             AutocompleteAttr<HTMLSelectElement>,
             MultipleAttr<HTMLSelectElement>,
@@ -138,7 +138,8 @@ export class Select<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface Select<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     AutocompleteAttr<HTMLSelectElement, EventMap>,
     MultipleAttr<HTMLSelectElement, EventMap>,

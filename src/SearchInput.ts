@@ -1,5 +1,6 @@
-import { ComponentFactory, DataListAttr, MinMaxLengthAttr, PatternAttr, PlaceholderAttr, SizeAttr, mixinDOMAttributes } from "@vanilla-ts/core";
+import { ComponentFactory, DirnameAttr, MinMaxLengthAttr, PatternAttr, PlaceholderAttr, SelectionEndProp, SelectionStartProp, SizeAttr, mixin, mixinDOMProperties } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
+import { TextField } from "./TextField.js";
 
 
 /**
@@ -16,35 +17,34 @@ export class SearchInput<EventMap extends HTMLElementEventMap = HTMLElementEvent
         super("search", id, value, name);
     }
 
-    /**
-     * Selects all text in the search input.
-     * @returns This instance.
-     */
-    public select(): this {
-        this._dom.select();
-        return this;
-    }
-
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             SearchInput,
-            DataListAttr<HTMLInputElement>,
+            DirnameAttr<HTMLInputElement>,
             MinMaxLengthAttr<HTMLInputElement>,
             PatternAttr<HTMLInputElement>,
             PlaceholderAttr<HTMLInputElement>,
-            SizeAttr<HTMLInputElement>
+            SizeAttr<HTMLInputElement>,
+            SelectionEndProp<HTMLInputElement>,
+            SelectionStartProp<HTMLInputElement>
         );
+        /** Mixin `TextField` functionality. */
+        mixin(false, SearchInput, TextField<HTMLInputElement>);
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface SearchInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
-    DataListAttr<HTMLInputElement, EventMap>,
+    DirnameAttr<HTMLInputElement, EventMap>,
     MinMaxLengthAttr<HTMLInputElement, EventMap>,
     PatternAttr<HTMLInputElement, EventMap>,
     PlaceholderAttr<HTMLInputElement, EventMap>,
-    SizeAttr<HTMLInputElement, EventMap> { }
+    SizeAttr<HTMLInputElement, EventMap>,
+    SelectionEndProp<HTMLInputElement, EventMap>,
+    SelectionStartProp<HTMLInputElement, EventMap>,
+    TextField<HTMLInputElement, EventMap> { }
 
 /**
  * Factory for `SearchInput` components.

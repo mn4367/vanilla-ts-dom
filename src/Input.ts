@@ -1,4 +1,4 @@
-import { AutocompleteAttr, DirnameAttr, ElementComponentVoid, HTMLInputTypes, MultipleAttr, NameAttr, NativeDisabledAttr, ReadonlyAttr, RequiredAttr, ValueAttr, mixinDOMAttributes } from "@vanilla-ts/core";
+import { AutocompleteAttr, DataListAttr, ElementComponentVoid, HTMLInputTypes, mixinDOMProperties, NameAttr, NativeDisabledAttr, ReadonlyAttr, RequiredAttr, ValueAttr } from "@vanilla-ts/core";
 
 
 /**
@@ -37,13 +37,74 @@ export abstract class Input<EventMap extends HTMLElementEventMap = HTMLElementEv
         return this.type;
     }
 
+    /**
+     * Get validity of the input element.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/validity
+     */
+    public get Validity(): ValidityState {
+        return this._dom.validity;
+    }
+
+    /**
+     * Get validation constraints that the `<input>` component does not satisfy (if any).
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/validationMessage
+     */
+    public get ValidationMessage(): string {
+        return this._dom.validationMessage;
+    }
+
+    /**
+     * Get/set the `valueAsDate` attribute of the component.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/valueAsDate
+     */
+    public get ValueAsDate(): Date | null {
+        return this._dom.valueAsDate;
+    }
+    /** @inheritdoc */
+    public set ValueAsDate(v: Date | null) {
+        this.valueAsDate(v);
+    }
+
+    /**
+     * Set the `valueAsDate` attribute of the component.
+     * @param v The value to be set.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/valueAsDate
+     * @returns This instance.
+     */
+    public valueAsDate(v: Date | null): this {
+        this._dom.valueAsDate = v;
+        return this;
+    }
+
+    /**
+     * Get/set the `valueAsNumber` attribute of the component.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/valueAsNumber
+     */
+    public get ValueAsNumber(): number {
+        return this._dom.valueAsNumber;
+    }
+    /** @inheritdoc */
+    public set ValueAsNumber(v: number) {
+        this.valueAsNumber(v);
+    }
+
+    /**
+     * Set the `valueAsNumber` attribute of the component.
+     * @param v The value to be set.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/valueAsNumber
+     * @returns This instance.
+     */
+    public valueAsNumber(v: number): this {
+        this._dom.valueAsNumber = v;
+        return this;
+    }
+
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             Input,
             AutocompleteAttr<HTMLInputElement>,
-            DirnameAttr<HTMLInputElement>,
-            MultipleAttr<HTMLInputElement>,
+            DataListAttr<HTMLInputElement>,
             NameAttr<HTMLInputElement>,
             ValueAttr<HTMLInputElement>,
             NativeDisabledAttr<HTMLInputElement>,
@@ -53,11 +114,11 @@ export abstract class Input<EventMap extends HTMLElementEventMap = HTMLElementEv
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface Input<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     AutocompleteAttr<HTMLInputElement, EventMap>,
-    DirnameAttr<HTMLInputElement, EventMap>,
-    MultipleAttr<HTMLInputElement, EventMap>,
+    DataListAttr<HTMLInputElement, EventMap>,
     NameAttr<HTMLInputElement, EventMap>,
     ValueAttr<HTMLInputElement, EventMap>,
     NativeDisabledAttr<HTMLInputElement, EventMap>,

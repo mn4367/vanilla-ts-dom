@@ -1,5 +1,6 @@
-import { ComponentFactory, DataListAttr, MinMaxLengthAttr, PatternAttr, PlaceholderAttr, SizeAttr, mixinDOMAttributes } from "@vanilla-ts/core";
+import { ComponentFactory, MinMaxLengthAttr, PatternAttr, PlaceholderAttr, SelectionEndProp, SelectionStartProp, SizeAttr, mixin, mixinDOMProperties } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
+import { TextField } from "./TextField.js";
 
 
 /**
@@ -14,15 +15,6 @@ export class PasswordInput<EventMap extends HTMLElementEventMap = HTMLElementEve
      */
     constructor(id?: string, value?: string, name?: string) {
         super("password", id, value, name);
-    }
-
-    /**
-     * Selects all text in the password input.
-     * @returns This instance.
-     */
-    public select(): this {
-        this._dom.select();
-        return this;
     }
 
     /**
@@ -48,26 +40,52 @@ export class PasswordInput<EventMap extends HTMLElementEventMap = HTMLElementEve
         return this;
     }
 
+    /**
+     * `DataList` isn't supported by `PasswordInput`, using this (overridden) property has no
+     * effect)!
+     */
+    public override get DataList(): string[] {
+        return [];
+    }
+    /** @inheritdoc */
+    public override set DataList(_v: string[]) { }
+
+    /**
+     * `DataList` isn't supported by `PasswordInput`, using this (overridden) function has no
+     * effect)!
+     * @param _v The list attribute value to be set.
+     * @returns This instance.
+     */
+    public override dataList(_v: string[]): this {
+        return this;
+    }
+
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             PasswordInput,
-            DataListAttr<HTMLInputElement>,
             MinMaxLengthAttr<HTMLInputElement>,
             PatternAttr<HTMLInputElement>,
             PlaceholderAttr<HTMLInputElement>,
-            SizeAttr<HTMLInputElement>
+            SizeAttr<HTMLInputElement>,
+            SelectionEndProp<HTMLInputElement>,
+            SelectionStartProp<HTMLInputElement>
         );
+        /** Mixin `TextField` functionality. */
+        mixin(false, PasswordInput, TextField<HTMLInputElement>);
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface PasswordInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
-    DataListAttr<HTMLInputElement, EventMap>,
     MinMaxLengthAttr<HTMLInputElement, EventMap>,
     PatternAttr<HTMLInputElement, EventMap>,
     PlaceholderAttr<HTMLInputElement, EventMap>,
-    SizeAttr<HTMLInputElement, EventMap> { }
+    SizeAttr<HTMLInputElement, EventMap>,
+    SelectionEndProp<HTMLInputElement, EventMap>,
+    SelectionStartProp<HTMLInputElement, EventMap>,
+    TextField<HTMLInputElement, EventMap> { }
 
 /**
  * Factory for `PasswordInput` components.

@@ -1,4 +1,4 @@
-import { ComponentFactory, DataListAttr, HTMLInputTypes, MinMaxAttr, StepAttr, mixinDOMAttributes } from "@vanilla-ts/core";
+import { ComponentFactory, HTMLInputTypes, MinMaxAttr, mixinDOMProperties, StepAttr } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
@@ -91,19 +91,18 @@ export class TemporalInput<EventMap extends HTMLElementEventMap = HTMLElementEve
     }
 
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             TemporalInput,
-            DataListAttr<HTMLInputElement>,
             MinMaxAttr<HTMLInputElement>,
             StepAttr<HTMLInputElement>,
         );
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface TemporalInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
-    DataListAttr<HTMLInputElement, EventMap>,
     MinMaxAttr<HTMLInputElement, EventMap>,
     StepAttr<HTMLInputElement, EventMap> { }
 

@@ -1,4 +1,4 @@
-import { ComponentFactory, DataListAttr, MinMaxAttr, PlaceholderAttr, StepAttr, mixinDOMAttributes } from "@vanilla-ts/core";
+import { ComponentFactory, MinMaxAttr, PlaceholderAttr, StepAttr, mixinDOMProperties } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
@@ -23,7 +23,7 @@ export class NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEvent
     }
 
     /**
-     * Selects all text in the number input.
+     * Selects all text in the input element.
      * @returns This instance.
      */
     public select(): this {
@@ -32,10 +32,9 @@ export class NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEvent
     }
 
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             NumberInput,
-            DataListAttr<HTMLInputElement>,
             MinMaxAttr<HTMLInputElement>,
             PlaceholderAttr<HTMLInputElement>,
             StepAttr<HTMLInputElement>
@@ -43,9 +42,9 @@ export class NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEvent
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
-    DataListAttr<HTMLInputElement, EventMap>,
     MinMaxAttr<HTMLInputElement, EventMap>,
     PlaceholderAttr<HTMLInputElement, EventMap>,
     StepAttr<HTMLInputElement, EventMap> { }

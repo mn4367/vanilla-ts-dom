@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, mixinDOMAttributes, OpenAttr, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, mixinDOMProperties, OpenAttr, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /**
@@ -80,15 +80,16 @@ export class Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
     }
 
     static {
-        /** Mixin additional DOM attributes. */
-        mixinDOMAttributes(
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
             Dialog,
             OpenAttr<HTMLDialogElement>
         );
     }
 }
 
-// Augment class definition with the DOM attributes introduced by `mixinDOMAttributes()` above.
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
 export interface Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging,jsdoc/require-jsdoc
     OpenAttr<HTMLDialogElement, EventMap> { }
 
