@@ -8,6 +8,7 @@ export * from "./Comment.js";
 export * from "./Dialog.js";
 export * from "./Div.js";
 export * from "./Em.js";
+export * from "./EmailInput.js";
 export * from "./Footer.js";
 export * from "./Fragment.js";
 export * from "./Header.js";
