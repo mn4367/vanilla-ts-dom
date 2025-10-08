@@ -27,23 +27,26 @@ export class Checkbox<EventMap extends CheckboxEventMap = CheckboxEventMap> exte
     }
 
     /**
-     * Get/set the indeterminate state of the checkbox.
+     * Get/set the indeterminate state of the checkbox. If set to `true` this also sets the checked
+     * state to `false`.
      */
     public get Indeterminate(): boolean {
         return this._dom.indeterminate;
     }
     /** @inheritdoc */
     public set Indeterminate(v: boolean) {
-        this._dom.indeterminate = v;
+        this.indeterminate(v);
     }
 
     /**
-     * Sets the indeterminate state of the checkbox to indeterminate/determinate.
+     * Sets the indeterminate state of the checkbox to indeterminate/determinate. If set to `true`
+     * this also sets the checked state to `false`.
      * @param indeterminate `true`, if the state of the checkbox should be indeterminate, otherwise
      * false.
      * @returns This instance.
      */
     public indeterminate(indeterminate: boolean): this {
+        indeterminate && this._dom.checked && (this._dom.checked = false);
         this._dom.indeterminate = indeterminate;
         return this;
     }
