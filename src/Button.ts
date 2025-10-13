@@ -50,4 +50,23 @@ export class ButtonFactory<T> extends ComponentFactory<Button> {
             data
         );
     }
+
+    /**
+     * Create, set up and return Button component. Identical to {@link button()}, but the class
+     * name `regular` is added to the returned button.
+     * @param phrase The phrasing content for the `<button>` element.
+     * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
+     * @returns Button component (with the class name `regular` added).
+     */
+    public buttonRegular(phrase?: Phrase | Phrases, data?: T): Button {
+        return this.setupComponent(
+            (!phrase
+                ? new Button()
+                : Array.isArray(phrase)
+                    ? new Button(...phrase)
+                    : new Button(phrase)
+            ).addClass("regular"),
+            data
+        );
+    }
 }
