@@ -24,6 +24,7 @@ export * from "./Main.js";
 export * from "./Menu.js";
 export * from "./NumberInput.js";
 export * from "./Ol.js";
+export * from "./Output.js";
 export * from "./P.js";
 export * from "./PasswordInput.js";
 export * from "./Progress.js";
