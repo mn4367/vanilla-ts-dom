@@ -1,13 +1,13 @@
-import { ComponentFactory, ElementComponentWithChildren, NullableString, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, ForAttr, mixinDOMProperties, Phrase, Phrases } from "@vanilla-ts/core";
 
 
 /**
  * Label component (`<label>`).
  */
-export class Label<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLLabelElement, EventMap> {
+export class Label<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLLabelElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     /**
      * Create `<label>` component.
-     * @param for_ Content of the `for` attribute.
+     * @param for_ Content of the `for` attribute (single target ID or space separated target IDs).
      * @param phrase The phrasing content for the `<label>` element.
      */
     constructor(for_?: string, ...phrase: Phrases) {
@@ -16,27 +16,19 @@ export class Label<EventMap extends HTMLElementEventMap = HTMLElementEventMap> e
         phrase.length > 0 && this.phrase(...phrase);
     }
 
-    /**
-     * Get/set `for` attribute value of underlying HTML element.
-     */
-    public get For(): NullableString {
-        return this.attr("for");
-    }
-    /** @inheritdoc */
-    public set For(v: NullableString) {
-        this.for(v);
-    }
-
-    /**
-     * Set for attribute of underlying HTML element.
-     * @param v The `for` attribute to be set or `null` to remove the attribute.
-     * @returns This instance.
-     */
-    public for(v: NullableString): this {
-        this.attrib("for", v);
-        return this;
+    static {
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
+            Label,
+            ForAttr<HTMLLabelElement>
+        );
     }
 }
+
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
+export interface Label<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+    ForAttr<HTMLLabelElement, EventMap> { }
 
 /**
  * Factory for `Label` components.
@@ -44,7 +36,7 @@ export class Label<EventMap extends HTMLElementEventMap = HTMLElementEventMap> e
 export class LabelFactory<T> extends ComponentFactory<Label> {
     /**
      * Create, set up and return Label component.
-     * @param for_ Content of the `for` attribute.
+     * @param for_ Content of the `for` attribute (single target ID or space separated target IDs).
      * @param phrase The phrasing content for the `<label>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Label component.
