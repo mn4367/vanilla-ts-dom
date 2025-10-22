@@ -96,7 +96,7 @@ export class TextArea<EventMap extends HTMLElementEventMap = HTMLElementEventMap
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            TextArea,
+            this,
             AutocompleteAttr<HTMLTextAreaElement>,
             DirnameAttr<HTMLTextAreaElement>,
             MinMaxLengthAttr<HTMLTextAreaElement>,
@@ -110,7 +110,7 @@ export class TextArea<EventMap extends HTMLElementEventMap = HTMLElementEventMap
             SelectionStartProp<HTMLTextAreaElement>
         );
         /** Mixin `TextField` functionality. */
-        mixin(false, TextArea, TextField<HTMLTextAreaElement>);
+        mixin(false, this, TextField<HTMLTextAreaElement>);
     }
 }
 

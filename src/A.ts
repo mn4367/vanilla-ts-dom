@@ -43,7 +43,7 @@ export class A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exten
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            A,
+            this,
             DownloadAttr<HTMLAnchorElement>,
             HrefAttr<HTMLAnchorElement>,
             HreflangAttr<HTMLAnchorElement>,

@@ -20,7 +20,7 @@ export class SearchInput<EventMap extends HTMLElementEventMap = HTMLElementEvent
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            SearchInput,
+            this,
             DirnameAttr<HTMLInputElement>,
             MinMaxLengthAttr<HTMLInputElement>,
             PatternAttr<HTMLInputElement>,
@@ -30,7 +30,7 @@ export class SearchInput<EventMap extends HTMLElementEventMap = HTMLElementEvent
             SelectionStartProp<HTMLInputElement>
         );
         /** Mixin `TextField` functionality. */
-        mixin(false, SearchInput, TextField<HTMLInputElement>);
+        mixin(false, this, TextField<HTMLInputElement>);
     }
 }
 

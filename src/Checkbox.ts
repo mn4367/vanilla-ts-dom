@@ -110,7 +110,7 @@ export class Checkbox<EventMap extends CheckboxEventMap = CheckboxEventMap> exte
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            Checkbox,
+            this,
             CheckedAttr<HTMLInputElement, CheckboxEventMap>
         );
     }

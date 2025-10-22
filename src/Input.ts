@@ -102,7 +102,7 @@ export abstract class Input<EventMap extends HTMLElementEventMap = HTMLElementEv
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            Input,
+            this,
             AutocompleteAttr<HTMLInputElement>,
             DataListAttr<HTMLInputElement>,
             NameAttr<HTMLInputElement>,

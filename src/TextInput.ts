@@ -20,7 +20,7 @@ export class TextInput<EventMap extends HTMLElementEventMap = HTMLElementEventMa
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            TextInput,
+            this,
             DirnameAttr<HTMLInputElement>,
             MinMaxLengthAttr<HTMLInputElement>,
             PatternAttr<HTMLInputElement>,
@@ -30,7 +30,7 @@ export class TextInput<EventMap extends HTMLElementEventMap = HTMLElementEventMa
             SelectionStartProp<HTMLInputElement>
         );
         /** Mixin `TextField` functionality. */
-        mixin(false, TextInput, TextField<HTMLInputElement>);
+        mixin(false, this, TextField<HTMLInputElement>);
     }
 }
 

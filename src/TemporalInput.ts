@@ -93,7 +93,7 @@ export class TemporalInput<EventMap extends HTMLElementEventMap = HTMLElementEve
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            TemporalInput,
+            this,
             MinMaxAttr<HTMLInputElement>,
             StepAttr<HTMLInputElement>,
         );

@@ -17,7 +17,7 @@ export class Button<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            Button,
+            this,
             NameAttr<HTMLButtonElement>,
             NativeDisabledAttr<HTMLButtonElement>,
             ValueAttr<HTMLButtonElement>

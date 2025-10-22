@@ -63,7 +63,7 @@ export class PasswordInput<EventMap extends HTMLElementEventMap = HTMLElementEve
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            PasswordInput,
+            this,
             MinMaxLengthAttr<HTMLInputElement>,
             PatternAttr<HTMLInputElement>,
             PlaceholderAttr<HTMLInputElement>,
@@ -72,7 +72,7 @@ export class PasswordInput<EventMap extends HTMLElementEventMap = HTMLElementEve
             SelectionStartProp<HTMLInputElement>
         );
         /** Mixin `TextField` functionality. */
-        mixin(false, PasswordInput, TextField<HTMLInputElement>);
+        mixin(false, this, TextField<HTMLInputElement>);
     }
 }
 

@@ -19,7 +19,7 @@ export class LiOl<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            LiOl,
+            this,
             ValueAttr<HTMLLIElement>
         );
     }

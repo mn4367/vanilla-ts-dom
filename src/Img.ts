@@ -139,7 +139,7 @@ export class Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ext
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            Img,
+            this,
             CrossOrginAttr<HTMLImageElement>,
             SrcAttr<HTMLImageElement>,
             AltAttr<HTMLImageElement>,

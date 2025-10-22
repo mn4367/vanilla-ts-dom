@@ -19,7 +19,7 @@ export class Label<EventMap extends HTMLElementEventMap = HTMLElementEventMap> e
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            Label,
+            this,
             ForAttr<HTMLLabelElement>
         );
     }

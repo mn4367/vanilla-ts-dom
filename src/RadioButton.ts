@@ -171,7 +171,7 @@ export class RadioButton<EventMap extends RadioButtonEventMap = RadioButtonEvent
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            RadioButton,
+            this,
             CheckedAttr<HTMLInputElement, RadioButtonEventMap>
         );
     }

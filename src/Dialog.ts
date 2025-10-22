@@ -82,7 +82,7 @@ export class Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            Dialog,
+            this,
             OpenAttr<HTMLDialogElement>
         );
     }

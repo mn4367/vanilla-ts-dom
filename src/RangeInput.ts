@@ -47,11 +47,13 @@ export class RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventM
     public vertical(vertical: boolean): this {
         this.vertical_ = vertical;
         if (this.vertical_) {
-            this.style("writingMode", "vertical-lr");
-            this.data("vertical", "");
+            this
+                .style("writingMode", "vertical-lr")
+                .data("vertical", "");
         } else {
-            this.style("writingMode", "");
-            this.data("vertical", null);
+            this
+                .style("writingMode", "")
+                .data("vertical", null);
         }
         return this;
     }
@@ -95,7 +97,7 @@ export class RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventM
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            RangeInput,
+            this,
             MinMaxAttr<HTMLInputElement>,
             StepAttr<HTMLInputElement>
         );

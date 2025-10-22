@@ -19,7 +19,7 @@ export class Output<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            Output,
+            this,
             ForAttr<HTMLOutputElement>,
             NameAttr<HTMLOutputElement>
         );

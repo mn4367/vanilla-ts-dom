@@ -34,7 +34,7 @@ export class NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEvent
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            NumberInput,
+            this,
             MinMaxAttr<HTMLInputElement>,
             PlaceholderAttr<HTMLInputElement>,
             StepAttr<HTMLInputElement>

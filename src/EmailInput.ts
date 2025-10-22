@@ -29,7 +29,7 @@ export class EmailInput<EventMap extends HTMLElementEventMap = HTMLElementEventM
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            EmailInput,
+            this,
             DirnameAttr<HTMLInputElement>,
             MinMaxLengthAttr<HTMLInputElement>,
             MultipleAttr<HTMLInputElement>,

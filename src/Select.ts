@@ -126,7 +126,7 @@ export class Select<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
-            Select,
+            this,
             AutocompleteAttr<HTMLSelectElement>,
             MultipleAttr<HTMLSelectElement>,
             NameAttr<HTMLSelectElement>,
