@@ -1,4 +1,4 @@
-import { AutocompleteAttr, ComponentFactory, ElementComponentWithChildren, mixinDOMProperties, MultipleAttr, NameAttr, NativeDisabledAttr, RequiredAttr, SizeAttr, ValueAttr } from "@vanilla-ts/core";
+import { AutocompleteAttr, cid, ComponentFactory, ElementComponentWithChildren, mixinDOMProperties, MultipleAttr, NameAttr, NativeDisabledAttr, NullableString, RequiredAttr, SizeAttr, ValueAttr } from "@vanilla-ts/core";
 
 
 /**
@@ -20,14 +20,18 @@ export class Select<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
     /**
      * Create Select component.
      * @param values The values to be displayed in the select.
-     * @param id The id (attribute) of the select.
+     * @param id The id (attribute) of the select. If `id` is `undefined` or omitted, a unique ID
+     * will be generated. If `id` is explicitely set to `null` or an empty string, no id attribute
+     * will be set. Any other value will be used as the id attribute.
      * @param value The value of the select.
      * @param name The name (attribute) of the select.
      */
-    constructor(values: ISelectValues[], id?: string, value?: string, name?: string) {
+    constructor(values: ISelectValues[], id?: NullableString, value?: string, name?: string) {
         super("select");
         this.values(values);
-        id && this.id(id);
+        id === undefined
+            ? this.id(cid())
+            : id && this.id(id);
         value && this.value(value);
         name && this.name(name);
     }

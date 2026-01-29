@@ -1,4 +1,4 @@
-import { AutocompleteAttr, DataListAttr, ElementComponentVoid, HTMLInputTypes, mixinDOMProperties, NameAttr, NativeDisabledAttr, ReadonlyAttr, RequiredAttr, ValueAttr } from "@vanilla-ts/core";
+import { AutocompleteAttr, cid, DataListAttr, ElementComponentVoid, HTMLInputTypes, mixinDOMProperties, NameAttr, NativeDisabledAttr, NullableString, ReadonlyAttr, RequiredAttr, ValueAttr } from "@vanilla-ts/core";
 
 
 /**
@@ -15,15 +15,19 @@ export abstract class Input<EventMap extends HTMLElementEventMap = HTMLElementEv
     /**
      * Create Input component.
      * @param type The type (attribute) of the input component.
-     * @param id The id (attribute) of the input component.
+     * @param id The id (attribute) of the input component. If `id` is `undefined` or omitted, a
+     * unique ID will be generated. If `id` is explicitely set to `null` or an empty string, no id
+     * attribute will be set. Any other value will be used as the id attribute.
      * @param value The value of the input element.
      * @param name The name (attribute) of the input component.
      */
-    constructor(type: HTMLInputTypes, id?: string, value?: string, name?: string) {
+    constructor(type: HTMLInputTypes, id?: NullableString, value?: string, name?: string) {
         super("input");
         this.type = type;
         this._dom.type = this.type;
-        id && this.id(id);
+        id === undefined
+            ? this.id(cid())
+            : id && this.id(id);
         // Otherwise this will be "on" (for checkboxes, radiobuttons, ...).
         // this.value(value ? value : ""); // eslint-disable-line @typescript-eslint/no-unsafe-call
         value && this.value(value);

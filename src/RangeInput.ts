@@ -1,4 +1,4 @@
-import { ComponentFactory, MinMaxAttr, mixinDOMProperties, StepAttr } from "@vanilla-ts/core";
+import { ComponentFactory, MinMaxAttr, mixinDOMProperties, NullableString, StepAttr } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
@@ -10,7 +10,9 @@ export class RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventM
 
     /**
      * Create RangeInput component.
-     * @param id The id (attribute) of the range input.
+     * @param id The id (attribute) of the range input. If `id` is `undefined` or omitted, a unique
+     * ID will be generated. If `id` is explicitely set to `null` or an empty string, no id
+     * attribute will be set. Any other value will be used as the id attribute.
      * @param value The value of the range input.
      * @param name The name (attribute) of the range input.
      * @param min The minimum value of the range input.
@@ -19,7 +21,7 @@ export class RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventM
      * @param vertical `true` if the range input is to be displayed with a vertical orientation,
      * otherwise `false`.
      */
-    constructor(id?: string, value?: string, name?: string, min: string = "0", max: string = "100", step: string | "any" = "1", vertical: boolean = false) { // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
+    constructor(id?: NullableString, value?: string, name?: string, min: string = "0", max: string = "100", step: string | "any" = "1", vertical: boolean = false) { // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
         super("range", id, value, name);
         this.min(min)
             .max(max)

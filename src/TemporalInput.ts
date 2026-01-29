@@ -1,4 +1,4 @@
-import { ComponentFactory, HTMLInputTypes, MinMaxAttr, mixinDOMProperties, StepAttr } from "@vanilla-ts/core";
+import { ComponentFactory, HTMLInputTypes, MinMaxAttr, mixinDOMProperties, NullableString, StepAttr } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
@@ -31,13 +31,15 @@ export class TemporalInput<EventMap extends HTMLElementEventMap = HTMLElementEve
     /**
      * Create TemporalInput component.
      * @param temporalType The type (attribute) of the temporal input.
-     * @param id The id (attribute) of the temporal input.
+     * @param id The id (attribute) of the temporal input. If `id` is `undefined` or omitted, a
+     * unique ID will be generated. If `id` is explicitely set to `null` or an empty string, no id
+     * attribute will be set. Any other value will be used as the id attribute.
      * @param value The value of the temporal input.
      * @param name The name (attribute) of the temporal input.
      * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week
      * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month
      */
-    constructor(temporalType: TemporalType, id?: string, value?: string, name?: string) {
+    constructor(temporalType: TemporalType, id?: NullableString, value?: string, name?: string) {
         let type: HTMLInputTypes = "date";
         let step: string | undefined = undefined;
         switch (temporalType) {

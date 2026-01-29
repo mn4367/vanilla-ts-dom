@@ -1,4 +1,4 @@
-import { ComponentFactory, MinMaxLengthAttr, PatternAttr, PlaceholderAttr, SelectionEndProp, SelectionStartProp, SizeAttr, mixin, mixinDOMProperties } from "@vanilla-ts/core";
+import { ComponentFactory, MinMaxLengthAttr, NullableString, PatternAttr, PlaceholderAttr, SelectionEndProp, SelectionStartProp, SizeAttr, mixin, mixinDOMProperties } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 import { TextField } from "./TextField.js";
 
@@ -9,11 +9,13 @@ import { TextField } from "./TextField.js";
 export class PasswordInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     /**
      * Create PasswordInput component.
-     * @param id The id (attribute) of the password input.
+     * @param id The id (attribute) of the password input. If `id` is `undefined` or omitted, a
+     * unique ID will be generated. If `id` is explicitely set to `null` or an empty string, no id
+     * attribute will be set. Any other value will be used as the id attribute.
      * @param value The value of the password input.
      * @param name The name (attribute) of the password input.
      */
-    constructor(id?: string, value?: string, name?: string) {
+    constructor(id?: NullableString, value?: string, name?: string) {
         super("password", id, value, name);
     }
 

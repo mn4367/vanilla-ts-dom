@@ -1,4 +1,4 @@
-import { AutocompleteAttributeValues, CheckedAttr, CheckedEvent, ComponentFactory, mixinDOMProperties } from "@vanilla-ts/core";
+import { AutocompleteAttributeValues, CheckedAttr, CheckedEvent, ComponentFactory, mixinDOMProperties, NullableString } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
@@ -15,12 +15,15 @@ export interface CheckboxEventMap extends HTMLElementEventMap {
 export class Checkbox<EventMap extends CheckboxEventMap = CheckboxEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     /**
      * Create Checkbox component.
-     * @param id The id (attribute) of the checkbox.
-     * @param value The value of the checkbox.
+     * @param id The id (attribute) of the checkbox. If `id` is `undefined` or omitted, a unique ID
+     * will be generated. If `id` is explicitely set to `null` or an empty string, no id attribute
+     * will be set. Any other value will be used as the id attribute.
+     * @param value The value of the checkbox. If omitted, it defaults to the value `on` (see
+     * https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox#value_2).
      * @param name The name (attribute) of the checkbox.
      * @param checked `true`, if the checkbox should be checked, otherwise false.
      */
-    constructor(id?: string, value?: string, name?: string, checked?: boolean) {
+    constructor(id?: NullableString, value?: string, name?: string, checked?: boolean) {
         super("checkbox", id, value, name);
         this._dom.checked = checked ?? false;
         this.on("change", () => this.emit(new CheckedEvent("checked", this, { Checked: this._dom.checked }))); // eslint-disable-line jsdoc/require-jsdoc

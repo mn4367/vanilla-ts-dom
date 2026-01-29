@@ -1,4 +1,4 @@
-import { AutocompleteAttr, ComponentFactory, DirnameAttr, ElementComponentWithChildren, MinMaxLengthAttr, mixin, mixinDOMProperties, NameAttr, NativeDisabledAttr, PlaceholderAttr, ReadonlyAttr, RequiredAttr, SelectionEndProp, SelectionStartProp, ValueAttr } from "@vanilla-ts/core";
+import { AutocompleteAttr, cid, ComponentFactory, DirnameAttr, ElementComponentWithChildren, MinMaxLengthAttr, mixin, mixinDOMProperties, NameAttr, NativeDisabledAttr, NullableString, PlaceholderAttr, ReadonlyAttr, RequiredAttr, SelectionEndProp, SelectionStartProp, ValueAttr } from "@vanilla-ts/core";
 import { TextField } from "./TextField.js";
 
 
@@ -14,16 +14,20 @@ export class TextArea<EventMap extends HTMLElementEventMap = HTMLElementEventMap
      * @param text The text content for the textarea element.
      * @param rows The number of visible text lines for the control.
      * @param cols The visible width of the text control, in average character widths.
-     * @param id The `id` attribute for the textarea element.
+     * @param id The id (attribute) of the textarea element. If `id` is `undefined` or omitted, a
+     * unique ID will be generated. If `id` is explicitely set to `null` or an empty string, no id
+     * attribute will be set. Any other value will be used as the id attribute.
      * @param name The `name` attribute for the textarea element.
      */
-    constructor(text?: string, rows?: number, cols?: number, id?: string, name?: string) {
+    constructor(text?: string, rows?: number, cols?: number, id?: NullableString, name?: string) {
         super("textarea");
-        this.rows(rows !== undefined ? Math.max(rows, 1) : 2)
-            .cols(cols !== undefined ? Math.max(cols, 1) : 20);
-        text && this.text(text);
-        id && this.id(id);
+        id === undefined
+            ? this.id(cid())
+            : id && this.id(id);
         name && this.name(name);
+        this.rows(Math.max(rows ?? 2, 1))
+            .cols(Math.max(cols ?? 20, 1));
+        text && this.text(text);
     }
 
     /**

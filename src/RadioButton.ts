@@ -1,4 +1,4 @@
-import { AutocompleteAttributeValues, CheckedAttr, CheckedEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, mixinDOMProperties } from "@vanilla-ts/core";
+import { AutocompleteAttributeValues, CheckedAttr, CheckedEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, mixinDOMProperties, NullableString } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
@@ -17,12 +17,14 @@ export class RadioButton<EventMap extends RadioButtonEventMap = RadioButtonEvent
 
     /**
      * Create RadioButton component.
-     * @param id The id (attribute) of the radio button.
+     * @param id The id (attribute) of the radio button. If `id` is `undefined` or omitted, a unique
+     * ID will be generated. If `id` is explicitely set to `null` or an empty string, no id
+     * attribute will be set. Any other value will be used as the id attribute.
      * @param value The value of the radio button.
      * @param name The name (attribute) of the radio button.
      * @param checked `true`, if the radio button should be checked, otherwise false.
      */
-    constructor(id?: string, value?: string, name?: string, checked?: boolean) {
+    constructor(id?: NullableString, value?: string, name?: string, checked?: boolean) {
         super("radio", id, value, name);
         this._dom.checked = checked ?? false;
         this.on("keyup", this.#onSpaceOrEnter.bind(this));

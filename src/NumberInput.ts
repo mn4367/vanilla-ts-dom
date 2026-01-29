@@ -1,5 +1,6 @@
-import { ComponentFactory, MinMaxAttr, PlaceholderAttr, StepAttr, mixinDOMProperties } from "@vanilla-ts/core";
+import { ComponentFactory, MinMaxAttr, NullableString, PlaceholderAttr, StepAttr, mixin, mixinDOMProperties } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
+import { TextField } from "./TextField.js";
 
 
 /**
@@ -8,14 +9,16 @@ import { Input } from "./Input.js";
 export class NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     /**
      * Create NumberInput component.
-     * @param id The id (attribute) of the number input.
+     * @param id The id (attribute) of the number input. If `id` is `undefined` or omitted, a unique
+     * ID will be generated. If `id` is explicitely set to `null` or an empty string, no id
+     * attribute will be set. Any other value will be used as the id attribute.
      * @param value The value of the number input.
      * @param name The name (attribute) of the number input.
      * @param min The minimum value (attribute) of the number input.
      * @param max The maximum value (attribute) of the number input.
      * @param step The step value (attribute) of the number input.
      */
-    constructor(id?: string, value?: string, name?: string, min?: string, max?: string, step?: string) {
+    constructor(id?: NullableString, value?: string, name?: string, min?: string, max?: string, step?: string) {
         super("number", id, value, name);
         min && this.min(min);
         max && this.max(max);
@@ -39,6 +42,8 @@ export class NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEvent
             PlaceholderAttr<HTMLInputElement>,
             StepAttr<HTMLInputElement>
         );
+        /** Mixin `TextField` functionality. */
+        mixin(false, this, TextField<HTMLInputElement>);
     }
 }
 
@@ -47,7 +52,8 @@ export class NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEvent
 export interface NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     MinMaxAttr<HTMLInputElement, EventMap>,
     PlaceholderAttr<HTMLInputElement, EventMap>,
-    StepAttr<HTMLInputElement, EventMap> { }
+    StepAttr<HTMLInputElement, EventMap>,
+    TextField<HTMLInputElement, EventMap> { }
 
 /**
  * Factory for `NumberInput` components.

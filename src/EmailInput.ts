@@ -1,5 +1,6 @@
-import { ComponentFactory, DirnameAttr, MinMaxLengthAttr, mixinDOMProperties, MultipleAttr, PatternAttr, PlaceholderAttr, SizeAttr } from "@vanilla-ts/core";
+import { ComponentFactory, DirnameAttr, MinMaxLengthAttr, mixin, mixinDOMProperties, MultipleAttr, NullableString, PatternAttr, PlaceholderAttr, SizeAttr } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
+import { TextField } from "./TextField.js";
 
 /**
  * Email input component (`<input type="email">`).
@@ -9,11 +10,13 @@ export class EmailInput<EventMap extends HTMLElementEventMap = HTMLElementEventM
      * Create EmailInput component.\
      * To check the validity of the input, this regex pattern can be used (as per HTML spec):\
      * `/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/`
-     * @param id The id (attribute) of the email input.
+     * @param id The id (attribute) of the email input. If `id` is `undefined` or omitted, a unique
+     * ID will be generated. If `id` is explicitely set to `null` or an empty string, no id
+     * attribute will be set. Any other value will be used as the id attribute.
      * @param value The value of the email input.
      * @param name The name (attribute) of the email input.
      */
-    constructor(id?: string, value?: string, name?: string) {
+    constructor(id?: NullableString, value?: string, name?: string) {
         super("email", id, value, name);
     }
 
@@ -37,6 +40,8 @@ export class EmailInput<EventMap extends HTMLElementEventMap = HTMLElementEventM
             PlaceholderAttr<HTMLInputElement>,
             SizeAttr<HTMLInputElement>
         );
+        /** Mixin `TextField` functionality. */
+        mixin(false, this, TextField<HTMLInputElement>);
     }
 }
 
@@ -48,7 +53,8 @@ export interface EmailInput<EventMap extends HTMLElementEventMap = HTMLElementEv
     MultipleAttr<HTMLInputElement, EventMap>,
     PatternAttr<HTMLInputElement, EventMap>,
     PlaceholderAttr<HTMLInputElement, EventMap>,
-    SizeAttr<HTMLInputElement, EventMap> { }
+    SizeAttr<HTMLInputElement, EventMap>,
+    TextField<HTMLInputElement, EventMap> { }
 
 /**
  * Factory for `EmailInput` components.
