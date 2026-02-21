@@ -3,6 +3,7 @@ export * from "./Address.js";
 export * from "./B.js";
 export * from "./Br.js";
 export * from "./Button.js";
+export * from "./Canvas.js";
 export * from "./Checkbox.js";
 export * from "./Code.js";
 export * from "./Comment.js";
