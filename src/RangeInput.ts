@@ -108,7 +108,7 @@ export class RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventM
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging,jsdoc/require-jsdoc
+export interface RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     MinMaxAttr<HTMLInputElement, EventMap>,
     StepAttr<HTMLInputElement, EventMap> { }
 

@@ -65,9 +65,7 @@ export class TemporalInput<EventMap extends HTMLElementEventMap = HTMLElementEve
                 break;
         }
         super(type, id, value, name);
-        step !== undefined
-            ? this.step(step)
-            : undefined;
+        step === undefined || this.step(step);
     }
 
     /**

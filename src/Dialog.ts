@@ -55,7 +55,8 @@ export class Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
 
     /**
      * Displays the dialog (non-modal).
-     * @throws `InvalidStateError` (if the dialog is already open and modal).
+     * @throws {DOMException} `DOMException.InvalidStateError` (if the dialog is already open and
+     * modal).
      * @returns This instance.
      */
     public show(): this {
@@ -68,7 +69,8 @@ export class Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
 
     /**
      * Displays the dialog (modal).
-     * @throws `InvalidStateError` (if the dialog is already open and non-modal).
+     * @throws {DOMException} `DOMException.InvalidStateError` (if the dialog is already open and
+     * non-modal).
      * @returns This instance.
      */
     public showModal(): this {
@@ -90,7 +92,7 @@ export class Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging,jsdoc/require-jsdoc
+export interface Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-empty-object-type,jsdoc/require-jsdoc
     OpenAttr<HTMLDialogElement, EventMap> { }
 
 /**

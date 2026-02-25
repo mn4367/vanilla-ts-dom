@@ -20,7 +20,7 @@ export class Address<EventMap extends HTMLElementEventMap = HTMLElementEventMap>
  */
 export class AddressFactory<T> extends ComponentFactory<Address> {
     /**
-     * Create, set up and return Header component.
+     * Create, set up and return Address component.
      * @param phrase The phrasing content for the `<address>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Header component.

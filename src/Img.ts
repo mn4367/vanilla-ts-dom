@@ -20,8 +20,8 @@ export class Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ext
      */
     constructor(src: string, width?: number, height?: number, alt?: string, lazyLoad: boolean = true) {
         super("img");
-        width !== undefined ? this.width(width) : undefined;
-        height !== undefined ? this.height(height) : undefined;
+        width === undefined || this.width(width);
+        height === undefined || this.height(height);
         alt && this.alt(alt);
         lazyLoad && this.loading("lazy");
         this

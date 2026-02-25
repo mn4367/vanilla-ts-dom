@@ -5,7 +5,7 @@ import { Input } from "./Input.js";
 /** Additional event(s) for `RadioButton`. */
 export interface RadioButtonEventMap extends HTMLElementEventMap {
     /** A radio button is checked/unchecked. */
-    "checked": CheckedEvent<RadioButton>; // eslint-disable-line jsdoc/require-jsdoc
+    "checked": CheckedEvent<RadioButton>;
 }
 
 /**
@@ -181,7 +181,7 @@ export class RadioButton<EventMap extends RadioButtonEventMap = RadioButtonEvent
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface RadioButton<EventMap extends RadioButtonEventMap = RadioButtonEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+export interface RadioButton<EventMap extends RadioButtonEventMap = RadioButtonEventMap> extends // eslint-disable-line jsdoc/require-jsdoc,@typescript-eslint/no-empty-object-type
     CheckedAttr<HTMLInputElement, EventMap> { }
 
 /**

@@ -27,7 +27,7 @@ export class Label<EventMap extends HTMLElementEventMap = HTMLElementEventMap> e
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Label<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+export interface Label<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc,@typescript-eslint/no-empty-object-type
     ForAttr<HTMLLabelElement, EventMap> { }
 
 /**

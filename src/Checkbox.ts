@@ -5,7 +5,7 @@ import { Input } from "./Input.js";
 /** Additional event(s) for `Checkbox`. */
 export interface CheckboxEventMap extends HTMLElementEventMap {
     /** A checkbox is checked/unchecked. */
-    "checked": CheckedEvent<Checkbox>; // eslint-disable-line jsdoc/require-jsdoc
+    "checked": CheckedEvent<Checkbox>;
 }
 
 /**
@@ -121,7 +121,7 @@ export class Checkbox<EventMap extends CheckboxEventMap = CheckboxEventMap> exte
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Checkbox<EventMap extends CheckboxEventMap = CheckboxEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+export interface Checkbox<EventMap extends CheckboxEventMap = CheckboxEventMap> extends // eslint-disable-line @typescript-eslint/no-empty-object-type,jsdoc/require-jsdoc
     CheckedAttr<HTMLInputElement, EventMap> { }
 
 /**

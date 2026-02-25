@@ -27,7 +27,7 @@ export class Canvas<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Canvas<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging,jsdoc/require-jsdoc
+export interface Canvas<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-empty-object-type,jsdoc/require-jsdoc
     WidthHeightAttr<HTMLCanvasElement, EventMap> { }
 
 /**
