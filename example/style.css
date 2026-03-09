@@ -1,0 +1,59 @@
+:root {
+    --font-primary: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    --font-size: 10pt;
+    --base-size: 1rem;
+    --base-size-half: 0.5rem;
+}
+html {
+    font-family: var(--font-primary);
+    font-size: var(--font-size);
+}
+* {
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    min-width: 35rem;
+    min-height: 20rem;
+    margin: 0;
+}
+header,
+footer {
+    flex-grow: 0;
+    flex-shrink: 0;
+    background: hsl(0, 0%, 95%);
+}
+header {
+    padding: var(--base-size);
+    border-block-end: 1px solid hsl(0, 0%, 85%);
+}
+footer {
+    padding: var(--base-size-half);
+    border-block-start: 1px solid hsl(0, 0%, 85%);
+}
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    .sidebar {
+        flex-grow: 0;
+        flex-shrink: 0;
+        min-width: 12rem;
+        padding: var(--base-size);
+        background: hsl(0, 0%, 95%);
+    }
+    .content {
+        flex-grow: 1;
+        padding: var(--base-size);
+        p {
+            margin: 0;
+            padding: var(--base-size);
+        }
+    }
+}

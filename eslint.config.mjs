@@ -9,7 +9,8 @@ const config = defineConfig([
   globalIgnores([
     "**/*.js",
     "**/*.d.ts",
-    "**/example/*.ts",
+    "**/example/**/*.ts",
+    "**/playground/**/*.ts",
     "**/rollup*.mjs",
     "eslint.config.mjs"
   ]),
