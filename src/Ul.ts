@@ -10,9 +10,9 @@ export class Ul<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
      * Create Ul component.
      * @param listItems Unordered list items to be appended to this list.
      */
-    constructor(listItems: (LiUl | undefined | null)[]) {
+    constructor(listItems?: (LiUl | undefined | null)[]) {
         super("ul");
-        this.append(...listItems);
+        listItems && this.append(...listItems);
     }
 }
 
@@ -26,7 +26,7 @@ export class UlFactory extends ComponentFactory<Ul> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Ul component.
      */
-    public ul(listItems: LiUl[], data?: AnyType): Ul {
+    public ul(listItems?: LiUl[], data?: AnyType): Ul {
         return this.setupComponent(new Ul(listItems), data);
     }
 }

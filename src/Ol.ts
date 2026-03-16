@@ -15,9 +15,9 @@ export class Ol<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
      * Create Ol component.
      * @param listItems Ordered list items to be appended to this list.
      */
-    constructor(listItems: (LiOl | undefined | null)[]) {
+    constructor(listItems?: (LiOl | undefined | null)[]) {
         super("ol");
-        this.append(...listItems);
+        listItems && this.append(...listItems);
     }
 
     /**
@@ -108,7 +108,7 @@ export class OlFactory<T> extends ComponentFactory<Ol> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Ol component.
      */
-    public ol(listItems: LiOl[], data?: T): Ol {
+    public ol(listItems?: LiOl[], data?: T): Ol {
         return this.setupComponent(new Ol(listItems), data);
     }
 }
