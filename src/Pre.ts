@@ -4,7 +4,7 @@ import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from 
 /**
  * Pre component (`<pre>`).
  */
-export class Pre<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLElement, EventMap> {
+export class Pre<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLPreElement, EventMap> {
     /**
      * Create Pre component.
      * @param phrase The phrasing content for the `<pre>` element.
