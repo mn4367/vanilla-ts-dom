@@ -97,6 +97,27 @@ export class TextArea<EventMap extends HTMLElementEventMap = HTMLElementEventMap
         return this;
     }
 
+    /**
+     * Get/set the `wrap` attribute of the component.
+     */
+    public get Wrap(): "hard" | "soft" | "off" {
+        return this._dom.wrap as "hard" | "soft" | "off";
+    }
+    /** @inheritdoc */
+    public set Wrap(v: "hard" | "soft" | "off") {
+        this._dom.wrap = v;
+    }
+
+    /**
+     * Set the `wrap` attribute of the component.
+     * @param v The value to be set.
+     * @returns This instance.
+     */
+    public wrap(v: "hard" | "soft" | "off"): this {
+        this._dom.wrap = v;
+        return this;
+    }
+
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
