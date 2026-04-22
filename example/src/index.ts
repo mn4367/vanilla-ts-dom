@@ -33,11 +33,11 @@ const sideBar = new Div()
         new Nav()
             .append(
                 new Text("Navigation"),
-                new Ul([
+                new Ul(
                     new LiUl("Intro"),
                     new LiUl("Usage"),
                     new LiUl("Components")
-                ])
+                )
             )
     );
 

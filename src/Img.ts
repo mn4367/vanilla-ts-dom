@@ -5,6 +5,8 @@ import { AltAttr, ComponentFactory, CrossOriginAttr, ElementComponentVoid, Loadi
  * Img component (`<img>`).
  */
 export class Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentVoid<HTMLImageElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
     protected naturalWidth: number = 0;
     protected naturalHeight: number = 0;
     protected _scale: number = 0;

@@ -13,6 +13,8 @@ export interface RadioButtonEventMap extends HTMLElementEventMap {
  * method and also with a custom event `checked` that signals checking/unchecking the radio button.
  */
 export class RadioButton<EventMap extends RadioButtonEventMap = RadioButtonEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
     protected _toggle: boolean = false;
 
     /**

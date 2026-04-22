@@ -6,6 +6,8 @@ import { Input } from "./Input.js";
  * Range input component (`<input type="range">`).
  */
 export class RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
     protected vertical_: boolean;
 
     /**

@@ -1,37 +1,41 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, FlowContent } from "@vanilla-ts/core";
+import { Text } from "./Text.js";
 
 
 /**
  * Div component (`<div>`).
  */
-export class Div<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLDivElement, EventMap> {
+export class Div<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLDivElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Div component.
-     * @param phrase The phrasing content for the `<div>` element.
+     * @param children The content for the `<div>` element.
      */
-    constructor(...phrase: Phrases) {
+    constructor(...children: Children) {
         super("div");
-        phrase.length > 0 && this.phrase(...phrase);
+        this.append(...children.map(child => typeof child === "string" ? <Child><unknown>new Text(child) : child));
     }
 }
 
 /**
  * Factory for `Div` components.
  */
-export class DivFactory<T> extends ComponentFactory<Div> {
+export class DivFactory<Child extends FlowContent = FlowContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<Div<Child>> {
     /**
      * Create, set up and return Div component.
-     * @param phrase The phrasing content for the `<div>` element.
+     * @param children The content for the `<div>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Div component.
      */
-    public div(phrase?: Phrase | Phrases, data?: T): Div {
+    public div(children?: string | Child | Children, data?: T): Div<Child> {
         return this.setupComponent(
-            !phrase
-                ? new Div()
-                : Array.isArray(phrase)
-                    ? new Div(...phrase)
-                    : new Div(phrase),
+            !children
+                ? new Div<Child>()
+                : Array.isArray(children)
+                    ? new Div<Child>(...children)
+                    : new Div<Child>(children),
             data
         );
     }

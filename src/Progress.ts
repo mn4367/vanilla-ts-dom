@@ -1,4 +1,4 @@
-import { ACustomComponentEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
+import { ACustomComponentEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
 
 
 /** Custom 'progress-value' event for progress components. */
@@ -32,8 +32,11 @@ export interface ProgressEventMap extends HTMLElementEventMap {
 /**
  * Progress component (`<progress>`).
  */
-export class Progress<EventMap extends ProgressEventMap = ProgressEventMap> extends ElementComponentWithChildren<HTMLProgressElement, EventMap> {
+export class Progress<Child extends PhrasingContent = PhrasingContent, EventMap extends ProgressEventMap = ProgressEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLProgressElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
     protected valueObserver?: MutationObserver;
+
     /**
      * Create, set up and return Progress component.
      * @param max The maximum value for the component. For the setter the value must be greater than
@@ -44,7 +47,7 @@ export class Progress<EventMap extends ProgressEventMap = ProgressEventMap> exte
      * 'indeterminate' state.
      * @param phrase The phrasing content for the `<progress>` element.
      */
-    constructor(max: number = 1, value?: number, ...phrase: Phrases) {
+    constructor(max: number = 1, value?: number, ...phrase: Children) {
         super("progress");
         this
             .max(max)
@@ -156,7 +159,7 @@ export class Progress<EventMap extends ProgressEventMap = ProgressEventMap> exte
 /**
  * Factory for `Progress` components.
  */
-export class ProgressFactory<T> extends ComponentFactory<Progress> {
+export class ProgressFactory<Child extends PhrasingContent = PhrasingContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<Progress<Child>> {
     /**
      * Create, set up and return Progress component.
      * @param max The maximum value for the component. For the setter the value must be greater than
@@ -169,13 +172,13 @@ export class ProgressFactory<T> extends ComponentFactory<Progress> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Progress component.
      */
-    public progress(max: number = 1, value?: number, phrase?: Phrase | Phrases, data?: T): Progress {
+    public progress(max: number = 1, value?: number, phrase?: string | Child | Children, data?: T): Progress<Child> {
         return this.setupComponent(
             !phrase
-                ? new Progress(max, value)
+                ? new Progress<Child>(max, value)
                 : Array.isArray(phrase)
-                    ? new Progress(max, value, ...phrase)
-                    : new Progress(max, value, phrase),
+                    ? new Progress<Child>(max, value, ...phrase)
+                    : new Progress<Child>(max, value, phrase),
             data
         );
     }

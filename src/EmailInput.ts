@@ -6,6 +6,9 @@ import { TextField } from "./TextField.js";
  * Email input component (`<input type="email">`).
  */
 export class EmailInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create EmailInput component.\
      * To check the validity of the input, this regex pattern can be used (as per HTML spec):\

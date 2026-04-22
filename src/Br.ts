@@ -5,6 +5,9 @@ import { ComponentFactory, ElementComponentVoid } from "@vanilla-ts/core";
  * Br component (`<br>`).
  */
 export class Br<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentVoid<HTMLBRElement, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Br component.
      */

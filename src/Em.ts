@@ -1,15 +1,18 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
 
 
 /**
  * Em component (`<em>`).
  */
-export class Em<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLElement, EventMap> {
+export class Em<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Em component.
      * @param phrase The phrasing content for the `<em>` element.
      */
-    constructor(...phrase: Phrases) {
+    constructor(...phrase: Children) {
         super("em");
         phrase.length > 0 && this.phrase(...phrase);
     }
@@ -18,20 +21,20 @@ export class Em<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
 /**
  * Factory for `Em` components.
  */
-export class EmFactory<T> extends ComponentFactory<Em> {
+export class EmFactory<Child extends PhrasingContent = PhrasingContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<Em<Child>> {
     /**
      * Create, set up and return Em component.
      * @param phrase The phrasing content for the `<em>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Em component.
      */
-    public em(phrase?: Phrase | Phrases, data?: T): Em {
+    public em(phrase?: string | Child | Children, data?: T): Em<Child> {
         return this.setupComponent(
             !phrase
-                ? new Em()
+                ? new Em<Child>()
                 : Array.isArray(phrase)
-                    ? new Em(...phrase)
-                    : new Em(phrase),
+                    ? new Em<Child>(...phrase)
+                    : new Em<Child>(phrase),
             data
         );
     }

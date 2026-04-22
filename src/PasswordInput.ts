@@ -7,6 +7,9 @@ import { TextField } from "./TextField.js";
  * Password input component (`<input type="password">`).
  */
 export class PasswordInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create PasswordInput component.
      * @param id The id (attribute) of the password input. If `id` is `undefined` or omitted, a

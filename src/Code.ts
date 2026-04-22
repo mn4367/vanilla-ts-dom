@@ -1,15 +1,18 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
 
 
 /**
  * Code component (`<code>`).
  */
-export class Code<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLElement, EventMap> {
+export class Code<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Code component.
      * @param phrase The phrasing content for the `<code>` element.
      */
-    constructor(...phrase: Phrases) {
+    constructor(...phrase: Children) {
         super("code");
         phrase.length > 0 && this.phrase(...phrase);
     }
@@ -18,20 +21,20 @@ export class Code<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
 /**
  * Factory for `Code` components.
  */
-export class CodeFactory<T> extends ComponentFactory<Code> {
+export class CodeFactory<Child extends PhrasingContent = PhrasingContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<Code<Child>> {
     /**
      * Create, set up and return Code component.
      * @param phrase The phrasing content for the `<code>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Code component.
      */
-    public code(phrase?: Phrase | Phrases, data?: T): Code {
+    public code(phrase?: string | Child | Children, data?: T): Code<Child> {
         return this.setupComponent(
             !phrase
-                ? new Code()
+                ? new Code<Child>()
                 : Array.isArray(phrase)
-                    ? new Code(...phrase)
-                    : new Code(phrase),
+                    ? new Code<Child>(...phrase)
+                    : new Code<Child>(phrase),
             data
         );
     }

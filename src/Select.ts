@@ -1,4 +1,6 @@
-import { AutocompleteAttr, cid, ComponentFactory, ElementComponentWithChildren, mixinDOMProperties, MultipleAttr, NameAttr, NativeDisabledAttr, NullableString, RequiredAttr, SizeAttr, ValueAttr } from "@vanilla-ts/core";
+import { AutocompleteAttr, cid, ComponentFactory, ElementComponentWithChildren, mixinDOMProperties, MultipleAttr, NameAttr, NativeDisabledAttr, NullableString, Option, RequiredAttr, SizeAttr, ValueAttr } from "@vanilla-ts/core";
+import { Hr } from "./Hr.js";
+import { OptGroup } from "./OptGroup.js";
 
 
 /**
@@ -14,7 +16,9 @@ export interface ISelectValues {
 /**
  * Select component (`<select>`).
  */
-export class Select<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLSelectElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup | Hr), EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLSelectElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
     protected _values: ISelectValues[];
 
     /**
@@ -144,7 +148,7 @@ export class Select<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Select<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+export interface Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup | Hr), EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     AutocompleteAttr<HTMLSelectElement, EventMap>,
     MultipleAttr<HTMLSelectElement, EventMap>,
     NameAttr<HTMLSelectElement, EventMap>,
@@ -156,7 +160,7 @@ export interface Select<EventMap extends HTMLElementEventMap = HTMLElementEventM
 /**
  * Factory for `Select` components.
  */
-export class SelectFactory<T> extends ComponentFactory<Select> {
+export class SelectFactory<Child extends (Option | OptGroup | Hr) = (Option | OptGroup | Hr), T = unknown> extends ComponentFactory<Select<Child>> {
     /**
      * Create, set up and return Select component.
      * @param values The values to be displayed in the select.
@@ -166,7 +170,7 @@ export class SelectFactory<T> extends ComponentFactory<Select> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Select component.
      */
-    public select(values: ISelectValues[], id?: string, value?: string, name?: string, data?: T): Select {
-        return this.setupComponent(new Select(values, id, value, name), data);
+    public select(values: ISelectValues[], id?: string, value?: string, name?: string, data?: T): Select<Child> {
+        return this.setupComponent(new Select<Child>(values, id, value, name), data);
     }
 }

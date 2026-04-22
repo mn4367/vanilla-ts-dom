@@ -4,6 +4,9 @@ import { ANodeComponent, ComponentFactory } from "@vanilla-ts/core";
  * Text component (for DOM text nodes).
  */
 export class Text<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ANodeComponent<globalThis.Text, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create instance based on the `Text` interface.
      * @see https://developer.mozilla.org/en-US/docs/Web/API/Text

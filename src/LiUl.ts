@@ -1,37 +1,43 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, FlowContent } from "@vanilla-ts/core";
+import { Text } from "./Text.js";
 
 
 /**
- * List item component (`<li>`) for unordered lists (`<ul>`).
+ * List item component (`<li>`), mainly for unordered lists (`<ul>`) but also other types of lists
+ * like, for example, menus (`<menu>`).
  */
-export class LiUl<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLLIElement, EventMap> {
+export class LiUl<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLLIElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create LiUl component.
-     * @param phrase The phrasing content for the `<li>` element.
+     * @param children The content for the `<li>` element.
      */
-    constructor(...phrase: Phrases) {
+    constructor(...children: Children) {
         super("li");
-        phrase.length > 0 && this.phrase(...phrase);
+        this.append(...children.map(child => typeof child === "string" ? <Child><unknown>new Text(child) : child));
     }
 }
 
 /**
- * Factory for `LiUl` components (for unordered lists (`<ul>`)).
+ * Factory for `LiUl` components (for unordered lists (`<ul>`)) but also other types of lists like,
+ * for example, menus (`<menu>`).
  */
-export class LiUlFactory<T> extends ComponentFactory<LiUl> {
+export class LiUlFactory<Child extends FlowContent = FlowContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<LiUl<Child>> {
     /**
      * Create, set up and return LiUl component.
-     * @param phrase The phrasing content for the `<li>` element.
+     * @param children The content for the `<li>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns LiUl component.
      */
-    public liUl(phrase?: Phrase | Phrases, data?: T): LiUl {
+    public liUl(children?: string | Child | Children, data?: T): LiUl<Child> {
         return this.setupComponent(
-            !phrase
-                ? new LiUl()
-                : Array.isArray(phrase)
-                    ? new LiUl(...phrase)
-                    : new LiUl(phrase),
+            !children
+                ? new LiUl<Child>()
+                : Array.isArray(children)
+                    ? new LiUl<Child>(...children)
+                    : new LiUl<Child>(children),
             data
         );
     }

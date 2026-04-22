@@ -13,6 +13,9 @@ export interface CheckboxEventMap extends HTMLElementEventMap {
  * method and also with a custom event `checked` that signals checking/unchecking the checkbox.
  */
 export class Checkbox<EventMap extends CheckboxEventMap = CheckboxEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Checkbox component.
      * @param id The id (attribute) of the checkbox. If `id` is `undefined` or omitted, a unique ID

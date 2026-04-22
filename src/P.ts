@@ -1,15 +1,18 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
 
 
 /**
  * Paragraph component (`<p>`).
  */
-export class P<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLParagraphElement, EventMap> {
+export class P<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLParagraphElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create P component.
      * @param phrase The phrasing content for the `<p>` element.
      */
-    constructor(...phrase: Phrases) {
+    constructor(...phrase: Children) {
         super("p");
         phrase.length > 0 && this.phrase(...phrase);
     }
@@ -18,20 +21,20 @@ export class P<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exten
 /**
  * Factory for `P` components.
  */
-export class PFactory<T> extends ComponentFactory<P> {
+export class PFactory<Child extends PhrasingContent = PhrasingContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<P<Child>> {
     /**
      * Create, set up and return P component.
      * @param phrase The phrasing content for the `<p>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns P component.
      */
-    public p(phrase?: Phrase | Phrases, data?: T): P {
+    public p(phrase?: string | Child | Children, data?: T): P<Child> {
         return this.setupComponent(
             !phrase
-                ? new P()
+                ? new P<Child>()
                 : Array.isArray(phrase)
-                    ? new P(...phrase)
-                    : new P(phrase),
+                    ? new P<Child>(...phrase)
+                    : new P<Child>(phrase),
             data
         );
     }

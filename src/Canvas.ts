@@ -1,19 +1,22 @@
-import { ComponentFactory, ElementComponentWithChildren, INodeComponent, mixinDOMProperties, WidthHeightAttr } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, FlowContent, mixinDOMProperties, WidthHeightAttr } from "@vanilla-ts/core";
 import { Text } from "./Text.js";
 
 
 /**
  * Canvas component (`<canvas>`).
  */
-export class Canvas<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLCanvasElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class Canvas<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLCanvasElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Canvas component.
      * @param alternativeContent Alternative content for the `<canvas>` element.
      * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/canvas#alternative_content
      */
-    constructor(...alternativeContent: (string | INodeComponent<Node>)[]) {
+    constructor(...alternativeContent: Children) {
         super("canvas");
-        alternativeContent.length > 0 && this.append(...alternativeContent.map(e => typeof e === "string" ? new Text(e) : e));
+        this.append(...alternativeContent.map(child => typeof child === "string" ? <Child><unknown>new Text(child) : child));
     }
 
     static {
@@ -27,13 +30,13 @@ export class Canvas<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Canvas<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-empty-object-type,jsdoc/require-jsdoc
+export interface Canvas<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line @typescript-eslint/no-empty-object-type,@typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     WidthHeightAttr<HTMLCanvasElement, EventMap> { }
 
 /**
  * Factory for `Canvas` components.
  */
-export class CanvasFactory<T> extends ComponentFactory<Canvas> {
+export class CanvasFactory<Child extends FlowContent = FlowContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<Canvas<Child>> {
     /**
      * Create, set up and return Canvas component.
      * @param alternativeContent Alternative content for the `<canvas>` element.
@@ -41,13 +44,13 @@ export class CanvasFactory<T> extends ComponentFactory<Canvas> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Canvas component.
      */
-    public canvas(alternativeContent?: string | INodeComponent<Node> | (string | INodeComponent<Node>)[], data?: T): Canvas {
+    public canvas(alternativeContent?: string | Child | Children, data?: T): Canvas<Child> {
         return this.setupComponent(
             !alternativeContent
-                ? new Canvas()
+                ? new Canvas<Child>()
                 : Array.isArray(alternativeContent)
-                    ? new Canvas(...alternativeContent)
-                    : new Canvas(alternativeContent),
+                    ? new Canvas<Child>(...alternativeContent)
+                    : new Canvas<Child>(alternativeContent),
             data
         );
     }

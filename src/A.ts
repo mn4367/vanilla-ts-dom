@@ -1,22 +1,26 @@
-import { ComponentFactory, DownloadAttr, ElementComponentWithChildren, HrefAttr, HreflangAttr, mixinDOMProperties, NullableString, Phrase, Phrases, PingAttr, ReferrerPolicyAttr, RelAttr, TargetAttr } from "@vanilla-ts/core";
+import { ComponentFactory, DownloadAttr, ElementComponentWithChildren, FlowContent, HrefAttr, HreflangAttr, mixinDOMProperties, NullableString, PingAttr, ReferrerPolicyAttr, RelAttr, TargetAttr } from "@vanilla-ts/core";
+import { Text } from "./Text.js";
 
 
 /**
  * A component (`<a>`).
  */
-export class A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLAnchorElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class A<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLAnchorElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create A component.
      * @param href The `href` attribute for the `<a>` element.
-     * @param phrase The phrasing content for the `<a>` element. If the length of `phrase` is `0`,
-     * the phrasing content of the `<a>` element will be set to the value of `href`.
+     * @param children The content for the `<a>` element. If the length of `children` is `0`, the
+     * content of the `<a>` element will be set to the value of `href`.
      */
-    constructor(href: string, ...phrase: Phrases) {
+    constructor(href: string, ...children: Children) {
         super("a");
         this.href(href);
-        phrase.length === 0
-            ? this.phrase(href)
-            : this.phrase(...phrase);
+        children.length === 0
+            ? this.append(<Child><unknown>new Text(href))
+            : this.append(...children.map(child => typeof child === "string" ? <Child><unknown>new Text(child) : child));
     }
 
     /**
@@ -57,7 +61,7 @@ export class A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exten
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+export interface A<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line jsdoc/require-jsdoc,@typescript-eslint/no-unused-vars
     DownloadAttr<HTMLAnchorElement, EventMap>,
     HrefAttr<HTMLAnchorElement, EventMap>,
     HreflangAttr<HTMLAnchorElement, EventMap>,
@@ -69,21 +73,22 @@ export interface A<EventMap extends HTMLElementEventMap = HTMLElementEventMap> e
 /**
  * Factory for `A` components.
  */
-export class AFactory<T> extends ComponentFactory<A> {
+export class AFactory<Child extends FlowContent = FlowContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<A<Child>> {
     /**
      * Create, set up and return A component.
      * @param href The `href` attribute for the `<a>` element.
-     * @param phrase The phrasing content for the `<a>` element.
+     * @param children The content for the `<a>` element. If the length of `children` is `0`, the
+     * content of the `<a>` element will be set to the value of `href`.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
-     * @returns B component.
+     * @returns A component.
      */
-    public a(href: string, phrase?: Phrase | Phrases, data?: T): A {
+    public a(href: string, children?: string | Child | Children, data?: T): A<Child> {
         return this.setupComponent(
-            !phrase
-                ? new A(href)
-                : Array.isArray(phrase)
-                    ? new A(href, ...phrase)
-                    : new A(href, phrase),
+            !children
+                ? new A<Child>(href)
+                : Array.isArray(children)
+                    ? new A<Child>(href, ...children)
+                    : new A<Child>(href, children),
             data
         );
     }

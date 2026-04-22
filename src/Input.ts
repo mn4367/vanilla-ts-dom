@@ -10,6 +10,8 @@ import { AutocompleteAttr, cid, DataListAttr, ElementComponentVoid, HTMLInputTyp
  * supported  for `datetime-local`, `multiple` only exist for the types `email` and `file` etc.
  */
 export abstract class Input<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentVoid<HTMLInputElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
     protected type: HTMLInputTypes;
 
     /**

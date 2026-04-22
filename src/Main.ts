@@ -1,37 +1,41 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, FlowContent } from "@vanilla-ts/core";
+import { Text } from "./Text.js";
 
 
 /**
  * Main component (`<main>`).
  */
-export class Main<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLElement, EventMap> {
+export class Main<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Main component.
-     * @param phrase The phrasing content for the `<main>` element.
+     * @param children The content for the `<main>` element.
      */
-    constructor(...phrase: Phrases) {
+    constructor(...children: Children) {
         super("main");
-        phrase.length > 0 && this.phrase(...phrase);
+        this.append(...children.map(child => typeof child === "string" ? <Child><unknown>new Text(child) : child));
     }
 }
 
 /**
  * Factory for `Main` components.
  */
-export class MainFactory<T> extends ComponentFactory<Main> {
+export class MainFactory<Child extends FlowContent = FlowContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<Main<Child>> {
     /**
      * Create, set up and return Main component.
-     * @param phrase The phrasing content for the `<main>` element.
+     * @param children The content for the `<main>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Main component.
      */
-    public main(phrase?: Phrase | Phrases, data?: T): Main {
+    public main(children?: string | Child | Children, data?: T): Main<Child> {
         return this.setupComponent(
-            !phrase
-                ? new Main()
-                : Array.isArray(phrase)
-                    ? new Main(...phrase)
-                    : new Main(phrase),
+            !children
+                ? new Main<Child>()
+                : Array.isArray(children)
+                    ? new Main<Child>(...children)
+                    : new Main<Child>(children),
             data
         );
     }

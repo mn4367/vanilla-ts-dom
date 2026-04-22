@@ -1,35 +1,41 @@
-import { AnyType, ComponentFactory, ElementComponentWithChildren, INodeComponent } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, FlowContent } from "@vanilla-ts/core";
+import { Text } from "./Text.js";
 
 
 /**
  * Navigation component Nav (`<nav>`).
  */
-export class Nav<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLElement, EventMap> {
+export class Nav<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Nav component.
-     * @param children Children to be appended to this navigation component.
+     * @param children The content for the `<nav>` element.
      */
-    constructor(...children: (INodeComponent<Node> | undefined | null)[]) {
+    constructor(...children: Children) {
         super("nav");
-        this.append(...children);
+        this.append(...children.map(child => typeof child === "string" ? <Child><unknown>new Text(child) : child));
     }
 }
 
 /**
  * Factory for Nav components.
  */
-export class NavFactory extends ComponentFactory<Nav> {
+export class NavFactory<Child extends FlowContent = FlowContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<Nav<Child>> {
     /**
      * Create, set up and return Nav component.
-     * @param children Children to be appended to this navigation component.
+     * @param children The content for the `<nav>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Nav component.
      */
-    public nav(children?: INodeComponent<Node>[], data?: AnyType): Nav {
+    public nav(children?: string | Child | Children, data?: T): Nav<Child> {
         return this.setupComponent(
-            children
-                ? new Nav(...children)
-                : new Nav(),
+            !children
+                ? new Nav<Child>()
+                : Array.isArray(children)
+                    ? new Nav<Child>(...children)
+                    : new Nav<Child>(children),
             data
         );
 

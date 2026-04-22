@@ -4,6 +4,9 @@ import { ANodeComponent, ComponentFactory } from "@vanilla-ts/core";
  * Comment component (for DOM comment nodes).
  */
 export class Comment<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ANodeComponent<globalThis.Comment, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create instance based on the `Comment` interface.
      * @see https://developer.mozilla.org/en-US/docs/Web/API/Comment

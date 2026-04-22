@@ -7,6 +7,9 @@ import { TextField } from "./TextField.js";
  * Text input component (`<input type="text">`).
  */
 export class TextInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create TextInput component.
      * @param id The id (attribute) of the text input. If `id` is `undefined` or omitted, a unique

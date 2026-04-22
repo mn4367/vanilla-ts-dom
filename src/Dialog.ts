@@ -1,10 +1,14 @@
-import { ComponentFactory, ElementComponentWithChildren, mixinDOMProperties, OpenAttr, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, FlowContent, mixinDOMProperties, OpenAttr } from "@vanilla-ts/core";
+import { Text } from "./Text.js";
 
 
 /**
  * Dialog component (`<dialog>`).
  */
-export class Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLDialogElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class Dialog<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLDialogElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Dialog component.\
      * __Note:__ In contrast to the vast majority of other components, instances of `Dialog` usually
@@ -12,11 +16,11 @@ export class Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
      * when centering or positioning the dialog relative to the viewport. If an instance of `Dialog`
      * is not mounted in another component, it is automatically added to `document.body` as a child
      * element in `show()`/`showModal()` and removed again in `close()`.
-     * @param phrase The phrasing content for the `<dialog>` element.
+     * @param children The content for the `<dialog>` element.
      */
-    constructor(...phrase: Phrases) {
+    constructor(...children: Children) {
         super("dialog");
-        phrase.length > 0 && this.phrase(...phrase);
+        this.append(...children.map(child => typeof child === "string" ? <Child><unknown>new Text(child) : child));
     }
 
     /**
@@ -92,26 +96,26 @@ export class Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Dialog<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-empty-object-type,jsdoc/require-jsdoc
+export interface Dialog<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line @typescript-eslint/no-empty-object-type,@typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     OpenAttr<HTMLDialogElement, EventMap> { }
 
 /**
  * Factory for `Dialog` components.
  */
-export class DialogFactory<T> extends ComponentFactory<Dialog> {
+export class DialogFactory<Child extends FlowContent = FlowContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<Dialog<Child>> {
     /**
      * Create, set up and return Dialog component.
-     * @param phrase The phrasing content for the `<dialog>` element.
+     * @param children The content for the `<dialog>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Dialog component.
      */
-    public dialog(phrase?: Phrase | Phrases, data?: T): Dialog {
+    public dialog(children?: string | Child | Children, data?: T): Dialog<Child> {
         return this.setupComponent(
-            !phrase
-                ? new Dialog()
-                : Array.isArray(phrase)
-                    ? new Dialog(...phrase)
-                    : new Dialog(phrase),
+            !children
+                ? new Dialog<Child>()
+                : Array.isArray(children)
+                    ? new Dialog<Child>(...children)
+                    : new Dialog<Child>(children),
             data
         );
     }

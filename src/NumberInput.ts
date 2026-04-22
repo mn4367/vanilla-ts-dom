@@ -7,6 +7,9 @@ import { TextField } from "./TextField.js";
  * Number input component (`<input type="number">`).
  */
 export class NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create NumberInput component.
      * @param id The id (attribute) of the number input. If `id` is `undefined` or omitted, a unique

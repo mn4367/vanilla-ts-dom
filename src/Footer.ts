@@ -1,37 +1,41 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, FlowContent } from "@vanilla-ts/core";
+import { Text } from "./Text.js";
 
 
 /**
  * Footer component (`<footer>`).
  */
-export class Footer<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLElement, EventMap> {
+export class Footer<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Footer component.
-     * @param phrase The phrasing content for the `<footer>` element.
+     * @param children The content for the `<footer>` element.
      */
-    constructor(...phrase: Phrases) {
+    constructor(...children: Children) {
         super("footer");
-        phrase.length > 0 && this.phrase(...phrase);
+        this.append(...children.map(child => typeof child === "string" ? <Child><unknown>new Text(child) : child));
     }
 }
 
 /**
  * Factory for `Footer` components.
  */
-export class FooterFactory<T> extends ComponentFactory<Footer> {
+export class FooterFactory<Child extends FlowContent = FlowContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<Footer<Child>> {
     /**
      * Create, set up and return Footer component.
-     * @param phrase The phrasing content for the `<footer>` element.
+     * @param children The content for the `<footer>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Footer component.
      */
-    public footer(phrase?: Phrase | Phrases, data?: T): Footer {
+    public footer(children?: string | Child | Children, data?: T): Footer<Child> {
         return this.setupComponent(
-            !phrase
-                ? new Footer()
-                : Array.isArray(phrase)
-                    ? new Footer(...phrase)
-                    : new Footer(phrase),
+            !children
+                ? new Footer<Child>()
+                : Array.isArray(children)
+                    ? new Footer<Child>(...children)
+                    : new Footer<Child>(children),
             data
         );
     }

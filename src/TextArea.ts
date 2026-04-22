@@ -1,11 +1,14 @@
 import { AutocompleteAttr, cid, ComponentFactory, DirnameAttr, ElementComponentWithChildren, MinMaxLengthAttr, mixin, mixinDOMProperties, NameAttr, NativeDisabledAttr, NullableString, PlaceholderAttr, ReadonlyAttr, RequiredAttr, SelectionEndProp, SelectionStartProp, ValueAttr } from "@vanilla-ts/core";
+import { Text } from "./Text.js";
 import { TextField } from "./TextField.js";
 
 
 /**
  * Textarea component (`<textarea>`).
  */
-export class TextArea<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLTextAreaElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class TextArea<Child extends Text = Text, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLTextAreaElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
     protected _rows: number;
     protected _cols: number;
 
@@ -141,7 +144,7 @@ export class TextArea<EventMap extends HTMLElementEventMap = HTMLElementEventMap
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface TextArea<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+export interface TextArea<Child extends Text = Text, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     AutocompleteAttr<HTMLTextAreaElement, EventMap>,
     DirnameAttr<HTMLTextAreaElement, EventMap>,
     MinMaxLengthAttr<HTMLTextAreaElement, EventMap>,
@@ -158,7 +161,7 @@ export interface TextArea<EventMap extends HTMLElementEventMap = HTMLElementEven
 /**
  * Factory for `TextArea` components.
  */
-export class TextAreaFactory<T> extends ComponentFactory<TextArea> {
+export class TextAreaFactory<Child extends Text = Text, T = unknown> extends ComponentFactory<TextArea<Child>> {
     /**
      * Create, set up and return TextArea component.
      * @param text The text content for the textarea element.
@@ -169,7 +172,7 @@ export class TextAreaFactory<T> extends ComponentFactory<TextArea> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns TextArea component.
      */
-    public textArea(text?: string, rows?: number, cols?: number, id?: string, name?: string, data?: T): TextArea {
-        return this.setupComponent(new TextArea(text, rows, cols, id, name), data);
+    public textArea(text?: string, rows?: number, cols?: number, id?: string, name?: string, data?: T): TextArea<Child> {
+        return this.setupComponent(new TextArea<Child>(text, rows, cols, id, name), data);
     }
 }

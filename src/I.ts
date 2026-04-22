@@ -1,15 +1,18 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
 
 
 /**
  * I component (`<i>`).
  */
-export class I<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLElement, EventMap> {
+export class I<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create I component.
      * @param phrase The phrasing content for the `<i>` element.
      */
-    constructor(...phrase: Phrases) {
+    constructor(...phrase: Children) {
         super("i");
         phrase.length > 0 && this.phrase(...phrase);
     }
@@ -18,20 +21,20 @@ export class I<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exten
 /**
  * Factory for `I` components.
  */
-export class IFactory<T> extends ComponentFactory<I> {
+export class IFactory<Child extends PhrasingContent = PhrasingContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<I<Child>> {
     /**
      * Create, set up and return I component.
      * @param phrase The phrasing content for the `<i>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns I component.
      */
-    public i(phrase?: Phrase | Phrases, data?: T): I {
+    public i(phrase?: string | Child | Children, data?: T): I<Child> {
         return this.setupComponent(
             !phrase
-                ? new I()
+                ? new I<Child>()
                 : Array.isArray(phrase)
-                    ? new I(...phrase)
-                    : new I(phrase),
+                    ? new I<Child>(...phrase)
+                    : new I<Child>(phrase),
             data
         );
     }

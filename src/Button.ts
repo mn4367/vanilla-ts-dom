@@ -1,15 +1,18 @@
-import { ComponentFactory, ElementComponentWithChildren, NameAttr, NativeDisabledAttr, Phrase, Phrases, ValueAttr, mixinDOMProperties } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, NameAttr, NativeDisabledAttr, PhrasingContent, ValueAttr, mixinDOMProperties } from "@vanilla-ts/core";
 
 
 /**
  * Button component (`<button>`).
  */
-export class Button<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLButtonElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class Button<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLButtonElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Button component.
      * @param phrase The phrasing content for the `<button>` element.
      */
-    constructor(...phrase: Phrases) {
+    constructor(...phrase: Children) {
         super("button");
         phrase.length > 0 && this.phrase(...phrase);
     }
@@ -27,26 +30,26 @@ export class Button<EventMap extends HTMLElementEventMap = HTMLElementEventMap> 
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Button<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-empty-object-type,jsdoc/require-jsdoc
+export interface Button<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line @typescript-eslint/no-empty-object-type,@typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     NativeDisabledAttr<HTMLButtonElement, EventMap> { }
 
 /**
  * Factory for `Button` components.
  */
-export class ButtonFactory<T> extends ComponentFactory<Button> {
+export class ButtonFactory<Child extends PhrasingContent = PhrasingContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<Button<Child>> {
     /**
      * Create, set up and return Button component.
      * @param phrase The phrasing content for the `<button>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Button component.
      */
-    public button(phrase?: Phrase | Phrases, data?: T): Button {
+    public button(phrase?: string | Child | Children, data?: T): Button<Child> {
         return this.setupComponent(
             !phrase
-                ? new Button()
+                ? new Button<Child>()
                 : Array.isArray(phrase)
-                    ? new Button(...phrase)
-                    : new Button(phrase),
+                    ? new Button<Child>(...phrase)
+                    : new Button<Child>(phrase),
             data
         );
     }
@@ -58,13 +61,13 @@ export class ButtonFactory<T> extends ComponentFactory<Button> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Button component (with the class name `regular` added).
      */
-    public buttonRegular(phrase?: Phrase | Phrases, data?: T): Button {
+    public buttonRegular(phrase?: string | Child | Children, data?: T): Button<Child> {
         return this.setupComponent(
             (!phrase
-                ? new Button()
+                ? new Button<Child>()
                 : Array.isArray(phrase)
-                    ? new Button(...phrase)
-                    : new Button(phrase)
+                    ? new Button<Child>(...phrase)
+                    : new Button<Child>(phrase)
             ).addClass("regular"),
             data
         );
@@ -77,13 +80,13 @@ export class ButtonFactory<T> extends ComponentFactory<Button> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Button component (with the class name `regular` added).
      */
-    public buttonDefault(phrase?: Phrase | Phrases, data?: T): Button {
+    public buttonDefault(phrase?: string | Child | Children, data?: T): Button<Child> {
         return this.setupComponent(
             (!phrase
-                ? new Button()
+                ? new Button<Child>()
                 : Array.isArray(phrase)
-                    ? new Button(...phrase)
-                    : new Button(phrase)
+                    ? new Button<Child>(...phrase)
+                    : new Button<Child>(phrase)
             ).addClass("regular", "default"),
             data
         );
@@ -96,13 +99,13 @@ export class ButtonFactory<T> extends ComponentFactory<Button> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Button component (with the class name `regular` added).
      */
-    public buttonWarn(phrase?: Phrase | Phrases, data?: T): Button {
+    public buttonWarn(phrase?: string | Child | Children, data?: T): Button<Child> {
         return this.setupComponent(
             (!phrase
-                ? new Button()
+                ? new Button<Child>()
                 : Array.isArray(phrase)
-                    ? new Button(...phrase)
-                    : new Button(phrase)
+                    ? new Button<Child>(...phrase)
+                    : new Button<Child>(phrase)
             ).addClass("regular", "warn"),
             data
         );

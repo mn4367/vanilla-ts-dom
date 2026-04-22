@@ -4,13 +4,16 @@ import { ComponentFactory, ElementComponentWithChildren, LabelAttr, mixinDOMProp
 /**
  * OptGroup component (`<optgroup>`).
  */
-export class OptGroup<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLOptGroupElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class OptGroup<Child extends Option = Option, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLOptGroupElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create OptGroup component.
      * @param label The label for the `<optgroup>` element.
      * @param options `Option` components to be added to this `OptGroup` instance.
      */
-    constructor(label: string, options: Option[] = []) {
+    constructor(label: string, ...options: (Child | undefined | null)[]) {
         super("optgroup");
         this
             .label(label)
@@ -29,14 +32,14 @@ export class OptGroup<EventMap extends HTMLElementEventMap = HTMLElementEventMap
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface OptGroup<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+export interface OptGroup<Child extends Option = Option, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     LabelAttr<HTMLOptGroupElement, EventMap>,
     NativeDisabledAttr<HTMLOptGroupElement, EventMap> { }
 
 /**
  * Factory for `OptGroup` components.
  */
-export class OptGroupFactory<T> extends ComponentFactory<OptGroup> {
+export class OptGroupFactory<Child extends Option = Option, T = unknown> extends ComponentFactory<OptGroup<Child>> {
     /**
      * Create OptGroup component.
      * @param label The label for the `<optgroup>` element.
@@ -44,7 +47,7 @@ export class OptGroupFactory<T> extends ComponentFactory<OptGroup> {
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Header component.
      */
-    public optGroup(label: string, options: Option[] = [], data?: T): OptGroup {
-        return this.setupComponent(new OptGroup(label, options), data);
+    public optGroup(label: string, options: Child[] = [], data?: T): OptGroup<Child> {
+        return this.setupComponent(new OptGroup<Child>(label, ...options), data);
     }
 }

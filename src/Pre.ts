@@ -1,15 +1,18 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
 
 
 /**
  * Pre component (`<pre>`).
  */
-export class Pre<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLPreElement, EventMap> {
+export class Pre<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLPreElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Pre component.
      * @param phrase The phrasing content for the `<pre>` element.
      */
-    constructor(...phrase: Phrases) {
+    constructor(...phrase: Children) {
         super("pre");
         phrase.length > 0 && this.phrase(...phrase);
     }
@@ -18,20 +21,20 @@ export class Pre<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ext
 /**
  * Factory for `Pre` components.
  */
-export class PreFactory<T> extends ComponentFactory<Pre> {
+export class PreFactory<Child extends PhrasingContent = PhrasingContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<Pre<Child>> {
     /**
      * Create, set up and return Pre component.
      * @param phrase The phrasing content for the `<pre>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Pre component.
      */
-    public pre(phrase?: Phrase | Phrases, data?: T): Pre {
+    public pre(phrase?: string | Child | Children, data?: T): Pre<Child> {
         return this.setupComponent(
             !phrase
-                ? new Pre()
+                ? new Pre<Child>()
                 : Array.isArray(phrase)
-                    ? new Pre(...phrase)
-                    : new Pre(phrase),
+                    ? new Pre<Child>(...phrase)
+                    : new Pre<Child>(phrase),
             data
         );
     }

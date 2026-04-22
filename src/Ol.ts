@@ -10,12 +10,15 @@ type ListItemType = "a" | "A" | "i" | "I" | 1 | null;
 /**
  * Ordered list component Ol (`<ol>`).
  */
-export class Ol<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLOListElement, EventMap> {
+export class Ol<Child extends LiOl = LiOl, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLOListElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Ol component.
      * @param listItems Ordered list items to be appended to this list.
      */
-    constructor(listItems?: (LiOl | undefined | null)[]) {
+    constructor(...listItems: (Child | undefined | null)[]) {
         super("ol");
         listItems && this.append(...listItems);
     }
@@ -101,14 +104,14 @@ export class Ol<EventMap extends HTMLElementEventMap = HTMLElementEventMap> exte
 /**
  * Factory for `Ol` components.
  */
-export class OlFactory<T> extends ComponentFactory<Ol> {
+export class OlFactory<Child extends LiOl = LiOl, T = unknown> extends ComponentFactory<Ol<Child>> {
     /**
      * Create, set up and return Ol component.
      * @param listItems Ordered list items to be appended to this list.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Ol component.
      */
-    public ol(listItems?: LiOl[], data?: T): Ol {
-        return this.setupComponent(new Ol(listItems), data);
+    public ol(listItems?: (Child | undefined | null)[], data?: T): Ol<Child> {
+        return this.setupComponent(new Ol<Child>(...(listItems || [])), data);
     }
 }

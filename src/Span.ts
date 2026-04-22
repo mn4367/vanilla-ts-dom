@@ -1,15 +1,18 @@
-import { ComponentFactory, ElementComponentWithChildren, Phrase, Phrases } from "@vanilla-ts/core";
+import { ComponentFactory, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
 
 
 /**
  * Span component (`<span>`).
  */
-export class Span<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLSpanElement, EventMap> {
+export class Span<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLSpanElement, Child, EventMap> {
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create Span component.
      * @param phrase The phrasing content for the `<span>` element.
      */
-    constructor(...phrase: Phrases) {
+    constructor(...phrase: Children) {
         super("span");
         phrase.length > 0 && this.phrase(...phrase);
     }
@@ -18,20 +21,20 @@ export class Span<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ex
 /**
  * Factory for `Span` components.
  */
-export class SpanFactory<T> extends ComponentFactory<Span> {
+export class SpanFactory<Child extends PhrasingContent = PhrasingContent, T = unknown, Children extends (Child | string)[] = (Child | string)[]> extends ComponentFactory<Span<Child>> {
     /**
      * Create, set up and return Span component.
      * @param phrase The phrasing content for the `<span>` element.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Span component.
      */
-    public span(phrase?: Phrase | Phrases, data?: T): Span {
+    public span(phrase?: string | Child | Children, data?: T): Span<Child> {
         return this.setupComponent(
             !phrase
-                ? new Span()
+                ? new Span<Child>()
                 : Array.isArray(phrase)
-                    ? new Span(...phrase)
-                    : new Span(phrase),
+                    ? new Span<Child>(...phrase)
+                    : new Span<Child>(phrase),
             data
         );
     }

@@ -28,6 +28,9 @@ export enum TemporalType {
  * Input component (`<input>`) for temporal types (`date`, `datetime-local`, `time` etc.).
  */
 export class TemporalInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create TemporalInput component.
      * @param temporalType The type (attribute) of the temporal input.

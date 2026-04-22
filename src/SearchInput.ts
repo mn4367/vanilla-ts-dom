@@ -7,6 +7,9 @@ import { TextField } from "./TextField.js";
  * Search input component (`<input type="search">`).
  */
 export class SearchInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    // @ts-expect-error ---
+    #brand;
+
     /**
      * Create SearchInput component.
      * @param id The id (attribute) of the search input. If `id` is `undefined` or omitted, a unique
