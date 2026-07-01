@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren, FlowContent } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, FlowContent } from "@vanilla-ts/core";
 import { Text } from "./Text.js";
 
 
@@ -6,7 +6,7 @@ import { Text } from "./Text.js";
  * List item component (`<li>`), mainly for unordered lists (`<ul>`) but also other types of lists
  * like, for example, menus (`<menu>`).
  */
-export class LiUl<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLLIElement, Child, EventMap> {
+export class LiUl<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLLIElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
 

@@ -1,10 +1,10 @@
-import { ComponentFactory, ElementComponentWithChildren, LabelAttr, mixinDOMProperties, NativeDisabledAttr, Option } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, LabelAttr, mixinDOMProperties, NativeDisabledAttr, Option } from "@vanilla-ts/core";
 
 
 /**
  * OptGroup component (`<optgroup>`).
  */
-export class OptGroup<Child extends Option = Option, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLOptGroupElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class OptGroup<Child extends Option = Option, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLOptGroupElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
 
@@ -32,7 +32,7 @@ export class OptGroup<Child extends Option = Option, EventMap extends HTMLElemen
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface OptGroup<Child extends Option = Option, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
+export interface OptGroup<Child extends Option = Option, EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     LabelAttr<HTMLOptGroupElement, EventMap>,
     NativeDisabledAttr<HTMLOptGroupElement, EventMap> { }
 

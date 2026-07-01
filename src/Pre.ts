@@ -1,10 +1,10 @@
-import { ComponentFactory, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
 
 
 /**
  * Pre component (`<pre>`).
  */
-export class Pre<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLPreElement, Child, EventMap> {
+export class Pre<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLPreElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
 

@@ -1,11 +1,11 @@
-import { AElementComponent } from "@vanilla-ts/core";
+import { AElementComponent, DefaultEventMap } from "@vanilla-ts/core";
 
 /**
  * Abstract base class for all input and textarea elements that are based on a text field. This
  * class provides functions, that are to be added as mixins to input and textarea elements.\
  * __Note__: This class is ___not___ meant to be used as a base class for other components!
  */
-export abstract class TextField<T extends HTMLInputElement | HTMLTextAreaElement, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends AElementComponent<T, EventMap> {
+export abstract class TextField<T extends HTMLInputElement | HTMLTextAreaElement, EventMap extends DefaultEventMap = DefaultEventMap> extends AElementComponent<T, EventMap> {
     /**
      * Selects all text in the input/textarea element.
      * @returns This instance.

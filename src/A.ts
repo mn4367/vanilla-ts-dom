@@ -1,11 +1,11 @@
-import { ComponentFactory, DownloadAttr, ElementComponentWithChildren, FlowContent, HrefAttr, HreflangAttr, mixinDOMProperties, NullableString, PingAttr, ReferrerPolicyAttr, RelAttr, TargetAttr } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, DownloadAttr, ElementComponentWithChildren, FlowContent, HrefAttr, HreflangAttr, mixinDOMProperties, NullableString, PingAttr, ReferrerPolicyAttr, RelAttr, TargetAttr } from "@vanilla-ts/core";
 import { Text } from "./Text.js";
 
 
 /**
  * A component (`<a>`).
  */
-export class A<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLAnchorElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class A<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLAnchorElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
 
@@ -61,7 +61,7 @@ export class A<Child extends FlowContent = FlowContent, EventMap extends HTMLEle
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface A<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line jsdoc/require-jsdoc,@typescript-eslint/no-unused-vars
+export interface A<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line jsdoc/require-jsdoc,@typescript-eslint/no-unused-vars
     DownloadAttr<HTMLAnchorElement, EventMap>,
     HrefAttr<HTMLAnchorElement, EventMap>,
     HreflangAttr<HTMLAnchorElement, EventMap>,

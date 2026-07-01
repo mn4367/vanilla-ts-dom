@@ -1,11 +1,11 @@
-import { ComponentFactory, ElementComponentWithChildren } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren } from "@vanilla-ts/core";
 import { LiUl } from "./LiUl.js";
 
 
 /**
  * Unordered list component Ul (`<ul>`).
  */
-export class Ul<Child extends LiUl = LiUl, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLUListElement, Child, EventMap> {
+export class Ul<Child extends LiUl = LiUl, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLUListElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
 

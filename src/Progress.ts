@@ -1,4 +1,4 @@
-import { ACustomComponentEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
+import { ACustomComponentEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, DefaultEventMap, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
 
 
 /** Custom 'progress-value' event for progress components. */
@@ -21,7 +21,7 @@ export class ProgressValueEvent extends ACustomComponentEvent<"progress-value", 
 }
 
 /** Additional event(s) for `Progress`. */
-export interface ProgressEventMap extends HTMLElementEventMap {
+export interface ProgressEventMap extends DefaultEventMap {
     /**
      * The value of the progress component has changed. This event is purely informative and can't
      * be canceled.

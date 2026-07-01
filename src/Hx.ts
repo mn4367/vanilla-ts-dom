@@ -1,10 +1,10 @@
-import { ComponentFactory, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
 
 
 /**
  * H1 component (`<h1>`).
  */
-export class H1<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
+export class H1<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
 
@@ -21,7 +21,7 @@ export class H1<Child extends PhrasingContent = PhrasingContent, EventMap extend
 /**
  * H2 component (`<h2>`).
  */
-export class H2<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
+export class H2<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
 
@@ -38,7 +38,7 @@ export class H2<Child extends PhrasingContent = PhrasingContent, EventMap extend
 /**
  * H3 component (`<h3>`).
  */
-export class H3<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
+export class H3<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
 
@@ -55,7 +55,7 @@ export class H3<Child extends PhrasingContent = PhrasingContent, EventMap extend
 /**
  * H4 component (`<h4>`).
  */
-export class H4<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
+export class H4<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
 
@@ -72,7 +72,7 @@ export class H4<Child extends PhrasingContent = PhrasingContent, EventMap extend
 /**
  * H5 component (`<h5>`).
  */
-export class H5<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
+export class H5<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
 
@@ -89,7 +89,7 @@ export class H5<Child extends PhrasingContent = PhrasingContent, EventMap extend
 /**
  * H6 component (`<h6>`).
  */
-export class H6<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
+export class H6<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
 

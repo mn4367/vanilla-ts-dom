@@ -1,11 +1,11 @@
-import { ComponentFactory, ElementComponentWithChildren } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren } from "@vanilla-ts/core";
 import { LiUl } from "./LiUl.js";
 
 
 /**
  * Menu component (`<menu>`).
  */
-export class Menu<Child extends LiUl = LiUl, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLMenuElement, Child, EventMap> {
+export class Menu<Child extends LiUl = LiUl, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLMenuElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
 

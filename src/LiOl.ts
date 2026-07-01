@@ -1,11 +1,11 @@
-import { ComponentFactory, ElementComponentWithChildren, FlowContent, mixinDOMProperties, ValueAttr } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, FlowContent, mixinDOMProperties, ValueAttr } from "@vanilla-ts/core";
 import { Text } from "./Text.js";
 
 
 /**
  * List item component (`<li>`) for ordered lists (`<ol>`).
  */
-export class LiOl<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLLIElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class LiOl<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLLIElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
 
@@ -31,7 +31,7 @@ export class LiOl<Child extends FlowContent = FlowContent, EventMap extends HTML
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface LiOl<Child extends FlowContent = FlowContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line jsdoc/require-jsdoc,@typescript-eslint/no-empty-object-type,@typescript-eslint/no-unused-vars
+export interface LiOl<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line jsdoc/require-jsdoc,@typescript-eslint/no-empty-object-type,@typescript-eslint/no-unused-vars
     ValueAttr<HTMLLIElement, EventMap> { }
 
 /**

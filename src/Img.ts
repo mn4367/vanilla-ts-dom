@@ -1,10 +1,10 @@
-import { AltAttr, ComponentFactory, CrossOriginAttr, ElementComponentVoid, LoadingAttr, mixinDOMProperties, ReferrerPolicyAttr, SrcAttr, WidthHeightAttr } from "@vanilla-ts/core";
+import { AltAttr, ComponentFactory, CrossOriginAttr, DefaultEventMap, ElementComponentVoid, LoadingAttr, mixinDOMProperties, ReferrerPolicyAttr, SrcAttr, WidthHeightAttr } from "@vanilla-ts/core";
 
 
 /**
  * Img component (`<img>`).
  */
-export class Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentVoid<HTMLImageElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class Img<EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentVoid<HTMLImageElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
     protected naturalWidth: number = 0;
@@ -154,7 +154,7 @@ export class Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> ext
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Img<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+export interface Img<EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     CrossOriginAttr<HTMLImageElement, EventMap>,
     SrcAttr<HTMLImageElement, EventMap>,
     AltAttr<HTMLImageElement, EventMap>,

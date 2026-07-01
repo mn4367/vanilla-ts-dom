@@ -1,10 +1,10 @@
-import { ComponentFactory, ElementComponentWithChildren, ForAttr, mixinDOMProperties, PhrasingContent } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, ForAttr, mixinDOMProperties, PhrasingContent } from "@vanilla-ts/core";
 
 
 /**
  * Label component (`<label>`).
  */
-export class Label<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLLabelElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class Label<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLLabelElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand: never;
 
@@ -30,7 +30,7 @@ export class Label<Child extends PhrasingContent = PhrasingContent, EventMap ext
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Label<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line jsdoc/require-jsdoc,@typescript-eslint/no-empty-object-type,@typescript-eslint/no-unused-vars
+export interface Label<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line jsdoc/require-jsdoc,@typescript-eslint/no-empty-object-type,@typescript-eslint/no-unused-vars
     ForAttr<HTMLLabelElement, EventMap> { }
 
 /**

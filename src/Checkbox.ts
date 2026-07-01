@@ -1,9 +1,9 @@
-import { AutocompleteAttributeValues, CheckedAttr, CheckedEvent, ComponentFactory, mixinDOMProperties, NullableString } from "@vanilla-ts/core";
+import { AutocompleteAttributeValues, CheckedAttr, CheckedEvent, ComponentFactory, DefaultEventMap, mixinDOMProperties, NullableString } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
 /** Additional event(s) for `Checkbox`. */
-export interface CheckboxEventMap extends HTMLElementEventMap {
+export interface CheckboxEventMap extends DefaultEventMap {
     /** A checkbox is checked/unchecked. */
     "checked": CheckedEvent<Checkbox>;
 }

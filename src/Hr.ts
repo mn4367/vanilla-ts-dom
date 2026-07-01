@@ -1,10 +1,10 @@
-import { ComponentFactory, ElementComponentVoid } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentVoid } from "@vanilla-ts/core";
 
 
 /**
  * Hr component (`<hr>`).
  */
-export class Hr<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentVoid<HTMLHRElement, EventMap> {
+export class Hr<EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentVoid<HTMLHRElement, EventMap> {
     // @ts-expect-error ---
     #brand;
 

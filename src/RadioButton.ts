@@ -1,9 +1,9 @@
-import { AutocompleteAttributeValues, CheckedAttr, CheckedEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, mixinDOMProperties, NullableString } from "@vanilla-ts/core";
+import { AutocompleteAttributeValues, CheckedAttr, CheckedEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, DefaultEventMap, mixinDOMProperties, NullableString } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
 /** Additional event(s) for `RadioButton`. */
-export interface RadioButtonEventMap extends HTMLElementEventMap {
+export interface RadioButtonEventMap extends DefaultEventMap {
     /** A radio button is checked/unchecked. */
     "checked": CheckedEvent<RadioButton>;
 }

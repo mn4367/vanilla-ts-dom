@@ -1,4 +1,4 @@
-import { AutocompleteAttr, cid, ComponentFactory, DirnameAttr, ElementComponentWithChildren, MinMaxLengthAttr, mixin, mixinDOMProperties, NameAttr, NativeDisabledAttr, NullableString, PlaceholderAttr, ReadonlyAttr, RequiredAttr, SelectionEndProp, SelectionStartProp, ValueAttr } from "@vanilla-ts/core";
+import { AutocompleteAttr, cid, ComponentFactory, DefaultEventMap, DirnameAttr, ElementComponentWithChildren, MinMaxLengthAttr, mixin, mixinDOMProperties, NameAttr, NativeDisabledAttr, NullableString, PlaceholderAttr, ReadonlyAttr, RequiredAttr, SelectionEndProp, SelectionStartProp, ValueAttr } from "@vanilla-ts/core";
 import { Text } from "./Text.js";
 import { TextField } from "./TextField.js";
 
@@ -6,7 +6,7 @@ import { TextField } from "./TextField.js";
 /**
  * Textarea component (`<textarea>`).
  */
-export class TextArea<Child extends Text = Text, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLTextAreaElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class TextArea<Child extends Text = Text, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLTextAreaElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
     protected _rows: number;
@@ -144,7 +144,7 @@ export class TextArea<Child extends Text = Text, EventMap extends HTMLElementEve
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface TextArea<Child extends Text = Text, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
+export interface TextArea<Child extends Text = Text, EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     AutocompleteAttr<HTMLTextAreaElement, EventMap>,
     DirnameAttr<HTMLTextAreaElement, EventMap>,
     MinMaxLengthAttr<HTMLTextAreaElement, EventMap>,

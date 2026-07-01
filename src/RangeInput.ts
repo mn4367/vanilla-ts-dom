@@ -1,11 +1,11 @@
-import { ComponentFactory, MinMaxAttr, mixinDOMProperties, NullableString, StepAttr } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, MinMaxAttr, mixinDOMProperties, NullableString, StepAttr } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
 /**
  * Range input component (`<input type="range">`).
  */
-export class RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
     protected vertical_: boolean;
@@ -110,7 +110,7 @@ export class RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventM
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface RangeInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+export interface RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     MinMaxAttr<HTMLInputElement, EventMap>,
     StepAttr<HTMLInputElement, EventMap> { }
 

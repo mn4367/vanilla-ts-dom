@@ -1,4 +1,4 @@
-import { AutocompleteAttr, cid, DataListAttr, ElementComponentVoid, HTMLInputTypes, mixinDOMProperties, NameAttr, NativeDisabledAttr, NullableString, ReadonlyAttr, RequiredAttr, ValueAttr } from "@vanilla-ts/core";
+import { AutocompleteAttr, cid, DataListAttr, DefaultEventMap, ElementComponentVoid, HTMLInputTypes, mixinDOMProperties, NameAttr, NativeDisabledAttr, NullableString, ReadonlyAttr, RequiredAttr, ValueAttr } from "@vanilla-ts/core";
 
 
 /**
@@ -9,7 +9,7 @@ import { AutocompleteAttr, cid, DataListAttr, ElementComponentVoid, HTMLInputTyp
  * override the properties, e.g. `readonly` isn't supported for checkboxes, `dirName` isn't
  * supported  for `datetime-local`, `multiple` only exist for the types `email` and `file` etc.
  */
-export abstract class Input<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentVoid<HTMLInputElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export abstract class Input<EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentVoid<HTMLInputElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
     protected type: HTMLInputTypes;
@@ -122,7 +122,7 @@ export abstract class Input<EventMap extends HTMLElementEventMap = HTMLElementEv
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Input<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+export interface Input<EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     AutocompleteAttr<HTMLInputElement, EventMap>,
     DataListAttr<HTMLInputElement, EventMap>,
     NameAttr<HTMLInputElement, EventMap>,

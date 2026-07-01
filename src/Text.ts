@@ -1,9 +1,9 @@
-import { ANodeComponent, ComponentFactory } from "@vanilla-ts/core";
+import { ANodeComponent, ComponentFactory, DefaultEventMap } from "@vanilla-ts/core";
 
 /**
  * Text component (for DOM text nodes).
  */
-export class Text<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ANodeComponent<globalThis.Text, EventMap> {
+export class Text<EventMap extends DefaultEventMap = DefaultEventMap> extends ANodeComponent<globalThis.Text, EventMap> {
     // @ts-expect-error ---
     #brand;
 

@@ -1,4 +1,4 @@
-import { AutocompleteAttr, cid, ComponentFactory, ElementComponentWithChildren, mixinDOMProperties, MultipleAttr, NameAttr, NativeDisabledAttr, NullableString, Option, RequiredAttr, SizeAttr, ValueAttr } from "@vanilla-ts/core";
+import { AutocompleteAttr, cid, ComponentFactory, DefaultEventMap, ElementComponentWithChildren, mixinDOMProperties, MultipleAttr, NameAttr, NativeDisabledAttr, NullableString, Option, RequiredAttr, SizeAttr, ValueAttr } from "@vanilla-ts/core";
 import { Hr } from "./Hr.js";
 import { OptGroup } from "./OptGroup.js";
 
@@ -16,7 +16,7 @@ export interface ISelectValues {
 /**
  * Select component (`<select>`).
  */
-export class Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup | Hr), EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLSelectElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup | Hr), EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLSelectElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
     protected _values: ISelectValues[];
@@ -148,7 +148,7 @@ export class Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup 
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup | Hr), EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
+export interface Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup | Hr), EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     AutocompleteAttr<HTMLSelectElement, EventMap>,
     MultipleAttr<HTMLSelectElement, EventMap>,
     NameAttr<HTMLSelectElement, EventMap>,

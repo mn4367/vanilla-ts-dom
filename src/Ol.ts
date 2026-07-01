@@ -1,4 +1,4 @@
-import { ComponentFactory, ElementComponentWithChildren } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren } from "@vanilla-ts/core";
 import { LiOl } from "./LiOl.js";
 
 
@@ -10,7 +10,7 @@ type ListItemType = "a" | "A" | "i" | "I" | 1 | null;
 /**
  * Ordered list component Ol (`<ol>`).
  */
-export class Ol<Child extends LiOl = LiOl, EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ElementComponentWithChildren<HTMLOListElement, Child, EventMap> {
+export class Ol<Child extends LiOl = LiOl, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLOListElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
 

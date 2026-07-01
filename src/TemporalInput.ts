@@ -1,4 +1,4 @@
-import { ComponentFactory, HTMLInputTypes, MinMaxAttr, mixinDOMProperties, NullableString, StepAttr } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, HTMLInputTypes, MinMaxAttr, mixinDOMProperties, NullableString, StepAttr } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
@@ -27,7 +27,7 @@ export enum TemporalType {
 /**
  * Input component (`<input>`) for temporal types (`date`, `datetime-local`, `time` etc.).
  */
-export class TemporalInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class TemporalInput<EventMap extends DefaultEventMap = DefaultEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
 
@@ -105,7 +105,7 @@ export class TemporalInput<EventMap extends HTMLElementEventMap = HTMLElementEve
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface TemporalInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+export interface TemporalInput<EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     MinMaxAttr<HTMLInputElement, EventMap>,
     StepAttr<HTMLInputElement, EventMap> { }
 

@@ -1,4 +1,4 @@
-import { ComponentFactory, MinMaxAttr, NullableString, PlaceholderAttr, StepAttr, mixin, mixinDOMProperties } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, MinMaxAttr, NullableString, PlaceholderAttr, StepAttr, mixin, mixinDOMProperties } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 import { TextField } from "./TextField.js";
 
@@ -6,7 +6,7 @@ import { TextField } from "./TextField.js";
 /**
  * Number input component (`<input type="number">`).
  */
-export class NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class NumberInput<EventMap extends DefaultEventMap = DefaultEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
 
@@ -52,7 +52,7 @@ export class NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEvent
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface NumberInput<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
+export interface NumberInput<EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     MinMaxAttr<HTMLInputElement, EventMap>,
     PlaceholderAttr<HTMLInputElement, EventMap>,
     StepAttr<HTMLInputElement, EventMap>,

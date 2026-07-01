@@ -1,10 +1,10 @@
-import { ComponentFactory, ElementComponentWithChildren, ForAttr, mixinDOMProperties, NameAttr, PhrasingContent } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, ForAttr, mixinDOMProperties, NameAttr, PhrasingContent } from "@vanilla-ts/core";
 
 
 /**
  * Output component (`<output>`).
  */
-export class Output<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLOutputElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class Output<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLOutputElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
 
@@ -31,7 +31,7 @@ export class Output<Child extends PhrasingContent = PhrasingContent, EventMap ex
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Output<Child extends PhrasingContent = PhrasingContent, EventMap extends HTMLElementEventMap = HTMLElementEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
+export interface Output<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     ForAttr<HTMLOutputElement, EventMap>,
     NameAttr<HTMLOutputElement, EventMap> { }
 

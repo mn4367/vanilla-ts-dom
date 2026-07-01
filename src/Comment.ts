@@ -1,9 +1,9 @@
-import { ANodeComponent, ComponentFactory } from "@vanilla-ts/core";
+import { ANodeComponent, ComponentFactory, DefaultEventMap } from "@vanilla-ts/core";
 
 /**
  * Comment component (for DOM comment nodes).
  */
-export class Comment<EventMap extends HTMLElementEventMap = HTMLElementEventMap> extends ANodeComponent<globalThis.Comment, EventMap> {
+export class Comment<EventMap extends DefaultEventMap = DefaultEventMap> extends ANodeComponent<globalThis.Comment, EventMap> {
     // @ts-expect-error ---
     #brand;
 
