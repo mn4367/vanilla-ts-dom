@@ -1,4 +1,4 @@
-import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren } from "@vanilla-ts/core";
+import { ANodeComponent, ComponentFactory, DefaultEventMap, ElementComponentWithChildren, FlowContent } from "@vanilla-ts/core";
 import { LiOl } from "./LiOl.js";
 
 
@@ -18,9 +18,15 @@ export class Ol<Child extends LiOl = LiOl, EventMap extends DefaultEventMap = De
      * Create Ol component.
      * @param listItems Ordered list items to be appended to this list.
      */
-    constructor(...listItems: (Child | undefined | null)[]) {
+    constructor(...listItems: (Child | FlowContent | string | undefined | null)[]) {
         super("ol");
-        listItems && this.append(...listItems);
+        listItems && this.append(...listItems.map(e =>
+            <Child>(e instanceof LiOl
+                ? e
+                : typeof e === "string" || e instanceof ANodeComponent
+                    ? new LiOl(undefined, e)
+                    : e)
+        ));
     }
 
     /**
@@ -111,7 +117,7 @@ export class OlFactory<Child extends LiOl = LiOl, T = unknown> extends Component
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Ol component.
      */
-    public ol(listItems?: (Child | undefined | null)[], data?: T): Ol<Child> {
+    public ol(listItems?: (Child | FlowContent | string | undefined | null)[], data?: T): Ol<Child> {
         return this.setupComponent(new Ol<Child>(...(listItems || [])), data);
     }
 }

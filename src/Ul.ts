@@ -1,4 +1,4 @@
-import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren } from "@vanilla-ts/core";
+import { ANodeComponent, ComponentFactory, DefaultEventMap, ElementComponentWithChildren, FlowContent } from "@vanilla-ts/core";
 import { LiUl } from "./LiUl.js";
 
 
@@ -13,9 +13,15 @@ export class Ul<Child extends LiUl = LiUl, EventMap extends DefaultEventMap = De
      * Create Ul component.
      * @param listItems Unordered list items to be appended to this list.
      */
-    constructor(...listItems: (Child | undefined | null)[]) {
+    constructor(...listItems: (Child | FlowContent | string | undefined | null)[]) {
         super("ul");
-        listItems && this.append(...listItems);
+        listItems && this.append(...listItems.map(e =>
+            <Child>(e instanceof LiUl
+                ? e
+                : typeof e === "string" || e instanceof ANodeComponent
+                    ? new LiUl(e)
+                    : e)
+        ));
     }
 }
 
@@ -29,7 +35,7 @@ export class UlFactory<Child extends LiUl = LiUl, T = unknown> extends Component
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Ul component.
      */
-    public ul(listItems?: (Child | undefined | null)[], data?: T): Ul<Child> {
+    public ul(listItems?: (Child | FlowContent | string | undefined | null)[], data?: T): Ul<Child> {
         return this.setupComponent(new Ul<Child>(...(listItems || [])), data);
     }
 }
