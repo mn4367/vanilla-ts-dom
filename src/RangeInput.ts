@@ -1,4 +1,4 @@
-import { ComponentFactory, DefaultEventMap, MinMaxAttr, mixinDOMProperties, NullableString, StepAttr } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, MinMaxAttr, mixinDOMProperties, NullableString, Orientation, StepAttr } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
@@ -8,7 +8,7 @@ import { Input } from "./Input.js";
 export class RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
-    protected vertical_: boolean;
+    protected _orientation: Orientation;
 
     /**
      * Create RangeInput component.
@@ -20,46 +20,14 @@ export class RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> exte
      * @param min The minimum value of the range input.
      * @param max The maximum value of the range input.
      * @param step The step garnularity of the range input.
-     * @param vertical `true` if the range input is to be displayed with a vertical orientation,
-     * otherwise `false`.
+     * @param orientation The orientation of the range input.
      */
-    constructor(id?: NullableString, value?: string, name?: string, min: string = "0", max: string = "100", step: string | "any" = "1", vertical: boolean = false) { // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
+    constructor(id?: NullableString, value?: string, name?: string, min: string = "0", max: string = "100", step: string | "any" = "1", orientation: Orientation = Orientation.HORIZONTAL) { // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
         super("range", id, value, name);
-        this.min(min)
+        this.orientation(orientation)
+            .min(min)
             .max(max)
-            .step(step)
-            .vertical(vertical);
-    }
-
-    /**
-     * Get/set the orientation of the range input (horizontal/vertical).
-     */
-    public get Vertical(): boolean {
-        return this.vertical_;
-    }
-    /** @inheritdoc */
-    public set Vertical(v: boolean) {
-        this.vertical(v);
-    }
-
-    /**
-     * Set the orientation of the range input (horizontal/vertical).
-     * @param vertical `true` if the range input is to be displayed with a vertical orientation,
-     * otherwise `false`.
-     * @returns This instance.
-     */
-    public vertical(vertical: boolean): this {
-        this.vertical_ = vertical;
-        if (this.vertical_) {
-            this
-                .style("writingMode", "vertical-lr")
-                .data("vertical", "");
-        } else {
-            this
-                .style("writingMode", "")
-                .data("vertical", null);
-        }
-        return this;
+            .step(step);
     }
 
     /**
@@ -98,6 +66,32 @@ export class RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> exte
         return this;
     }
 
+    /**
+     * Get/set the orientation of the range input.
+     */
+    public get Orientation(): Orientation {
+        return this._orientation;
+    }
+    /** @inheritdoc */
+    public set Orientation(v: Orientation) {
+        this.orientation(v);
+    }
+
+    /**
+     * Sets the orientation of the range input.
+     * @param orientation The new orientation.
+     * @returns This instance.
+     */
+    public orientation(orientation: Orientation): this {
+        if (this._orientation !== orientation) {
+            this._orientation = orientation;
+            this._orientation === Orientation.HORIZONTAL
+                ? this.removeClass("vertical").addClass("horizontal")
+                : this.removeClass("horizontal").addClass("vertical");
+        }
+        return this;
+    }
+
     static {
         /** Mixin additional DOM attributes/properties. */
         mixinDOMProperties(
@@ -126,12 +120,11 @@ export class RangeInputFactory<T> extends ComponentFactory<RangeInput> {
      * @param min The minimum value of the range input.
      * @param max The maximum value of the range input.
      * @param step The step garnularity of the range input.
-     * @param vertical `true` if the range input is to be displayed with a vertical orientation,
-     * otherwise `false`.
+     * @param orientation The orientation of the range input.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns RangeInput component.
      */
-    public rangeInput(id?: string, value?: string, name?: string, min: string = "0", max: string = "100", step: string | "any" = "1", vertical: boolean = false, data?: T): RangeInput { // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
-        return this.setupComponent(new RangeInput(id, value, name, min, max, step, vertical), data);
+    public rangeInput(id?: string, value?: string, name?: string, min: string = "0", max: string = "100", step: string | "any" = "1", orientation: Orientation = Orientation.HORIZONTAL, data?: T): RangeInput { // eslint-disable-line @typescript-eslint/no-redundant-type-constituents
+        return this.setupComponent(new RangeInput(id, value, name, min, max, step, orientation), data);
     }
 }
