@@ -1,4 +1,4 @@
-import { ACustomComponentEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, DefaultEventMap, ElementComponentWithChildren, PhrasingContent } from "@vanilla-ts/core";
+import { ACustomComponentEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, DefaultEventMap, ElementComponentWithChildren, Orientation, PhrasingContent } from "@vanilla-ts/core";
 
 
 /** Custom 'progress-value' event for progress components. */
@@ -35,6 +35,7 @@ export interface ProgressEventMap extends DefaultEventMap {
 export class Progress<Child extends PhrasingContent = PhrasingContent, EventMap extends ProgressEventMap = ProgressEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLProgressElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
+    protected _orientation: Orientation;
     protected valueObserver?: MutationObserver;
 
     /**
@@ -50,6 +51,7 @@ export class Progress<Child extends PhrasingContent = PhrasingContent, EventMap 
     constructor(max: number = 1, value?: number, ...phrase: Children) {
         super("progress");
         this
+            .orientation(Orientation.HORIZONTAL)
             .max(max)
             .value(value);
         phrase.length > 0 && this.phrase(...phrase);
@@ -145,6 +147,32 @@ export class Progress<Child extends PhrasingContent = PhrasingContent, EventMap 
         v === undefined
             ? this._dom.removeAttribute("value")
             : this._dom.value = Math.max(0, Math.min(v, this._dom.max));
+        return this;
+    }
+
+    /**
+     * Get/set the orientation of the component.
+     */
+    public get Orientation(): Orientation {
+        return this._orientation;
+    }
+    /** @inheritdoc */
+    public set Orientation(v: Orientation) {
+        this.orientation(v);
+    }
+
+    /**
+     * Sets the orientation of the component.
+     * @param orientation The new orientation.
+     * @returns This instance.
+     */
+    public orientation(orientation: Orientation): this {
+        if (this._orientation !== orientation) {
+            this._orientation = orientation;
+            this._orientation === Orientation.HORIZONTAL
+                ? this.removeClass("vertical").addClass("horizontal")
+                : this.removeClass("horizontal").addClass("vertical");
+        }
         return this;
     }
 
