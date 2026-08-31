@@ -10,6 +10,9 @@ import { AutocompleteAttr, cid, DataListAttr, DefaultEventMap, ElementComponentV
  * supported  for `datetime-local`, `multiple` only exist for the types `email` and `file` etc.
  */
 export abstract class Input<EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentVoid<HTMLInputElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+    protected static valuePropDesc: PropertyDescriptor = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")!;
+    protected static valueAsDatePropDesc = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "valueAsDate")!;
+    protected static valueAsNumberPropDesc = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "valueAsNumber")!;
     // @ts-expect-error ---
     #brand;
     protected type: HTMLInputTypes;
@@ -30,8 +33,6 @@ export abstract class Input<EventMap extends DefaultEventMap = DefaultEventMap> 
         id === undefined
             ? this.id(cid())
             : id && this.id(id);
-        // Otherwise this will be "on" (for checkboxes, radiobuttons, ...).
-        // this.value(value ? value : ""); // eslint-disable-line @typescript-eslint/no-unsafe-call
         value && this.value(value);
         name && this.name(name);
     }
@@ -102,6 +103,76 @@ export abstract class Input<EventMap extends DefaultEventMap = DefaultEventMap> 
      */
     public valueAsNumber(v: number): this {
         this._dom.valueAsNumber = v;
+        return this;
+    }
+
+    /**
+     * If available, this method is called when the `value` property of the underlying DOM element
+     * is set. Implementing classes can override this method to react to changes of the `value`
+     * property. The method is called after the `value` property is actually set, so the original
+     * behavior of the DOM element is preserved.
+     * @returns This instance.
+     */
+    protected onValue?(): this;
+
+    /**
+     * If available, this method is called when the `valueAsDate` property of the underlying DOM
+     * element is set. Implementing classes can override this method to react to changes of the
+     * `valueAsDate` property. The method is called after the `valueAsDate` property is actually
+     * set, so the original behavior of the DOM element is preserved.
+     * @returns This instance.
+     */
+    protected onValueAsDate?(): this;
+
+    /**
+     * If available, this method is called when the `valueAsNumber` property of the underlying DOM
+     * element is set. Implementing classes can override this method to react to changes of the
+     * `valueAsNumber` property. The method is called after the `valueAsNumber` property is actually
+     * set, so the original behavior of the DOM element is preserved.
+     * @returns This instance.
+     */
+    protected onValueAsNumber?(): this;
+
+    /**
+     * Patch the `value`, `valueAsDate` and `valueAsNumber` properties of the underlying DOM element
+     * to call the corresponding `onValue*()` function of the owner component when they are set.
+     * @param owner The owner component.
+     * @returns This instance.
+     */
+    protected supportOnValueCallbacks(owner: Input): this {
+        /* eslint-disable jsdoc/require-jsdoc */
+        Object.defineProperty(this._dom, "value", {
+            enumerable: true,
+            configurable: true,
+            get(this: HTMLInputElement): string { return Input.valuePropDesc?.get?.call(this) as string; },
+            set(this: HTMLInputElement, newVal: string): void { Input.valuePropDesc?.set?.call(this, newVal); owner.onValue?.(); }
+        });
+        Object.defineProperty(this._dom, "valueAsDate", {
+            enumerable: true,
+            configurable: true,
+            get(this: HTMLInputElement): Date | null { return Input.valueAsDatePropDesc?.get?.call(this) as Date | null; },
+            set(this: HTMLInputElement, newVal: Date | null): void { Input.valueAsDatePropDesc?.set?.call(this, newVal); owner.onValueAsDate?.(); }
+        });
+        Object.defineProperty(this._dom, "valueAsNumber", {
+            enumerable: true,
+            configurable: true,
+            get(this: HTMLInputElement): number { return Input.valueAsNumberPropDesc?.get?.call(this) as number; },
+            set(this: HTMLInputElement, newVal: number): void { Input.valueAsNumberPropDesc?.set?.call(this, newVal); owner.onValueAsNumber?.(); }
+        });
+        /* eslint-enable jsdoc/require-jsdoc */
+        return this;
+    }
+
+    /**
+     * Restore the original `value`, `valueAsDate` and `valueAsNumber` properties of the underlying
+     * DOM element.
+     * @see {@link Input.supportOnValueCallbacks}
+     * @returns This instance.
+     */
+    protected unsupportOnValueCallbacks(): this {
+        Object.defineProperty(this._dom, "value", Input.valuePropDesc);
+        Object.defineProperty(this._dom, "valueAsDate", Input.valueAsDatePropDesc);
+        Object.defineProperty(this._dom, "valueAsNumber", Input.valueAsNumberPropDesc);
         return this;
     }
 
