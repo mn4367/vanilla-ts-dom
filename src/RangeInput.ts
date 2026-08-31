@@ -9,9 +9,12 @@ export class RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> exte
     // @ts-expect-error ---
     #brand;
     protected _orientation: Orientation;
+    protected minMaxObserver: MutationObserver;
 
     /**
-     * Create RangeInput component.
+     * Create RangeInput component. In addition to the original `HTMLInputElement` this component
+     * reflects its current percentage value in the `--range-input-percentage` CSS variable and the
+     * `data-percent` attribute.
      * @param id The id (attribute) of the range input. If `id` is `undefined` or omitted, a unique
      * ID will be generated. If `id` is explicitely set to `null` or an empty string, no id
      * attribute will be set. Any other value will be used as the id attribute.
@@ -27,7 +30,19 @@ export class RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> exte
         this.orientation(orientation)
             .min(min)
             .max(max)
-            .step(step);
+            .step(step)
+            .updatePercentage()
+            .on("input", () => this.updatePercentage());
+        this.supportOnValueCallbacks(this);
+        this.minMaxObserver = new MutationObserver((records: MutationRecord[]) => {
+            for (const record of records) {
+                if (record.target === this._dom && (record.attributeName === "min" || record.attributeName === "max")) {
+                    this.updatePercentage();
+                    break;
+                }
+            }
+        });
+        this.minMaxObserver.observe(this._dom, { attributes: true, attributeFilter: ["min", "max"] }); // eslint-disable-line jsdoc/require-jsdoc
     }
 
     /**
@@ -90,6 +105,38 @@ export class RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> exte
                 : this.removeClass("horizontal").addClass("vertical");
         }
         return this;
+    }
+
+    /** @inheritdoc */
+    protected override onValue(): this {
+        this.updatePercentage();
+        return this;
+    }
+
+    /** @inheritdoc */
+    protected override onValueAsNumber(): this {
+        this.updatePercentage();
+        return this;
+    }
+
+    /**
+     * Update the `--range-input-percentage` CSS variable to reflect the current percentage value of
+     * the range input.
+     * @returns This instance.
+     */
+    protected updatePercentage(): this {
+        const min = parseFloat(this._dom.min) || 0;
+        const max = parseFloat(this._dom.max) || 100;
+        const percentage = (parseFloat(this._dom.value) - min) / (max - min) * 100;
+        this._dom.style.setProperty("--range-input-percentage", percentage + "%");
+        this._dom.setAttribute("data-percent", percentage.toString());
+        return this;
+    }
+
+    /** @inheritdoc */
+    public override dispose(): void {
+        this.minMaxObserver.disconnect();
+        super.dispose();
     }
 
     static {
