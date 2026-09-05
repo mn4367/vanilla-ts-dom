@@ -3,36 +3,28 @@ import { Hr } from "./Hr.js";
 import { OptGroup } from "./OptGroup.js";
 
 
-/**
- * An entry in a drop-down list.
- */
-export interface ISelectValues {
-    /** The displayed text of the entry. */
-    Text: string;
-    /** The value of the entry. */
-    Value: string;
-}
+/** Allowed types of entries in a drop-down list. */
+export type SelectChild = Option | OptGroup | Hr;
 
 /**
  * Select component (`<select>`).
  */
-export class Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup | Hr), EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLSelectElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class Select<Child extends SelectChild = SelectChild, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLSelectElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
-    protected _values: ISelectValues[];
 
     /**
      * Create Select component.
-     * @param values The values to be displayed in the select.
+     * @param options The option elements to be displayed in the select.
      * @param id The id (attribute) of the select. If `id` is `undefined` or omitted, a unique ID
      * will be generated. If `id` is explicitely set to `null` or an empty string, no id attribute
      * will be set. Any other value will be used as the id attribute.
      * @param value The value of the select.
      * @param name The name (attribute) of the select.
      */
-    constructor(values: ISelectValues[], id?: NullableString, value?: string, name?: string) {
+    constructor(options?: Child[], id?: NullableString, value?: string, name?: string) {
         super("select");
-        this.values(values);
+        this.options(options ?? []);
         id === undefined
             ? this.id(cid())
             : id && this.id(id);
@@ -41,42 +33,53 @@ export class Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup 
     }
 
     /**
-     * Get/set the values of the drop-down list.
+     * Get/set the options of the drop-down list.
+     * - The __getter__ _only_ returns all `Option` instances which are child components of this
+     *   `Select` instance list. If there are any `OptGroup` instances in the list, their child
+     *   `Option` instances will also be included in the returned array, but not the `OptGroup`
+     *   instances themselves (or instances of `Hr`, if any).
+     * - The __setter__ will _replace_ all child components of this `Select` instance with the
+     *   specified values; these child components are also disposed of(!), so if they are needed or
+     *   referenced somewhere else they must be extracted or removed before calling the setter
+     *   (using `<selectInstance>.extract()`, `<selectInstance>.remove()`).
      */
-    public get Values(): ISelectValues[] {
-        return this._values;
+    public get Options(): Option[] {
+        const result: Option[] = [];
+        const addOptions = (children: Iterable<SelectChild>): void => { // eslint-disable-line jsdoc/require-jsdoc
+            for (const child of children) {
+                if (child instanceof Option) {
+                    result.push(child);
+                } else if (child instanceof OptGroup) {
+                    addOptions(child.Children);
+                }
+            }
+        };
+        addOptions(this.Children);
+        return result;
     }
     /** @inheritdoc */
-    public set Values(v: ISelectValues[]) {
-        this.values(v);
+    public set Options(v: Child[]) {
+        this.options(v);
     }
 
     /**
-     * Set the values of the drop-down list.
-     * @param v The values for the drop-down list.
+     * Set the options of the drop-down list. __Note:__ this will _replace_ all child components of
+     * this `Select` instance with the specified values; these child components are also disposed
+     * of(!), so if they are needed or referenced somewhere else they must be extracted or removed
+     * before calling the setter (using `<selectInstance>.extract()`, `<selectInstance>.remove()`).
+     * @param v The options for the drop-down list.
      * @returns This instance.
      */
-    public values(v: ISelectValues[]): this {
-        const oldValue: ISelectValues = { Text: this.TextValue, Value: this.Value }; // eslint-disable-line jsdoc/require-jsdoc
-        this._values = v;
-        while (this._dom.lastChild) {
-            this._dom.lastChild.remove();
+    public options(v: Child[]): this {
+        const oldValue = this.Value;
+        const extracted: Child[] = [];
+        this.extract(extracted);
+        for (const component of extracted) {
+            component.dispose();
         }
-        let i = 0;
-        let newIndex = -1;
-        for (const value of this._values) {
-            const option = document.createElement("option");
-            option.textContent = value.Text;
-            option.value = value.Value;
-            this._dom.appendChild(option);
-            if ((newIndex === -1) && (value.Text === oldValue.Text) && (value.Value === oldValue.Value)) {
-                newIndex = i;
-            }
-            i++;
-        }
-        if (newIndex !== -1) {
-            this.SelectedIndex = newIndex;
-        }
+        this._dom.replaceChildren();
+        this.append(...v);
+        this.value(oldValue);
         return this;
     }
 
@@ -100,9 +103,10 @@ export class Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup 
      * @returns This instance.
      */
     public textValue(v: string): this {
-        let l = this._values.length;
+        const options = this.Options;
+        let l = options.length;
         while (l--) {
-            if (this._values[l].Text === v) {
+            if (options[l].Value === v) {
                 this.SelectedIndex = l;
                 break;
             }
@@ -111,7 +115,10 @@ export class Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup 
     }
 
     /**
-     * Get/set the index of the selected value in the drop-down list.
+     * Get/set the index of the selected value in the drop-down list. If `Multiple` is set to
+     * `true`, this will be the index of the first selected value.
+     * - The __getter__ returns `-1` if no value is selected.
+     * - The __setter__ will select the value at the specified index, and deselect all other values.
      */
     public get SelectedIndex(): number {
         return this._dom.selectedIndex;
@@ -122,13 +129,76 @@ export class Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup 
     }
 
     /**
-     * Set the index of the selected value in the drop-down list.
+     * Set the index of the selected value in the drop-down list. If `Multiple` is set to `true`,
+     * this will deselect all other values.
      * @param v The index of the value to be selected in the drop-down list.
      * @returns This instance.
      */
     public selectedIndex(v: number): this {
         this._dom.selectedIndex = v;
         return this;
+    }
+
+    /**
+     * Get the selected option in the drop-down list. If `Multiple` is set to `true`, this will be
+     * the first selected option. If no option is selected, this will return `undefined`.\
+     * __Note:__ There is no setter and also no `selectedOption()` function for this property since
+     * it is just easier to use the `Options` property and set the `Selected` property of the
+     * desired `Option` instance in the returned array.
+     */
+    public get SelectedOption(): Option | undefined {
+        const index = this._dom.selectedIndex;
+        return index >= 0 ? this.Options[index] : undefined;
+    }
+
+    /**
+     * Get/set the zero-based indexes of the selected options in `Options`, including options
+     * inside option groups.
+     * - The __getter__ returns the indexes in option order, or an empty array if none are selected.
+     * - The __setter__ selects options whose indexes are included in the array and deselects the
+     *   others. Indexes that do not match an option are ignored.
+     * - `Multiple` must be `true` to select more than one option; otherwise, the native select
+     *   element's single-selection behavior applies.
+     */
+    public get SelectedIndexes(): number[] {
+        const result: number[] = [];
+        const options = this.Options;
+        for (let i = 0; i < options.length; i++) {
+            options[i].Selected && result.push(i);
+        }
+        return result;
+    }
+    /** @inheritdoc */
+    public set SelectedIndexes(v: number[]) {
+        this.selectedIndexes(v);
+    }
+
+    /**
+     * Select options by their zero-based indexes in `Options`, including options inside option
+     * groups, and deselect all other options. Indexes that do not match an option are ignored.
+     * `Multiple` must be `true` to select more than one option; otherwise, the native select
+     * element's single-selection behavior applies.
+     * @param v The indexes of the options to select. An empty array deselects all options when
+     * `Multiple` is `true`.
+     * @returns This instance.
+     */
+    public selectedIndexes(v: number[]): this {
+        const options = this.Options;
+        for (let i = 0; i < options.length; i++) {
+            options[i].Selected = v.includes(i);
+        }
+        return this;
+    }
+
+    /**
+     * Get the selected options in the drop-down list. If `Multiple` is set to `true`, this will be
+     * all selected options. If no option is selected, this will return an empty array.\
+     * __Note:__ There is no setter and also no `selectedOptions()` function for this property since
+     * it is just easier to use the `Options` property and set the `Selected` property of the
+     * individual `Option` instances in the returned array.
+     */
+    public get SelectedOptions(): Option[] {
+        return this.Options.filter(option => option.Selected);
     }
 
     static {
@@ -148,7 +218,7 @@ export class Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup 
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Select<Child extends (Option | OptGroup | Hr) = (Option | OptGroup | Hr), EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
+export interface Select<Child extends SelectChild = SelectChild, EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     AutocompleteAttr<HTMLSelectElement, EventMap>,
     MultipleAttr<HTMLSelectElement, EventMap>,
     NameAttr<HTMLSelectElement, EventMap>,
@@ -160,17 +230,17 @@ export interface Select<Child extends (Option | OptGroup | Hr) = (Option | OptGr
 /**
  * Factory for `Select` components.
  */
-export class SelectFactory<Child extends (Option | OptGroup | Hr) = (Option | OptGroup | Hr), T = unknown> extends ComponentFactory<Select<Child>> {
+export class SelectFactory<Child extends SelectChild = SelectChild, T = unknown> extends ComponentFactory<Select<Child>> {
     /**
      * Create, set up and return Select component.
-     * @param values The values to be displayed in the select.
+     * @param options The option elements to be displayed in the select.
      * @param id The id (attribute) of the select.
      * @param value The value of the select.
      * @param name The name (attribute) of the select.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Select component.
      */
-    public select(values: ISelectValues[], id?: string, value?: string, name?: string, data?: T): Select<Child> {
-        return this.setupComponent(new Select<Child>(values, id, value, name), data);
+    public select(options: Child[], id?: string, value?: string, name?: string, data?: T): Select<Child> {
+        return this.setupComponent(new Select<Child>(options, id, value, name), data);
     }
 }
