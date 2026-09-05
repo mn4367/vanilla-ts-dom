@@ -7,6 +7,7 @@ export * from "./Canvas.js";
 export * from "./Checkbox.js";
 export * from "./Code.js";
 export * from "./Comment.js";
+export * from "./DataList.js";
 export * from "./Dialog.js";
 export * from "./Div.js";
 export * from "./Em.js";
