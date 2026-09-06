@@ -1,4 +1,5 @@
-import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, Option } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren } from "@vanilla-ts/core";
+import { Option } from "./Option.js";
 
 
 /**

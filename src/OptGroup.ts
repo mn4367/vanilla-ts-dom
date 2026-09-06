@@ -1,4 +1,5 @@
-import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, LabelAttr, mixinDOMProperties, NativeDisabledAttr, Option } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, LabelAttr, mixinDOMProperties, NativeDisabledAttr } from "@vanilla-ts/core";
+import { Option } from "./Option.js";
 
 
 /**

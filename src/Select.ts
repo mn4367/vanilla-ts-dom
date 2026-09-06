@@ -1,6 +1,7 @@
-import { AutocompleteAttr, cid, ComponentFactory, DefaultEventMap, ElementComponentWithChildren, mixinDOMProperties, MultipleAttr, NameAttr, NativeDisabledAttr, NullableString, Option, RequiredAttr, SizeAttr, ValueAttr } from "@vanilla-ts/core";
+import { AutocompleteAttr, cid, ComponentFactory, DefaultEventMap, ElementComponentWithChildren, mixinDOMProperties, MultipleAttr, NameAttr, NativeDisabledAttr, NullableString, RequiredAttr, SizeAttr, ValueAttr } from "@vanilla-ts/core";
 import { Hr } from "./Hr.js";
 import { OptGroup } from "./OptGroup.js";
+import { Option } from "./Option.js";
 
 
 /** Allowed types of entries in a drop-down list. */

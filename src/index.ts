@@ -29,6 +29,7 @@ export * from "./Nav.js";
 export * from "./NumberInput.js";
 export * from "./Ol.js";
 export * from "./OptGroup.js";
+export * from "./Option.js";
 export * from "./Output.js";
 export * from "./P.js";
 export * from "./PasswordInput.js";

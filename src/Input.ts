@@ -1,4 +1,71 @@
-import { AutocompleteAttr, cid, DataListAttr, DefaultEventMap, ElementComponentVoid, HTMLInputTypes, mixinDOMProperties, NameAttr, NativeDisabledAttr, NullableString, ReadonlyAttr, RequiredAttr, ValueAttr } from "@vanilla-ts/core";
+import { AElementComponent, AutocompleteAttr, cid, DefaultEventMap, ElementComponentVoid, EventMapVoid, HTMLInputsWithDataList, HTMLInputTypes, mixinDOMProperties, NameAttr, NativeDisabledAttr, NullableString, ReadonlyAttr, RequiredAttr, ValueAttr } from "@vanilla-ts/core";
+
+
+/**
+ * 'DataList' (suggestion values) getter/setter and set method returning this instance.\
+ * __Note:__ Only some inputs can have a 'DataList' attribute (`list` attribute).
+ * @see {@link HTMLInputsWithDataList}
+ */
+export abstract class DataListAttr<T extends HTMLInputElement, EventMap extends EventMapVoid = DefaultEventMap> extends AElementComponent<T, EventMap> {
+    /**
+     * Get/set the datalist (suggestion values) of the component. If the length of `values` is `0`,
+     * the attribute is removed.
+     */
+    public get DataList(): string[] {
+        const result: string[] = [];
+        const dataListID = this.attr("list");
+        if (dataListID) {
+            const dataList = this._dom.querySelector("#" + dataListID);
+            if (dataList) {
+                for (const option of dataList.querySelectorAll("option")) {
+                    result.push(option.value);
+                }
+            }
+        }
+        return result;
+    }
+    /** @inheritdoc */
+    public set DataList(values: string[]) {
+        this.dataList(values);
+    }
+
+    /**
+     * Set new suggestion values.
+     * @param values The new suggestion values. If the length of `values` is `0`, the attribute is
+     * removed.
+     * @returns This instance.
+     */
+    public dataList(values: string[]): this {
+        let dataListID = this.attr("list");
+        if (!dataListID) {
+            if (values.length === 0) {
+                return this;
+            }
+            dataListID = `dl${cid().slice(1)}`;
+        }
+        let dataList = document.getElementById(dataListID);
+        if (dataList && values.length === 0) {
+            this.attrib("list", null);
+            dataList.remove();
+            return this;
+        }
+        if (!dataList) {
+            dataList = document.createElement("datalist");
+            dataList.id = dataListID;
+            this.attrib("list", dataListID);
+            this._dom.appendChild(dataList);
+        }
+        while (dataList.lastChild) {
+            dataList.lastChild.remove();
+        }
+        for (const value of values) {
+            const option = document.createElement("option");
+            option.value = value;
+            dataList.append(option);
+        }
+        return this;
+    }
+}
 
 
 /**
