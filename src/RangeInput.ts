@@ -1,4 +1,4 @@
-import { ComponentFactory, DefaultEventMap, MinMaxAttr, mixinDOMProperties, NullableString, Orientation, StepAttr } from "@vanilla-ts/core";
+import { ComponentFactory, DefaultEventMap, MinMaxAttr, mixinDOMProperties, NullableString, Orientation, OrientationAttr, StepAttr } from "@vanilla-ts/core";
 import { Input } from "./Input.js";
 
 
@@ -81,32 +81,6 @@ export class RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> exte
         return this;
     }
 
-    /**
-     * Get/set the orientation of the range input.
-     */
-    public get Orientation(): Orientation {
-        return this._orientation;
-    }
-    /** @inheritdoc */
-    public set Orientation(v: Orientation) {
-        this.orientation(v);
-    }
-
-    /**
-     * Sets the orientation of the range input.
-     * @param orientation The new orientation.
-     * @returns This instance.
-     */
-    public orientation(orientation: Orientation): this {
-        if (this._orientation !== orientation) {
-            this._orientation = orientation;
-            this._orientation === Orientation.HORIZONTAL
-                ? this.removeClass("vertical").addClass("horizontal")
-                : this.removeClass("horizontal").addClass("vertical");
-        }
-        return this;
-    }
-
     /** @inheritdoc */
     protected override onValue(): this {
         this.updatePercentage();
@@ -144,6 +118,7 @@ export class RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> exte
         mixinDOMProperties(
             this,
             MinMaxAttr<HTMLInputElement>,
+            OrientationAttr<HTMLInputElement>,
             StepAttr<HTMLInputElement>
         );
     }
@@ -153,6 +128,7 @@ export class RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> exte
 // above.
 export interface RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line jsdoc/require-jsdoc
     MinMaxAttr<HTMLInputElement, EventMap>,
+    OrientationAttr<HTMLInputElement, EventMap>,
     StepAttr<HTMLInputElement, EventMap> { }
 
 /**

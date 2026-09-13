@@ -1,4 +1,4 @@
-import { ACustomComponentEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, DefaultEventMap, ElementComponentWithChildren, Orientation, PhrasingContent } from "@vanilla-ts/core";
+import { ACustomComponentEvent, ComponentFactory, DEFAULT_EVENT_INIT_DICT, DefaultEventMap, ElementComponentWithChildren, mixinDOMProperties, Orientation, OrientationAttr, PhrasingContent } from "@vanilla-ts/core";
 
 
 /** Custom 'progress-value' event for progress components. */
@@ -32,7 +32,7 @@ export interface ProgressEventMap extends DefaultEventMap {
 /**
  * Progress component (`<progress>`).
  */
-export class Progress<Child extends PhrasingContent = PhrasingContent, EventMap extends ProgressEventMap = ProgressEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLProgressElement, Child, EventMap> {
+export class Progress<Child extends PhrasingContent = PhrasingContent, EventMap extends ProgressEventMap = ProgressEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLProgressElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
     protected _orientation: Orientation;
@@ -150,39 +150,26 @@ export class Progress<Child extends PhrasingContent = PhrasingContent, EventMap 
         return this;
     }
 
-    /**
-     * Get/set the orientation of the component.
-     */
-    public get Orientation(): Orientation {
-        return this._orientation;
-    }
-    /** @inheritdoc */
-    public set Orientation(v: Orientation) {
-        this.orientation(v);
-    }
-
-    /**
-     * Sets the orientation of the component.
-     * @param orientation The new orientation.
-     * @returns This instance.
-     */
-    public orientation(orientation: Orientation): this {
-        if (this._orientation !== orientation) {
-            this._orientation = orientation;
-            this._orientation === Orientation.HORIZONTAL
-                ? this.removeClass("vertical").addClass("horizontal")
-                : this.removeClass("horizontal").addClass("vertical");
-        }
-        return this;
-    }
-
     /** @inheritdoc */
     public override dispose(): void {
         this.valueObserver?.disconnect();
         this.valueObserver = undefined;
         super.dispose();
     }
+
+    static {
+        /** Mixin additional DOM attributes/properties. */
+        mixinDOMProperties(
+            this,
+            OrientationAttr<HTMLProgressElement>,
+        );
+    }
 }
+
+// Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
+// above.
+export interface Progress<Child extends PhrasingContent = PhrasingContent, EventMap extends ProgressEventMap = ProgressEventMap, Children extends (Child | string)[] = (Child | string)[]> extends // eslint-disable-line @typescript-eslint/no-empty-object-type,@typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
+    OrientationAttr<HTMLProgressElement, EventMap> { };
 
 /**
  * Factory for `Progress` components.
