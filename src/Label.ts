@@ -2,7 +2,8 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, ForAtt
 
 
 /**
- * Label component (`<label>`).
+ * Label component (`<label>`). Represents a caption associated with a user-interface control.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/label
  */
 export class Label<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLLabelElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

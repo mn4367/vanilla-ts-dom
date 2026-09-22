@@ -2,7 +2,9 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, Phrasi
 
 
 /**
- * Pre component (`<pre>`).
+ * Pre component (`<pre>`). Represents preformatted text whose whitespace is displayed as written in
+ * the source.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/pre
  */
 export class Pre<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLPreElement, Child, EventMap> {
     // @ts-expect-error ---

@@ -2,7 +2,9 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, EventM
 
 
 /**
- * Option component (`<option>`).
+ * Option component (`<option>`). Represents an item that users can choose in a `<select>`,
+ * `<optgroup>` or `<datalist>` element.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/option
  */
 export class Option<Child extends INodeComponent<Node> = INodeComponent<Node>, EventMap extends EventMapVoid = DefaultEventMap> extends ElementComponentWithChildren<HTMLOptionElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     /**

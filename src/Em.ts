@@ -2,7 +2,8 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, Phrasi
 
 
 /**
- * Em component (`<em>`).
+ * Em component (`<em>`). Marks text that has stress emphasis relative to its surrounding content.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/em
  */
 export class Em<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
     // @ts-expect-error ---

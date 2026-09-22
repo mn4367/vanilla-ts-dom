@@ -4,7 +4,9 @@ import { TextField } from "./TextField.js";
 
 
 /**
- * Number input component (`<input type="number">`).
+ * Number input component (`<input type="number">`). Lets users enter a number and optionally
+ * constrains it to a range or step size.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/number
  */
 export class NumberInput<EventMap extends DefaultEventMap = DefaultEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

@@ -3,7 +3,9 @@ import { Input } from "./Input.js";
 
 
 /**
- * Range input component (`<input type="range">`).
+ * Range input component (`<input type="range">`). Lets users choose an approximate numeric value
+ * within a configured range.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/range
  */
 export class RangeInput<EventMap extends DefaultEventMap = DefaultEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

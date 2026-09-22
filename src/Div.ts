@@ -3,7 +3,9 @@ import { Text } from "./Text.js";
 
 
 /**
- * Div component (`<div>`).
+ * Div component (`<div>`). Provides a generic container for flow content without adding specific
+ * semantic meaning.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/div
  */
 export class Div<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLDivElement, Child, EventMap> {
     // @ts-expect-error ---

@@ -3,7 +3,9 @@ import { Text } from "./Text.js";
 
 
 /**
- * List item component (`<li>`) for ordered lists (`<ol>`).
+ * List item component (`<li>`) for ordered lists (`<ol>`). Represents an individual item whose
+ * ordinal value can be set explicitly.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li
  */
 export class LiOl<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLLIElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

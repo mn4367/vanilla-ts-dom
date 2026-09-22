@@ -2,7 +2,8 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, ForAtt
 
 
 /**
- * Output component (`<output>`).
+ * Output component (`<output>`). Represents the result of a calculation or user action.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/output
  */
 export class Output<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLOutputElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

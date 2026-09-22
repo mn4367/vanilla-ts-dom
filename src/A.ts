@@ -3,7 +3,9 @@ import { Text } from "./Text.js";
 
 
 /**
- * A component (`<a>`).
+ * A component (`<a>`). Creates a hyperlink to a URL, file, email address, location on the current
+ * page or anything else that a URL can address.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a
  */
 export class A<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLAnchorElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

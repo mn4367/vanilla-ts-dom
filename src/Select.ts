@@ -9,7 +9,8 @@ import { Option } from "./Option.js";
 export type SelectChild = Option | OptGroup | Hr | Button;
 
 /**
- * Select component (`<select>`).
+ * Select component (`<select>`). Provides a menu from which users can choose one or more options.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select
  */
 export class Select<Child extends SelectChild = SelectChild, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLSelectElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

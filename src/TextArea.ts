@@ -4,7 +4,9 @@ import { TextField } from "./TextField.js";
 
 
 /**
- * Textarea component (`<textarea>`).
+ * Textarea component (`<textarea>`). Provides a control for entering and editing multiple lines of
+ * plain text.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea
  */
 export class TextArea<Child extends Text = Text, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLTextAreaElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

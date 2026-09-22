@@ -2,7 +2,8 @@ import { ComponentFactory, DefaultEventMap, ElementComponentVoid } from "@vanill
 
 
 /**
- * Br component (`<br>`).
+ * Br component (`<br>`). Produces a line break in text, for example in an address or poem.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/br
  */
 export class Br<EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentVoid<HTMLBRElement, EventMap> {
     // @ts-expect-error ---

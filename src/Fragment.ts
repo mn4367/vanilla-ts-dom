@@ -2,7 +2,7 @@ import { ComponentFactory, FragmentComponent } from "@vanilla-ts/core";
 
 
 /**
- * Fragment component.
+ * Fragment component. Groups multiple components without adding an enclosing element to the DOM.
  * @see {@link FragmentComponent}
  */
 export class Fragment extends FragmentComponent { }

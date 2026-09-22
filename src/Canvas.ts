@@ -3,7 +3,9 @@ import { Text } from "./Text.js";
 
 
 /**
- * Canvas component (`<canvas>`).
+ * Canvas component (`<canvas>`). Provides a drawing surface for graphics and animations rendered
+ * through a scripting API. Its children provide fallback content.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/canvas
  */
 export class Canvas<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLCanvasElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

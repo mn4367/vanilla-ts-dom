@@ -3,7 +3,9 @@ import { Text } from "./Text.js";
 
 
 /**
- * Dialog component (`<dialog>`).
+ * Dialog component (`<dialog>`). Represents a dialog box or another interactive component that can
+ * be shown either non-modally or as a modal dialog.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog
  */
 export class Dialog<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLDialogElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

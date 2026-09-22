@@ -9,8 +9,10 @@ export interface CheckboxEventMap extends DefaultEventMap {
 }
 
 /**
- * Checkbox component (`<input type="checkbox">`) extended with a 'Checked' getter/setter and set
- * method and also with a custom event `checked` that signals checking/unchecking the checkbox.
+ * Checkbox component (`<input type="checkbox">`). Lets users select or clear a single value.
+ * Extended with a 'Checked' getter/setter and set method and also with a custom event `checked`
+ * that signals checking/unchecking the checkbox.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/checkbox
  */
 export class Checkbox<EventMap extends CheckboxEventMap = CheckboxEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

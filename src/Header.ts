@@ -3,7 +3,9 @@ import { Text } from "./Text.js";
 
 
 /**
- * Header component (`<header>`).
+ * Header component (`<header>`). Represents introductory content for its nearest sectioning
+ * ancestor or the document, often including a heading or navigation aids.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/header
  */
 export class Header<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
     // @ts-expect-error ---

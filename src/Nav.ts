@@ -3,7 +3,9 @@ import { Text } from "./Text.js";
 
 
 /**
- * Navigation component Nav (`<nav>`).
+ * Navigation component Nav (`<nav>`). Represents a section whose purpose is to provide navigation
+ * links within the current document or to other documents.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/nav
  */
 export class Nav<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
     // @ts-expect-error ---

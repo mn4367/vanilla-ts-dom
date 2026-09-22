@@ -4,7 +4,9 @@ import { TextField } from "./TextField.js";
 
 
 /**
- * Text input component (`<input type="text">`).
+ * Text input component (`<input type="text">`). Provides a control for entering and editing a
+ * single line of plain text.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/text
  */
 export class TextInput<EventMap extends DefaultEventMap = DefaultEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

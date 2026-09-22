@@ -2,7 +2,8 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, Phrasi
 
 
 /**
- * B component (`<b>`).
+ * B component (`<b>`). Draws attention to text without conveying additional importance or emphasis.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/b
  */
 export class B<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
     // @ts-expect-error ---

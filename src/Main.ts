@@ -3,7 +3,8 @@ import { Text } from "./Text.js";
 
 
 /**
- * Main component (`<main>`).
+ * Main component (`<main>`). Represents the dominant content of the document body.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/main
  */
 export class Main<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
     // @ts-expect-error ---

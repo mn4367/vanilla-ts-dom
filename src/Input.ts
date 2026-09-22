@@ -1,3 +1,5 @@
+// Referenced by a JSDoc `@see` tag below.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { AElementComponent, AutocompleteAttr, cid, DefaultEventMap, ElementComponentVoid, EventMapVoid, HTMLInputsWithDataList, HTMLInputTypes, mixinDOMProperties, NameAttr, NativeDisabledAttr, NullableString, ReadonlyAttr, RequiredAttr, ValueAttr } from "@vanilla-ts/core";
 
 
@@ -69,7 +71,10 @@ export abstract class DataListAttr<T extends HTMLInputElement, EventMap extends 
 
 
 /**
- * Abstract base Input component (`<input>`).\
+ * Abstract base Input component (`<input>`). Represents a form control that accepts or selects user
+ * data.\
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input
+ *
  * __Note:__ This class has mixins for the properties `readonly`, `required`, `dirName`, `multiple`
  * and `value`, however, some input elements don't support these attributes, but since the vast
  * majority supports them, they are included here. Nevertheless some derived classes may have to

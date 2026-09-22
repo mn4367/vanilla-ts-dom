@@ -2,7 +2,8 @@ import { ComponentFactory, DefaultEventMap, ElementComponentVoid } from "@vanill
 
 
 /**
- * Hr component (`<hr>`).
+ * Hr component (`<hr>`). Represents a thematic break between paragraph-level sections of content.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/hr
  */
 export class Hr<EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentVoid<HTMLHRElement, EventMap> {
     // @ts-expect-error ---

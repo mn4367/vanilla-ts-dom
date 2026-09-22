@@ -30,7 +30,9 @@ export interface ProgressEventMap extends DefaultEventMap {
 }
 
 /**
- * Progress component (`<progress>`).
+ * Progress component (`<progress>`). Indicates how much of a task has been completed, either as a
+ * determinate value or in an indeterminate state.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/progress
  */
 export class Progress<Child extends PhrasingContent = PhrasingContent, EventMap extends ProgressEventMap = ProgressEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLProgressElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

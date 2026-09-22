@@ -7,7 +7,9 @@ import { Option } from "./Option.js";
 export type OptGroupChild = Option | Legend;
 
 /**
- * OptGroup component (`<optgroup>`).
+ * OptGroup component (`<optgroup>`). Groups related options within a `<select>` element and gives
+ * the group a label.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/optgroup
  */
 export class OptGroup<Child extends OptGroupChild = OptGroupChild, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLOptGroupElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

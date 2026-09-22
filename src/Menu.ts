@@ -3,7 +3,9 @@ import { LiUl } from "./LiUl.js";
 
 
 /**
- * Menu component (`<menu>`).
+ * Menu component (`<menu>`). Represents an unordered list of items, commonly a group of commands
+ * that users can perform or activate.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/menu
  */
 export class Menu<Child extends LiUl = LiUl, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLMenuElement, Child, EventMap> {
     // @ts-expect-error ---

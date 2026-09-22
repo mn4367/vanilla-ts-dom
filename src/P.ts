@@ -2,7 +2,8 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, Phrasi
 
 
 /**
- * Paragraph component (`<p>`).
+ * Paragraph component (`<p>`). Represents a paragraph of text or other phrasing content.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/p
  */
 export class P<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLParagraphElement, Child, EventMap> {
     // @ts-expect-error ---

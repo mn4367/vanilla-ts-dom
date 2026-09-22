@@ -1,7 +1,8 @@
 import { ANodeComponent, ComponentFactory, DefaultEventMap } from "@vanilla-ts/core";
 
 /**
- * Text component (for DOM text nodes).
+ * Text component (for DOM text nodes). Represents the textual content of an element in the DOM.
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Text
  */
 export class Text<EventMap extends DefaultEventMap = DefaultEventMap> extends ANodeComponent<globalThis.Text, EventMap> {
     // @ts-expect-error ---

@@ -4,7 +4,8 @@ import { Text } from "./Text.js";
 
 /**
  * List item component (`<li>`), mainly for unordered lists (`<ul>`) but also other types of lists
- * like, for example, menus (`<menu>`).
+ * like, for example, menus (`<menu>`). Represents an individual item in such a list.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/li
  */
 export class LiUl<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLLIElement, Child, EventMap> {
     // @ts-expect-error ---

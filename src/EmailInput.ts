@@ -3,7 +3,9 @@ import { Input } from "./Input.js";
 import { TextField } from "./TextField.js";
 
 /**
- * Email input component (`<input type="email">`).
+ * Email input component (`<input type="email">`). Lets users enter and edit an email address, or
+ * multiple addresses when the `multiple` attribute is enabled.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/email
  */
 export class EmailInput<EventMap extends DefaultEventMap = DefaultEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

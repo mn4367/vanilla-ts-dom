@@ -3,7 +3,9 @@ import { Option } from "./Option.js";
 
 
 /**
- * DataList component (`<datalist>`).
+ * DataList component (`<datalist>`). Contains predefined values that can be offered as suggestions
+ * for an associated input control.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/datalist
  */
 export class DataList<Child extends Option = Option, EventMap extends DefaultEventMap = DefaultEventMap, Children extends Child[] = Child[]> extends ElementComponentWithChildren<HTMLDataListElement, Child, EventMap> {
     // @ts-expect-error ---

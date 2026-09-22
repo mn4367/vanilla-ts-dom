@@ -3,7 +3,8 @@ import { LiUl } from "./LiUl.js";
 
 
 /**
- * Unordered list component Ul (`<ul>`).
+ * Unordered list component Ul (`<ul>`). Represents a list whose item order is not meaningful.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ul
  */
 export class Ul<Child extends LiUl = LiUl, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLUListElement, Child, EventMap> {
     // @ts-expect-error ---

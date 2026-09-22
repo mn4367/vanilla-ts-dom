@@ -2,7 +2,8 @@ import { AltAttr, ComponentFactory, CrossOriginAttr, DefaultEventMap, ElementCom
 
 
 /**
- * Img component (`<img>`).
+ * Img component (`<img>`). Embeds an image into the document.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/img
  */
 export class Img<EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentVoid<HTMLImageElement, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

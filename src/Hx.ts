@@ -2,7 +2,8 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, Phrasi
 
 
 /**
- * H1 component (`<h1>`).
+ * H1 component (`<h1>`). Represents a first-level section heading.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements
  */
 export class H1<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
     // @ts-expect-error ---
@@ -19,7 +20,8 @@ export class H1<Child extends PhrasingContent = PhrasingContent, EventMap extend
 }
 
 /**
- * H2 component (`<h2>`).
+ * H2 component (`<h2>`). Represents a second-level section heading.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements
  */
 export class H2<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
     // @ts-expect-error ---
@@ -36,7 +38,8 @@ export class H2<Child extends PhrasingContent = PhrasingContent, EventMap extend
 }
 
 /**
- * H3 component (`<h3>`).
+ * H3 component (`<h3>`). Represents a third-level section heading.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements
  */
 export class H3<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
     // @ts-expect-error ---
@@ -53,7 +56,8 @@ export class H3<Child extends PhrasingContent = PhrasingContent, EventMap extend
 }
 
 /**
- * H4 component (`<h4>`).
+ * H4 component (`<h4>`). Represents a fourth-level section heading.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements
  */
 export class H4<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
     // @ts-expect-error ---
@@ -70,7 +74,8 @@ export class H4<Child extends PhrasingContent = PhrasingContent, EventMap extend
 }
 
 /**
- * H5 component (`<h5>`).
+ * H5 component (`<h5>`). Represents a fifth-level section heading.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements
  */
 export class H5<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
     // @ts-expect-error ---
@@ -87,7 +92,8 @@ export class H5<Child extends PhrasingContent = PhrasingContent, EventMap extend
 }
 
 /**
- * H6 component (`<h6>`).
+ * H6 component (`<h6>`). Represents a sixth-level section heading.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/Heading_Elements
  */
 export class H6<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLHeadingElement, Child, EventMap> {
     // @ts-expect-error ---

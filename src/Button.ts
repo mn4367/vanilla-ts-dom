@@ -2,7 +2,9 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, NameAt
 
 
 /**
- * Button component (`<button>`).
+ * Button component (`<button>`). Represents an interactive control that users can activate to
+ * perform an action, such as submitting a form or opening a dialog.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button
  */
 export class Button<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLButtonElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

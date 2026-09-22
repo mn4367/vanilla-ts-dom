@@ -4,7 +4,9 @@ import { TextField } from "./TextField.js";
 
 
 /**
- * Password input component (`<input type="password">`).
+ * Password input component (`<input type="password">`). Lets users enter text while obscuring its
+ * value on screen.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/password
  */
 export class PasswordInput<EventMap extends DefaultEventMap = DefaultEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

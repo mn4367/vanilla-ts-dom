@@ -3,7 +3,9 @@ import { Text } from "./Text.js";
 
 
 /**
- * Section component (`<section>`).
+ * Section component (`<section>`). Represents a generic standalone section of a document, which
+ * should usually have a heading.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/section
  */
 export class Section<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
     // @ts-expect-error ---

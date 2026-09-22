@@ -3,7 +3,9 @@ import { Text } from "./Text.js";
 
 
 /**
- * Footer component (`<footer>`).
+ * Footer component (`<footer>`). Represents a footer for its nearest sectioning ancestor or the
+ * document, typically containing authorship, copyright or related information.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/footer
  */
 export class Footer<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
     // @ts-expect-error ---

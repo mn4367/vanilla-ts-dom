@@ -2,7 +2,9 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, Phrasi
 
 
 /**
- * Span component (`<span>`).
+ * Span component (`<span>`). Provides a generic inline container for phrasing content without
+ * adding specific semantic meaning.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/span
  */
 export class Span<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLSpanElement, Child, EventMap> {
     // @ts-expect-error ---

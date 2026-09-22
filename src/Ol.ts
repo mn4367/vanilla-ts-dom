@@ -8,7 +8,8 @@ import { LiOl } from "./LiOl.js";
 type ListItemType = "a" | "A" | "i" | "I" | 1 | null;
 
 /**
- * Ordered list component Ol (`<ol>`).
+ * Ordered list component Ol (`<ol>`). Represents a list whose items have a meaningful order.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/ol
  */
 export class Ol<Child extends LiOl = LiOl, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLOListElement, Child, EventMap> {
     // @ts-expect-error ---

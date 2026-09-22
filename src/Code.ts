@@ -2,7 +2,8 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, Phrasi
 
 
 /**
- * Code component (`<code>`).
+ * Code component (`<code>`). Represents a short fragment of computer code.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/code
  */
 export class Code<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
     // @ts-expect-error ---

@@ -2,7 +2,8 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, Phrasi
 
 
 /**
- * Strong component (`<strong>`).
+ * Strong component (`<strong>`). Marks content as having strong importance, seriousness or urgency.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/strong
  */
 export class Strong<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
     // @ts-expect-error ---

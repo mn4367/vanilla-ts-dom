@@ -2,7 +2,9 @@ import { ComponentFactory, DefaultEventMap, ElementComponentWithChildren, Phrasi
 
 
 /**
- * I component (`<i>`).
+ * I component (`<i>`). Represents text set apart from the surrounding prose for reasons such as an
+ * idiomatic expression, technical term or foreign-language phrase.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/i
  */
 export class I<Child extends PhrasingContent = PhrasingContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
     // @ts-expect-error ---

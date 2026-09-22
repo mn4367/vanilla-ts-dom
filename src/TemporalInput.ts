@@ -25,7 +25,9 @@ export enum TemporalType {
 }
 
 /**
- * Input component (`<input>`) for temporal types (`date`, `datetime-local`, `time` etc.).
+ * Input component (`<input>`) for temporal types (`date`, `datetime-local`, `month`, `time` and
+ * `week`). Lets users enter or select a value appropriate for the configured temporal type.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input
  */
 export class TemporalInput<EventMap extends DefaultEventMap = DefaultEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

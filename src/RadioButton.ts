@@ -9,8 +9,10 @@ export interface RadioButtonEventMap extends DefaultEventMap {
 }
 
 /**
- * Radio button component (`<input type="radio">`)  extended with a 'Checked' getter/setter and set
- * method and also with a custom event `checked` that signals checking/unchecking the radio button.
+ * Radio button component (`<input type="radio">`). Lets users select one value from a group of
+ * related choices that share the same name. Extended with a 'Checked' getter/setter and set method
+ * and also with a custom event `checked` that signals checking/unchecking the radio button.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/radio
  */
 export class RadioButton<EventMap extends RadioButtonEventMap = RadioButtonEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

@@ -3,7 +3,9 @@ import { Text } from "./Text.js";
 
 
 /**
- * Address component (`<address>`).
+ * Address component (`<address>`). Represents contact information for a person, organization or the
+ * nearest enclosing article or document.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/address
  */
 export class Address<Child extends FlowContent = FlowContent, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | string)[] = (Child | string)[]> extends ElementComponentWithChildren<HTMLElement, Child, EventMap> {
     // @ts-expect-error ---

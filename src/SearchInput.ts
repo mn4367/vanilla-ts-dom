@@ -4,7 +4,9 @@ import { TextField } from "./TextField.js";
 
 
 /**
- * Search input component (`<input type="search">`).
+ * Search input component (`<input type="search">`). Provides a single-line field for entering a
+ * search query.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/search
  */
 export class SearchInput<EventMap extends DefaultEventMap = DefaultEventMap> extends Input<EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---

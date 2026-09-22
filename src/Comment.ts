@@ -1,7 +1,9 @@
 import { ANodeComponent, ComponentFactory, DefaultEventMap } from "@vanilla-ts/core";
 
 /**
- * Comment component (for DOM comment nodes).
+ * Comment component (for DOM comment nodes). Represents an annotation in the DOM that is not
+ * rendered as part of the document.
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/Comment
  */
 export class Comment<EventMap extends DefaultEventMap = DefaultEventMap> extends ANodeComponent<globalThis.Comment, EventMap> {
     // @ts-expect-error ---
