@@ -11,16 +11,16 @@ export type OptGroupChild = Option | Legend;
  * the group a label.
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/optgroup
  */
-export class OptGroup<Child extends OptGroupChild = OptGroupChild, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLOptGroupElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class OptGroup<Child extends OptGroupChild = OptGroupChild, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | undefined | null)[] = (Child | undefined | null)[]> extends ElementComponentWithChildren<HTMLOptGroupElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
 
     /**
      * Create OptGroup component.
      * @param label The label for the `<optgroup>` element.
-     * @param options `Option` components to be added to this `OptGroup` instance.
+     * @param options Child components to be added to this `OptGroup` instance.
      */
-    constructor(label: string, ...options: (Child | undefined | null)[]) {
+    constructor(label: string, ...options: Children) {
         super("optgroup");
         this
             .label(label)
@@ -39,7 +39,7 @@ export class OptGroup<Child extends OptGroupChild = OptGroupChild, EventMap exte
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface OptGroup<Child extends OptGroupChild = OptGroupChild, EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
+export interface OptGroup<Child extends OptGroupChild = OptGroupChild, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | undefined | null)[] = (Child | undefined | null)[]> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     LabelAttr<HTMLOptGroupElement, EventMap>,
     NativeDisabledAttr<HTMLOptGroupElement, EventMap> { }
 
@@ -50,7 +50,7 @@ export class OptGroupFactory<Child extends OptGroupChild = OptGroupChild, T = un
     /**
      * Create OptGroup component.
      * @param label The label for the `<optgroup>` element.
-     * @param options `Option` components to be added to this `OptGroup` instance.
+     * @param options Child components to be added to this `OptGroup` instance.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns OptGroup component.
      */

@@ -7,7 +7,7 @@ import { LiUl } from "./LiUl.js";
  * that users can perform or activate.
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/menu
  */
-export class Menu<Child extends LiUl = LiUl, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLMenuElement, Child, EventMap> {
+export class Menu<Child extends LiUl = LiUl, EventMap extends DefaultEventMap = DefaultEventMap, Children extends (Child | undefined | null)[] = (Child | undefined | null)[]> extends ElementComponentWithChildren<HTMLMenuElement, Child, EventMap> {
     // @ts-expect-error ---
     #brand;
 
@@ -15,7 +15,7 @@ export class Menu<Child extends LiUl = LiUl, EventMap extends DefaultEventMap = 
      * Create Menu component.
      * @param items Menu items to be appended to this menu.
      */
-    constructor(...items: (Child | undefined | null)[]) {
+    constructor(...items: Children) {
         super("menu");
         items && this.append(...items);
     }
@@ -24,14 +24,14 @@ export class Menu<Child extends LiUl = LiUl, EventMap extends DefaultEventMap = 
 /**
  * Factory for `Menu` components.
  */
-export class MenuFactory<Child extends LiUl = LiUl, T = unknown> extends ComponentFactory<Menu<Child>> {
+export class MenuFactory<Child extends LiUl = LiUl, T = unknown, Children extends (Child | undefined | null)[] = (Child | undefined | null)[]> extends ComponentFactory<Menu<Child>> {
     /**
      * Create, set up and return Menu component.
      * @param items Menu items to be appended to this menu.
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Menu component.
      */
-    public menu(items?: (Child | undefined | null)[], data?: T): Menu<Child> {
+    public menu(items?: Children, data?: T): Menu<Child> {
         return this.setupComponent(new Menu<Child>(...(items || [])), data);
     }
 }

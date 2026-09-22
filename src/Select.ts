@@ -12,7 +12,7 @@ export type SelectChild = Option | OptGroup | Hr | Button;
  * Select component (`<select>`). Provides a menu from which users can choose one or more options.
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/select
  */
-export class Select<Child extends SelectChild = SelectChild, EventMap extends DefaultEventMap = DefaultEventMap> extends ElementComponentWithChildren<HTMLSelectElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
+export class Select<Child extends SelectChild = SelectChild, EventMap extends DefaultEventMap = DefaultEventMap, Children extends Child[] = Child[]> extends ElementComponentWithChildren<HTMLSelectElement, Child, EventMap> { // eslint-disable-line @typescript-eslint/no-unsafe-declaration-merging
     // @ts-expect-error ---
     #brand;
 
@@ -25,7 +25,7 @@ export class Select<Child extends SelectChild = SelectChild, EventMap extends De
      * @param value The value of the select.
      * @param name The name (attribute) of the select.
      */
-    constructor(options?: Child[], id?: NullableString, value?: string, name?: string) {
+    constructor(options?: Children, id?: NullableString, value?: string, name?: string) {
         super("select");
         this.options(options ?? []);
         id === undefined
@@ -70,11 +70,17 @@ export class Select<Child extends SelectChild = SelectChild, EventMap extends De
      * this `Select` instance with the specified values; these child components are also disposed
      * of(!), so if they are needed or referenced somewhere else they must be extracted or removed
      * before calling the setter (using `<selectInstance>.extract()`, `<selectInstance>.remove()`).
+     * When replacing existing options, their selected values are restored in the new list. When
+     * initially populating the select, the selected state of the supplied options is retained.
      * @param v The options for the drop-down list.
      * @returns This instance.
      */
     public options(v: Child[]): this {
+        const oldOptions = this.Options;
         const oldValue = this.Value;
+        const oldSelectedValues = this.Multiple
+            ? oldOptions.filter(option => option.Selected).map(option => option.Value)
+            : [];
         const extracted: Child[] = [];
         this.extract(extracted);
         for (const component of extracted) {
@@ -82,7 +88,18 @@ export class Select<Child extends SelectChild = SelectChild, EventMap extends De
         }
         this._dom.replaceChildren();
         this.append(...v);
-        this.value(oldValue);
+        if (oldOptions.length > 0) {
+            if (this.Multiple) {
+                const selectedValues = [...oldSelectedValues];
+                for (const option of this.Options) {
+                    const index = selectedValues.indexOf(option.Value);
+                    option.Selected = index >= 0;
+                    index >= 0 && selectedValues.splice(index, 1);
+                }
+            } else {
+                this.value(oldValue);
+            }
+        }
         return this;
     }
 
@@ -221,7 +238,7 @@ export class Select<Child extends SelectChild = SelectChild, EventMap extends De
 
 // Augment class definition with the DOM attributes/properties introduced by `mixinDOMProperties()`
 // above.
-export interface Select<Child extends SelectChild = SelectChild, EventMap extends DefaultEventMap = DefaultEventMap> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
+export interface Select<Child extends SelectChild = SelectChild, EventMap extends DefaultEventMap = DefaultEventMap, Children extends Child[] = Child[]> extends // eslint-disable-line @typescript-eslint/no-unused-vars,jsdoc/require-jsdoc
     AutocompleteAttr<HTMLSelectElement, EventMap>,
     MultipleAttr<HTMLSelectElement, EventMap>,
     NameAttr<HTMLSelectElement, EventMap>,
@@ -233,7 +250,7 @@ export interface Select<Child extends SelectChild = SelectChild, EventMap extend
 /**
  * Factory for `Select` components.
  */
-export class SelectFactory<Child extends SelectChild = SelectChild, T = unknown> extends ComponentFactory<Select<Child>> {
+export class SelectFactory<Child extends SelectChild = SelectChild, T = unknown, Children extends Child[] = Child[]> extends ComponentFactory<Select<Child>> {
     /**
      * Create, set up and return Select component.
      * @param options The option elements to be displayed in the select.
@@ -243,7 +260,7 @@ export class SelectFactory<Child extends SelectChild = SelectChild, T = unknown>
      * @param data Optional arbitrary data passed to the `setupComponent()` function of the factory.
      * @returns Select component.
      */
-    public select(options: Child[], id?: string, value?: string, name?: string, data?: T): Select<Child> {
+    public select(options: Children, id?: string, value?: string, name?: string, data?: T): Select<Child> {
         return this.setupComponent(new Select<Child>(options, id, value, name), data);
     }
 }
