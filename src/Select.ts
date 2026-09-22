@@ -1,11 +1,12 @@
 import { AutocompleteAttr, cid, ComponentFactory, DefaultEventMap, ElementComponentWithChildren, mixinDOMProperties, MultipleAttr, NameAttr, NativeDisabledAttr, NullableString, RequiredAttr, SizeAttr, ValueAttr } from "@vanilla-ts/core";
+import { Button } from "./Button.js";
 import { Hr } from "./Hr.js";
-import { OptGroup } from "./OptGroup.js";
+import { OptGroup, OptGroupChild } from "./OptGroup.js";
 import { Option } from "./Option.js";
 
 
 /** Allowed types of entries in a drop-down list. */
-export type SelectChild = Option | OptGroup | Hr;
+export type SelectChild = Option | OptGroup | Hr | Button;
 
 /**
  * Select component (`<select>`).
@@ -46,7 +47,7 @@ export class Select<Child extends SelectChild = SelectChild, EventMap extends De
      */
     public get Options(): Option[] {
         const result: Option[] = [];
-        const addOptions = (children: Iterable<SelectChild>): void => { // eslint-disable-line jsdoc/require-jsdoc
+        const addOptions = (children: Iterable<SelectChild | OptGroupChild>): void => { // eslint-disable-line jsdoc/require-jsdoc
             for (const child of children) {
                 if (child instanceof Option) {
                     result.push(child);
