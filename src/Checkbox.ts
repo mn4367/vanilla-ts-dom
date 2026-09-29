@@ -148,7 +148,7 @@ export class CheckboxFactory<T> extends ComponentFactory<Checkbox> {
 
     /**
      * Create, set up and return Checkbox component. Identical to {@link checkbox()}, but the class
-     * name `switch` is added to the returned checkbox.
+     * name `switch` is added to the returned checkbox and its role is set to `switch`.
      * @param id The id (attribute) of the checkbox.
      * @param value The value of the checkbox.
      * @param name The name (attribute) of the checkbox.
@@ -157,6 +157,9 @@ export class CheckboxFactory<T> extends ComponentFactory<Checkbox> {
      * @returns Checkbox component.
      */
     public switch(id?: string, value?: string, name?: string, checked?: boolean, data?: T): Checkbox {
-        return this.setupComponent(new Checkbox(id, value, name, checked).addClass("switch"), data);
+        return this.setupComponent(
+            new Checkbox(id, value, name, checked).addClass("switch")
+                .role("switch"),
+            data);
     }
 }
